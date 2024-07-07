@@ -3,9 +3,9 @@ import Header from "./header/Header";
 
 
 const HomePage:FC = () => {
-    return <div>
-            <Header/>
-    </div>
+    return <>
+        <Header/>
+    </>
 };
 
 export default HomePage;

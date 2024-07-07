@@ -86,6 +86,7 @@
     @apply mr-5
 }
 
+
 .custom-ul > *{
-    @apply text-xl  hover:scale-150
+    @apply transition duration-300 hover:text-blue-700
 }

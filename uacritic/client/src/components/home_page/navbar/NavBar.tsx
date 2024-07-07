@@ -12,7 +12,7 @@ const navItems = [
 
 const NavBar: FC = () => {
     return (
-        <nav className="mt-2 mx-[1rem]">
+        <nav className="mt-2 mx-[7rem]" >
             <ul className="w-[35rem] custom-ul">
                 {navItems.map((item) => (
                     <NavBarItem key={item.path} path={item.path}>
