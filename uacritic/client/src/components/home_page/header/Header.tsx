@@ -1,7 +1,7 @@
 import {FC} from "react";
 
 const Header: FC = () => {
-    return <div className="bg-blue">
+    return <div className="">
         <div>
             <div>
                 <div>
@@ -23,7 +23,7 @@ const Header: FC = () => {
                         <path d="M25.775 39.3787C25.9447 39.4049 26.1992 39.4049 26.3406 39.3787C26.4678 39.3394 26.3264 39.3133 26.0154 39.3263C25.7043 39.3263 25.5912 39.3525 25.775 39.3787Z" fill="black"/>
                     </svg>
                 </div>
-                <div>
+                <div className="text-3xl">
                     <p >UaCritic</p>
                 </div>
                 <div>

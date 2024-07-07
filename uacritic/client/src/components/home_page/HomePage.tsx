@@ -3,7 +3,7 @@ import Header from "./header/Header";
 import NavBar from "./navbar/NavBar";
 
 const HomePage:FC = () => {
-    return <div>
+    return <div className="mx-10">
         <Header />
         <NavBar />
     </div>
