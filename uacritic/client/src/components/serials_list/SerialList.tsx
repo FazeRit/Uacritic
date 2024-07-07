@@ -1,7 +1,11 @@
 import React from "react";
+import Header from "../home_page/header/Header";
 
 const SerialList: React.FC = () => {
-    return  <p>SerialList</p>;
+    return <>
+        <Header/>
+        <p>SerialList</p>
+    </>
 }
 
 export default SerialList;

@@ -73,3 +73,19 @@
     font-weight: 900;
     font-style: italic;
 }
+
+.custom-ul > *:not(:first-child):not(:last-child) {
+    @apply mx-5
+}
+
+.custom-ul > *:last-child{
+    @apply ml-5
+}
+
+.custom-ul > *:first-child{
+    @apply mr-5
+}
+
+.custom-ul > *{
+    @apply text-xl  hover:scale-150
+}

@@ -9,7 +9,7 @@ import GamesList from "./components/games_list/GamesList";
 import About from "./components/about/About";
 
 const App: React.FC = () => {
-  return (
+  return (<div className="bg-bgMain">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -20,6 +20,7 @@ const App: React.FC = () => {
           <Route path="/about" element={<About />} />
         </Routes>
       </BrowserRouter>
+      </div>
   );
 };
 
