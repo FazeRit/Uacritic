@@ -90,3 +90,16 @@
 .custom-ul > *{
     @apply transition duration-300 hover:text-blue-700
 }
+
+.card-ul > *:not(:first-child):not(:last-child) {
+    @apply mx-11
+}
+
+.card-ul > *:last-child{
+    @apply ml-11
+}
+
+.card-ul > *:first-child{
+    @apply mr-11
+}
+

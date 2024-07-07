@@ -7,7 +7,7 @@ interface Props{
 }
 
 const NavBarItem: FC<Props> = ({path, children}) => {
-    return <Link to={path} className="roboto-regular">{children}</Link>;
+    return <Link to={path} className="roboto-regular text-xl">{children}</Link>;
 }
 
 export default NavBarItem;
