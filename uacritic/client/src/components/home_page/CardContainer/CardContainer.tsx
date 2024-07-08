@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Card from "./Card";
-import CardProps from "../../../data_models/CardProps";
+import {CardProps} from "../../../data_models/CardProps";
 import {Link} from "react-router-dom";
 
 
@@ -11,7 +11,7 @@ const DUMMY_MOVIES: CardProps[] = [
         item:{
             value: 10,
             rate: 9.0,
-            title: "Фильм 1",
+            title: "Три метри над рівнем моря",
             liked: false,
             imageUrl: "https://example.com/image1.jpg"
         }
