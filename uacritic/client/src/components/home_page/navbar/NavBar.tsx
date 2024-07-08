@@ -1,16 +1,27 @@
 import {FC} from "react";
-import {Link} from "react-router-dom";
+import NavBarItem from "./NavBarItem";
+
+
+const navItems = [
+    { path: "/movies", label: "Фільми" },
+    { path: "/serials", label: "Серіали" },
+    { path: "/music", label: "Музика" },
+    { path: "/games", label: "Ігри" },
+    { path: "/about", label: "Про нас" },
+];
 
 const NavBar: FC = () => {
-    return <nav>
-        <ul>
-            <Link to="/movies">Фільми</Link>
-            <Link to="/serials">Серіали</Link>
-            <Link to="/music">Музика</Link>
-            <Link to="/games">Ігри</Link>
-            <Link to="/about">Про нас</Link>
-        </ul>
-    </nav>
-}
+    return (
+        <nav className="mt-2 mx-[7rem]" >
+            <ul className="w-[35rem] custom-ul ">
+                {navItems.map((item) => (
+                    <NavBarItem key={item.path} path={item.path}>
+                        {item.label}
+                    </NavBarItem>
+                ))}
+            </ul>
+        </nav>
+    );
+};
 
 export default NavBar;
