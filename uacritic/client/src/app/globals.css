@@ -103,6 +103,11 @@
     @apply mr-11
 }
 
-.logo-image {
-    background-image: url('');
+.shadow-card{
+    position: absolute;
+    width: 288px;
+    height: 182px;
+    top: 60px;
+    background: linear-gradient(180deg, rgba(29, 29, 29, 0) 0%, #0F1E29 100%);
+    border-radius: 12px;
 }

@@ -12,6 +12,14 @@ export type CardProps =  {
     }
 }
 
+export type CardImgProps = {
+    category:string;
+    title:string;
+    value:string;
+    imageUrl:string;
+}
+
+
 export const chooseCategory = (category:CardProps["category"])=> {
     switch (category) {
         case 'movies':

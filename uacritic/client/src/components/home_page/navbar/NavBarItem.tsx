@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import Link from 'next/link'
 import  {FC, ReactNode} from "react";
 
 interface Props{
@@ -7,7 +7,7 @@ interface Props{
 }
 
 const NavBarItem: FC<Props> = ({path, children}) => {
-    return <Link to={path} className="roboto-regular text-xl">{children}</Link>;
+    return <Link href={path} className="roboto-regular text-xl">{children}</Link>;
 }
 
 export default NavBarItem;

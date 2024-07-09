@@ -1,6 +1,6 @@
 import {FC} from "react";
 import NavBar from "../navbar/NavBar";
-import {Link} from "react-router-dom";
+import Link from 'next/link'
 
 const Header: FC = () => {
     return <div>
@@ -58,7 +58,7 @@ const Header: FC = () => {
                         </svg>
                     </div>
                     <div className="mt-5 ml-5 roboto-black text-2xl mr-[12rem]">
-                        <Link to='/' className="transition duration-300 hover:text-blue-700">UaCritic</Link>
+                        <Link href='/' className="transition duration-300 hover:text-blue-700">UaCritic</Link>
                     </div>
                     <div className="mt-5 h-8 w-[32rem] flex flex-row bg-inputHeader">
                         <input className="text-[0.9rem] w-[24rem] placeholder-primaryText p-1 roboto-regular" type="text"
@@ -69,8 +69,9 @@ const Header: FC = () => {
                     </div>
                 </div>
                 <div className="flex flex-row [&>*]:mt-5 [&>*:not]:text-primaryText [&>*]:text-[1rem]">
-                    <Link to="/" className="mx-5 roboto-regular transition duration-300 hover:text-blue-900">Зареєструватися</Link>
-                    <Link to="/" className="mx-5 roboto-regular transition duration-300 hover:text-blue-900">Авторизуватися</Link>
+                    {/*TODO: make links*/}
+                    <Link href="/" className="mx-5 roboto-regular transition duration-300 hover:text-blue-900">Зареєструватися</Link>
+                    <Link href="/" className="mx-5 roboto-regular transition duration-300 hover:text-blue-900">Авторизуватися</Link>
                     <svg className="ml-5 cursor-pointer" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_9_107)">
                             <path
