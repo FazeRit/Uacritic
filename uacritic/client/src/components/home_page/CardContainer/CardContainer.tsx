@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Card from "./Сard/Card";
-import {CardProps} from "@/data_models/CardProps";
+import {CardProps, chooseCategory} from "@/data_models/CardProps";
 import Link from 'next/link';
 
 
@@ -40,7 +40,7 @@ const DUMMY_MOVIES: CardProps[] = [
     },
     {
         id: 4,
-        category: 'movies',
+        category: 'music',
         item: {
             value: 15,
             rate: 8.9,
@@ -51,15 +51,15 @@ const DUMMY_MOVIES: CardProps[] = [
     },
 ];
 
-const CardContainer: FC = () => {
+const CardContainer: FC<{title:string}> = ({title}) => {
     return (
         <div>
-            <div className="flex flex-row text-primaryText roboto-bold w-full justify-between">
-                <p className="text-3xl w-[20rem] ">ТОП 100 фільми</p>
-                <div className="flex flex-row w-50 mt-5">
+            <div className="flex flex-row text-primaryText roboto-bold mt-[2vw] w-full justify-between">
+                <p className="sm:text-[4vw] md:text-[3vw] lg:text-[2vw] w-[60vw] ">ТОП 100 {title}</p>
+                <div className="flex flex-row w-full mt-[1vw]">
                     {/*TODO: Add Link to the page with all top movies*/}
-                    <Link href='/' className="roboto-thin flex flex-row">Переглянути всі
-                        <svg className="ml-2  mt-[2px]" width="23" height="20" viewBox="0 0 23 20" fill="none"
+                    <Link href='/' className="ml-auto roboto-thin flex flex-row ">Переглянути всі
+                        <svg className="ml-2 mt-[2px]" width="23" height="20" viewBox="0 0 23 20" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <path
                                 opacity="0.5"
@@ -70,10 +70,10 @@ const CardContainer: FC = () => {
                     </Link>
                 </div>
             </div>
-            <div className="my-5 flex flex-row mx-20">
-                <ul className="flex flex-row card-ul w-full">
-                    {DUMMY_MOVIES.map(({ id, item, category }) => (
-                        <Card key={id} item={item} category={category} />
+            <div className="my-[2vw] sm:mx-[0vw] md:mx-0 xl:mx-[4vw]">
+                <ul className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 w-full">
+                    {DUMMY_MOVIES.map(({id, item, category}) => (
+                        <Card key={id} item={item} category={category}/>
                     ))}
                 </ul>
             </div>
