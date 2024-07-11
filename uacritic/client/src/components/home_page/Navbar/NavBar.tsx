@@ -1,6 +1,5 @@
-import {FC} from "react";
+import { FC } from "react";
 import NavBarItem from "./NavBarItem";
-
 
 const navItems = [
     { path: "/movies", label: "Фільми" },
@@ -12,8 +11,8 @@ const navItems = [
 
 const NavBar: FC = () => {
     return (
-        <nav className="mt-2 mx-[7rem]" >
-            <ul className="w-[35rem] custom-ul ">
+        <nav className="mt-[1vw] mx-[7vw]">
+            <ul className="sm:hidden lg:block w-[50vw] custom-ul">
                 {navItems.map((item) => (
                     <NavBarItem key={item.path} path={item.path}>
                         {item.label}
