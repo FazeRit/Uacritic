@@ -1,12 +1,9 @@
 import Link from 'next/link'
-import  {FC, ReactNode} from "react";
+import  {FC} from "react";
 
-interface Props{
-    path:string;
-    children:ReactNode;
-}
+import {NavbarProps} from '@/data_models/NavbarItems';
 
-const NavBarItem: FC<Props> = ({path, children}) => {
+const NavBarItem: FC<NavbarProps> = ({path, children}) => {
     return <Link href={path} className="roboto-regular md:text-lg lg:text-2xl">{children}</Link>;
 }
 

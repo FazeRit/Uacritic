@@ -2,6 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+.custom-hover-effect {
+    position: relative;
+    display: inline-block;
+}
+
+.custom-hover-effect .hover-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: black;
+    transition: width 0.5s ease-in-out;
+}
+
+.custom-hover-effect:hover .hover-line {
+    width: 100%;
+}
+
+body{
+    @apply bg-bgMain
+}
+
 .roboto-thin {
     font-family: "Roboto", sans-serif;
     font-weight: 100;
@@ -128,6 +151,3 @@
         height: 10vw;
     }
 }
-
-
-

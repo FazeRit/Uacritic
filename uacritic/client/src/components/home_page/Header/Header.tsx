@@ -1,8 +1,18 @@
-import {FC} from "react";
-import NavBar from "@/components/home_page/Navbar/NavBar";
+'use client';
+
+import {FC, useState} from "react";
 import Link from 'next/link';
 
+import NavbarGamburger from "@/components/home_page/Navbar/NavbarGamburger";
+import NavBar from "@/components/home_page/Navbar/NavBar";
+
 const Header: FC = () => {
+    const [showMenu, setShowMenu] = useState(false);
+
+    function handleMenu(){
+        setShowMenu(prevState => !prevState);
+    }
+
     return <div>
         <div className="mx-[5.2vw]">
             <div className="flex flex-row justify-between">
@@ -66,17 +76,19 @@ const Header: FC = () => {
                             type="text"
                             placeholder="Введіть ключові слова"/>
                         <button
-                            className="w-[8vw] h-6 my-1 mr-1 bg-buttonPrimary text-primaryText bg-opacity-30 transition duration-300 hover:bg-blue-500 hover:text-white"
+                            className="w-[8vw] h-6 ml-[1.75vw] my-1 bg-buttonPrimary text-primaryText bg-opacity-30 transition duration-300 hover:bg-blue-500 hover:text-white"
                             type="button">Пошук
                         </button>
                     </div>
                 </div>
-                <div className="sm:block lg:hidden"> 
-                    <svg className="sm:mt-[5vw] md:mt-[3vw] transition transform hover:scale-125" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 18L20 18" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M4 12L20 12" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M4 6L20 6" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
-                </svg></div>
+                <div className="sm:block lg:hidden" onClick={handleMenu}>
+                    <svg className="sm:mt-[5vw] cursor-pointer md:mt-[3vw] transition transform active:scale-125"
+                         width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 18L20 18" stroke="#000000" strokeWidth="2" strokeLinecap="round"/>
+                        <path d="M4 12L20 12" stroke="#000000" strokeWidth="2" strokeLinecap="round"/>
+                        <path d="M4 6L20 6" stroke="#000000" strokeWidth="2" strokeLinecap="round"/>
+                    </svg>
+                </div>
                 <div
                     className="flex flex-row [&>*]:mt-5 [&>*:not]:text-primaryText [&>*]:text-[1rem] sm:hidden lg:flex">
                     {/*TODO: make links*/}
@@ -101,6 +113,9 @@ const Header: FC = () => {
             </div>
         </div>
         <div className="my-[1.5vw] border-b-4"></div>
+        <div hidden={!showMenu} className={`pt-[2vw] bg-gray-200 w-[100vw] pb-[2vw] lg:hidden`}>
+            <NavbarGamburger/>
+        </div>
         <NavBar/>
     </div>
 }
