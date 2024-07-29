@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    height: 100%;
+    margin: 0;
+}
+
 .custom-hover-effect {
     position: relative;
     display: inline-block;

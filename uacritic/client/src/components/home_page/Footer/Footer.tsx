@@ -18,7 +18,6 @@ const Footer:FC = () => {
                 © 2024 DUMMY TEXT. All rights reserved.
             </div>
         </div>
-
     </div>
 };
 

@@ -1,6 +1,6 @@
 export type CardProps =  {
     id: number,
-    category:string,
+    category: 'movies' | 'serials' | 'music' | 'games',
     item: {
         /*value is unique for each category, for movies and serials it is episodes,
          for music it is performer, for games it is company that created it*/
@@ -13,7 +13,7 @@ export type CardProps =  {
 }
 
 export type CardImgProps = {
-    category:string;
+    category: CardProps['category'];
     title:string;
     value:string;
     imageUrl:string;
@@ -28,7 +28,7 @@ export const chooseCategory = (category:CardProps["category"])=> {
         case 'music':
             return 'Виконавець';
         case 'games':
-            return 'Компанія розробник';
+            return 'Розробник';
         default:
             return 'Невідомо';
     }

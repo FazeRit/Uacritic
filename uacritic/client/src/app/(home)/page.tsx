@@ -1,6 +1,6 @@
 import { FC } from "react";
-import CardContainer from "../components/home_page/CardContainer/CardContainer";
-import ComingSoonContainer from "../components/home_page/ComingSoon/ComingSoonContainer";
+import CardContainer from "../../components/home_page/CardContainer/CardContainer";
+import ComingSoonContainer from "../../components/home_page/ComingSoon/ComingSoonContainer";
 import hedgehogHeader from '@/assets/hedgehogHeader.svg';
 import Image from 'next/image';
 
