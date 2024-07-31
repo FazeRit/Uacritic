@@ -133,8 +133,7 @@ body{
 
 .shadow-card{
     position: absolute;
-    width: 14vw;
-    margin-left:1vw;
+    width: 16vw;
     height: 13vw;
     bottom: 0;
     background: linear-gradient(180deg, rgba(29, 29, 29, 0) 0%, #0F1E29 100%);
@@ -143,16 +142,18 @@ body{
 
 @media (max-width: 1024px) {
     .shadow-card{
-        margin-left: 1vw;
-        width: 18vw;
+        width: 20vw;
         height: 10vw;
     }
 }
 
 @media (max-width: 766px) {
     .shadow-card{
-        margin-left: 2vw;
-        width: 36vw;
+        width: 40vw;
         height: 10vw;
     }
+}
+
+.profile-nav-item {
+    @apply transition duration-300 sm:hover:text-pink-300 md:hover:text-white rounded-xl md:hover:bg-primaryText
 }
