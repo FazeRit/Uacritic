@@ -1,6 +1,4 @@
-import {FC} from "react";
-
-const MusicList: FC = () => {
+const MusicList = () => {
     return <>
         <p>MusicList</p>
     </>

@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import {FC} from 'react';
-import notFoundHedgehog from '@/assets/notFoundHedgehog.svg';
+import notFoundHedgehog from '@/assets/logo/notFoundHedgehog.svg';
 
-const NotFound:FC = () => {
+const NotFound = () => {
     return (
         <div className="lg:mt-[5vw] md:mt-[10vw] md:mx-[20vw] lg:mx-[30vw] md:w-[60vw] lg:w-[40vw] sm:mt-[10vw] sm:mx-[10vw] sm:w-[80vw]">
             <div className="flex flex-row lg:h-[10vw] md:h-[20vw] sm:h-[30vw]">

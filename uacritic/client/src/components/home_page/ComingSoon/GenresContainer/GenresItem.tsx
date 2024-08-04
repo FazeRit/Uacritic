@@ -1,4 +1,4 @@
-import { FC } from 'react';
+
 
 const GenresItem: FC<{ genre: string }> = ({ genre }) => {
     return (

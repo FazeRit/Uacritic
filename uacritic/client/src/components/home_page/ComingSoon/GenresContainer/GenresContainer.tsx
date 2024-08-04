@@ -1,4 +1,4 @@
-import { FC } from 'react';
+
 import GenresItem from "@/components/home_page/ComingSoon/GenresContainer/GenresItem";
 
 const GenresContainer: FC<{ genres: string[] }> = ({ genres }) => {

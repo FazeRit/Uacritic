@@ -1,4 +1,4 @@
-import { FC } from "react";
+import {FC} from "react";
 import Card from "./Сard/Card";
 import {CardProps} from "@/data_models/CardProps";
 import Link from 'next/link';

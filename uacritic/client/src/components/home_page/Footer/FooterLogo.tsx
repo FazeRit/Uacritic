@@ -1,8 +1,8 @@
-import { FC } from 'react';
+
 import Image from 'next/image';
 import footerImg from '@/assets/footerImg.svg';
 
-const FooterLogo:FC = () =>{
+const FooterLogo  () =>{
     return <div className="flex flex-row my-[1vw]">
         <svg className="sm:h-[8vw] sm:w-[10vw] md:h-[6vw] md:w-[7vw]  lg:h-[3vw] lg:w-[4vw]" viewBox="0 0 55 40" fill="none"
              xmlns="http://www.w3.org/2000/svg">

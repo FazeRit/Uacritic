@@ -1,6 +1,4 @@
-import {FC} from "react";
-
-const GamesList: FC = () => {
+const GamesList = () => {
     return <>
         <p>GamesList</p>
     </>

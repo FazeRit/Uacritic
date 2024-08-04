@@ -1,6 +1,4 @@
-import React from "react";
-
-const SerialList: React.FC = () => {
+const SerialList = () => {
     return <>
         <p>SerialList</p>
     </>

@@ -1,4 +1,4 @@
-import{ FC } from 'react';
+import{  } from 'react';
 
 const ComingSoonDescription:FC<{description:string}> = ({description}) => {
     return <div className=" sm:hidden md:block  lg:w-[40vw] md:h-[1vw] lg:h-[20vw] break-words text-primaryText text-xl">

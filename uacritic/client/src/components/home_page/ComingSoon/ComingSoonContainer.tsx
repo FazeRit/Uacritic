@@ -1,4 +1,4 @@
-import { FC } from "react";
+import {  } from "react";
 import ComingSoonText from "./ComingSoonText/ComingSoonText";
 
 interface ComingSoonContainerProps {

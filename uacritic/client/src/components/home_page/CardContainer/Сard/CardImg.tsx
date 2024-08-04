@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, {  } from "react";
 import { CardImgProps } from "@/data_models/CardProps";
 import { chooseCategory } from "@/data_models/CardProps";
 

@@ -1,6 +1,4 @@
-import React from "react";
-
-const MovieList:React.FC = () => {
+const MovieList = () => {
     return<>
         <p>MovieList</p>
     </>

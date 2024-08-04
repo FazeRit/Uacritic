@@ -1,6 +1,6 @@
-import { FC } from 'react';
 
-const AuthPasswordInput: FC = () =>{
+
+const AuthPasswordInput= () =>{
     return <div className="relative lg:mt-[1vw] md:mt-[2vw] sm:mt-[3vw]">
         <input type="password" placeholder="Password"
                className="lg:h-[50px] w-full pl-10 pr-4 py-2 rounded-lg border border-blue-200 bg-blue-100 text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"/>

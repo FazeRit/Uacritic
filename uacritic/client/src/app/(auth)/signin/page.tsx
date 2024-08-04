@@ -1,15 +1,15 @@
-import { FC } from 'react';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
-import signUpHedgehog from '@/assets/signUpHedgehog.svg';
+import signUpHedgehog from '@/assets/logo/signUpHedgehog.svg';
 import SigninWebItem from '@/components/signin/signinWebItem'
 import AuthEmailInput from "@/components/signin/authEmailInput";
 import AuthPasswordInput from "@/components/signin/authPasswordInput";
-import googleLogoSvg from '@/assets/googleLogo.svg';
-import githubBlackLogo from '@/assets/githubBlackLogo.svg';
+import googleLogoSvg from '@/assets/logo/googleLogo.svg';
+import githubBlackLogo from '@/assets/logo/githubBlackLogo.svg';
 
-const signUpPage: FC = () => {
+const signUpPage= () => {
     return <div className="w-full h-screen flex flex-row md:bg-[#E3D9CF] lg:bg-bgMain">
         <div className="sm:w-[88vw] sm:mt-[6vh] sm:mx-auto md:w-[44vw] md:h-[60vw] md:border-4 md:bg-white lg:bg-bgMain lg:border-none sm:p-[5vw] md:p-[2vw] lg:p-0 sm:rounded-3xl border-primaryText lg:rounded-none lg:w-[30vw] lg:mx-[10vw] flex-row md:mt-[6vw] lg:mt-[8vw] lg:h-[20vh] lg:justify-center">
             <div>

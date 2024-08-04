@@ -1,7 +1,5 @@
-import {FC} from "react";
 
-
-const About: FC = () =>{
+const About = () =>{
     return <>
         <p>About</p>
     </>

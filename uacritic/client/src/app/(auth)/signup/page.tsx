@@ -1,14 +1,14 @@
-import { FC } from 'react';
+
 import Image from 'next/image';
 
-import signUpHedgehog from '@/assets/signUpHedgehog.svg';
+import signUpHedgehog from '@/assets/logo/signUpHedgehog.svg';
 import AuthEmailInput from "@/components/signin/authEmailInput";
 import AuthPasswordInput from "@/components/signin/authPasswordInput";
 import Link from "next/link";
 import AuthUsernameInput from "@/components/signin/authUsernameInput";
 import AuthConfirmPasswordInput from "@/components/signin/authConfirmPasswordInput";
 
-const signUpPage: FC = () => {
+const signUpPage= () => {
     return <div className="w-full h-screen flex flex-row md:bg-[#E3D9CF] lg:bg-bgMain">
         <div className="w-[50vw] bg-[#E3D9CF] lg:block sm:hidden">
             <Image src={signUpHedgehog} alt="cute hedgehog" className="w-[50vw] h-full" width={50} height={50}></Image>
