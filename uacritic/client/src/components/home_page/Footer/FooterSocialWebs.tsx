@@ -1,7 +1,7 @@
 import {FC} from 'react';
 
-const FooterSocialWebs: FC = () => {
-    return <div>
+const FooterSocialWebs= () => {
+    return <div className="grid grid-cols-4 gap-2">
 
     </div>
 }

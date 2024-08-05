@@ -2,6 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    height: 100%;
+    margin: 0;
+}
+
+.custom-hover-effect {
+    position: relative;
+    display: inline-block;
+}
+
+.custom-hover-effect .hover-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: black;
+    transition: width 0.5s ease-in-out;
+}
+
+.custom-hover-effect:hover .hover-line {
+    width: 100%;
+}
+
+body{
+    @apply bg-bgMain
+}
+
 .roboto-thin {
     font-family: "Roboto", sans-serif;
     font-weight: 100;
@@ -105,8 +133,7 @@
 
 .shadow-card{
     position: absolute;
-    width: 14vw;
-    margin-left:1vw;
+    width: 16vw;
     height: 13vw;
     bottom: 0;
     background: linear-gradient(180deg, rgba(29, 29, 29, 0) 0%, #0F1E29 100%);
@@ -115,19 +142,18 @@
 
 @media (max-width: 1024px) {
     .shadow-card{
-        margin-left: 1vw;
-        width: 18vw;
+        width: 20vw;
         height: 10vw;
     }
 }
 
 @media (max-width: 766px) {
     .shadow-card{
-        margin-left: 2vw;
-        width: 36vw;
+        width: 40vw;
         height: 10vw;
     }
 }
 
-
-
+.profile-nav-item {
+    @apply transition duration-300 sm:hover:text-pink-300 md:hover:text-white rounded-xl md:hover:bg-primaryText
+}

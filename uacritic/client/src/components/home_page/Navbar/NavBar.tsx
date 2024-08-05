@@ -1,22 +1,15 @@
-import { FC } from "react";
+import {  } from "react";
 import NavBarItem from "./NavBarItem";
+import {navItems} from '@/data_models/NavbarItems'
 
-const navItems = [
-    { path: "/movies", label: "Фільми" },
-    { path: "/serials", label: "Серіали" },
-    { path: "/music", label: "Музика" },
-    { path: "/games", label: "Ігри" },
-    { path: "/about", label: "Про нас" },
-];
-
-const NavBar: FC = () => {
+const NavBar= () => {
     return (
         <nav className="mt-[1vw] mx-[7vw]">
-            <ul className="sm:hidden lg:block w-[50vw] custom-ul">
+            <ul className="sm:hidden lg:block w-[70vw] custom-ul flex flex-row">
                 {navItems.map((item) => (
-                    <NavBarItem key={item.path} path={item.path}>
-                        {item.label}
-                    </NavBarItem>
+                        <NavBarItem key={item.path} path={item.path}>
+                            {item.label}
+                        </NavBarItem>
                 ))}
             </ul>
         </nav>
