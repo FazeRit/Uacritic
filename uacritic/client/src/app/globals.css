@@ -114,11 +114,6 @@ body{
     @apply mr-5
 }
 
-
-.custom-ul > *{
-    @apply transition duration-300 hover:text-blue-700
-}
-
 .card-ul > *:not(:first-child):not(:last-child) {
     @apply mx-11
 }

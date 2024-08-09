@@ -1,15 +1,16 @@
-import {  } from "react";
-import NavBarItem from "./NavBarItem";
+import NavBarItem from "./navbarItem/NavBarItem";
 import {navItems} from '@/data_models/NavbarItems'
 
 const NavBar= () => {
     return (
         <nav className="mt-[1vw] mx-[7vw]">
-            <ul className="sm:hidden lg:block w-[70vw] custom-ul flex flex-row">
+            <ul className="sm:hidden lg:flex w-full custom-ul flex-row">
                 {navItems.map((item) => (
-                        <NavBarItem key={item.path} path={item.path}>
+                    <li key={item.path}>
+                        <NavBarItem  path={item.path}>
                             {item.label}
                         </NavBarItem>
+                    </li>
                 ))}
             </ul>
         </nav>

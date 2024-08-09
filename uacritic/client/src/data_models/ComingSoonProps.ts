@@ -1,6 +1,6 @@
-export type ComingSoonProps = {
-    title:string,
-    description:string,
-    genres:string[],
-    imageUrl?:string;
+export interface ComingSoonProps{
+    readonly title:string,
+    readonly description:string,
+    readonly genres:string[],
+    readonly imageUrl?:string;
 }

@@ -4,7 +4,7 @@ import {useState} from "react";
 import Image from 'next/image';
 import Link from 'next/link';
 
-import NavbarGamburger from "@/components/home_page/Navbar/NavbarGamburger";
+import NavbarGamburger from "@/components/home_page/Navbar/navbarGamburger/NavbarGamburger";
 import NavBar from "@/components/home_page/Navbar/NavBar";
 import mainLogo from '@/assets/logo/mainLogo.svg';
 
@@ -26,9 +26,9 @@ const Header = () => {
                     <div className="mt-5 ml-5 roboto-black text-2xl mr-[10vw]">
                         <Link href="/" className="transition duration-300 hover:text-blue-700">UaCritic</Link>
                     </div>
-                    <div className="mt-5 h-8 w-[30vw] flex flex-row bg-inputHeader sm:hidden md:hidden lg:block">
+                    <div className="mt-5 h-8 w-[26vw] flex flex-row bg-inputHeader sm:hidden md:hidden lg:block">
                         <input
-                            className="outline-none sm:text-[1vw] md:text-[0.9vw] w-[20vw] placeholder-primaryText p-1 roboto-regular"
+                            className="outline-none sm:text-[1vw] md:text-[0.9vw] w-[16vw] placeholder-primaryText p-1 roboto-regular"
                             type="text"
                             placeholder="Введіть ключові слова"/>
                         <button

@@ -1,4 +1,4 @@
-import {  } from "react";
+import { FC } from "react";
 import ComingSoonText from "./ComingSoonText/ComingSoonText";
 
 interface ComingSoonContainerProps {
@@ -8,7 +8,7 @@ interface ComingSoonContainerProps {
 const ComingSoonContainer: FC<ComingSoonContainerProps> = ({ reverse = false }) => {
     const item = {
         title: "Назва",
-        genres: ['1', '2', '3','4','5','6'],
+        genres: ['фантастика', 'хоррор', 'наукова фантастика','4','5','6'],
         description: "124333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333334",
         imageUrl: 'https://via.placeholder.com/300x200.png?text=Movie+4'
     };

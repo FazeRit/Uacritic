@@ -75,7 +75,7 @@ const CardContainer: FC<{title:string}> = ({title}) => {
             <div className="my-[2vw] sm:mx-[0vw] md:mx-0 xl:mx-[4vw]">
                 <ul className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 w-full">
                     {DUMMY_MOVIES.map(({id, item, category}) => (
-                        <li key={id}><Card item={item} category={category}/></li>
+                        <li className="sm:w-[40vw] lg:w-[16vw] md:w-[20vw]" key={id}><Card item={item} category={category}/></li>
                     ))}
                 </ul>
             </div>
