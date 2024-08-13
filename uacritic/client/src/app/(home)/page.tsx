@@ -1,5 +1,5 @@
-import CardContainer from "../../components/home_page/CardContainer/CardContainer";
-import ComingSoonContainer from "../../components/home_page/ComingSoon/ComingSoonContainer";
+import CardContainer from "@/ui/home_page/CardContainer/CardContainer";
+import ComingSoonContainer from "@/ui/home_page/ComingSoon/ComingSoonContainer";
 import hedgehogHeader from '@/assets/hedgehogHeader.svg';
 import Image from 'next/image';
 

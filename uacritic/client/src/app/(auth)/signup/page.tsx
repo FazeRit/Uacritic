@@ -2,11 +2,11 @@
 import Image from 'next/image';
 
 import signUpHedgehog from '@/assets/logo/signUpHedgehog.svg';
-import AuthEmailInput from "@/components/signin/authEmailInput";
-import AuthPasswordInput from "@/components/signin/authPasswordInput";
+import AuthEmailInput from "@/ui/signin/authEmailInput";
+import AuthPasswordInput from "@/ui/signin/authPasswordInput";
 import Link from "next/link";
-import AuthUsernameInput from "@/components/signin/authUsernameInput";
-import AuthConfirmPasswordInput from "@/components/signin/authConfirmPasswordInput";
+import AuthUsernameInput from "@/ui/signin/authUsernameInput";
+import AuthConfirmPasswordInput from "@/ui/signin/authConfirmPasswordInput";
 
 const signUpPage= () => {
     return <div className="w-full h-screen flex flex-row md:bg-[#E3D9CF] lg:bg-bgMain">

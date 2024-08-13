@@ -3,9 +3,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import signUpHedgehog from '@/assets/logo/signUpHedgehog.svg';
-import SigninWebItem from '@/components/signin/signinWebItem'
-import AuthEmailInput from "@/components/signin/authEmailInput";
-import AuthPasswordInput from "@/components/signin/authPasswordInput";
+import SigninWebItem from '@/ui/signin/signinWebItem'
+import AuthEmailInput from "@/ui/signin/authEmailInput";
+import AuthPasswordInput from "@/ui/signin/authPasswordInput";
 import googleLogoSvg from '@/assets/logo/googleLogo.svg';
 import githubBlackLogo from '@/assets/logo/githubBlackLogo.svg';
 

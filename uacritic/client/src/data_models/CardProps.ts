@@ -20,6 +20,7 @@ export interface CardImgProps{
 }
 
 
+
 export const chooseCategory = (category:CardProps["category"])=> {
     switch (category) {
         case 'movies':
