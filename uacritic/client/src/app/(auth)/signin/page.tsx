@@ -3,9 +3,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import signUpHedgehog from '@/assets/logo/signUpHedgehog.svg';
-import SigninWebItem from '@/ui/signin/signinWebItem'
-import AuthEmailInput from "@/ui/signin/authEmailInput";
-import AuthPasswordInput from "@/ui/signin/authPasswordInput";
+import SigninWebItem from '@/components/signin/signinWebItem'
+import AuthEmailInput from "@/components/signin/authEmailInput";
+import AuthPasswordInput from "@/components/signin/authPasswordInput";
 import googleLogoSvg from '@/assets/logo/googleLogo.svg';
 import githubBlackLogo from '@/assets/logo/githubBlackLogo.svg';
 
@@ -21,7 +21,7 @@ const signUpPage= () => {
                 </div>
             </div>
             <div className="flex items-center justify-center sm:mt-[2vw] lg:mt-[1vw]">
-                <p className="text-[#71717A] sm:text-sm md:text-md">або ввійдіть через пошту</p>
+                <p className="text-[#71717A] sm:text-sm md:text-base">або ввійдіть через пошту</p>
             </div>
             <div>
                 <AuthEmailInput/>

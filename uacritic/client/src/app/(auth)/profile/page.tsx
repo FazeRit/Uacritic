@@ -6,8 +6,8 @@ import { useGSAP } from '@gsap/react';
 import React, {useRef, useState} from 'react';
 import gsap from 'gsap';
 
-import ProfileEditForm from "@/ui/profile/profileEditForm";
-import ProfileAchievements from "@/ui/profile/profileAchievements/profileAchievements";
+import ProfileEditForm from "@/components/profile/profileEditForm";
+import ProfileAchievements from "@/components/profile/profileAchievements/profileAchievements";
 import burgerMenu from '@/assets/burgerMenu.svg';
 
 

@@ -2,7 +2,7 @@ import {FC} from "react";
 import {ComingSoonProps} from "@/data_models/ComingSoonProps";
 import GenresContainer from "../GenresContainer/GenresContainer";
 import ComingSoonTitle from "./ComingSoonTitle";
-import ComingSoonDescription from "@/ui/home_page/ComingSoon/ComingSoonText/ComingSoonDescription";
+import ComingSoonDescription from "@/components/home_page/ComingSoon/ComingSoonText/ComingSoonDescription";
 
 const ComingSoonText:FC<ComingSoonProps> = ({title, genres, description}) => {
     return <div>

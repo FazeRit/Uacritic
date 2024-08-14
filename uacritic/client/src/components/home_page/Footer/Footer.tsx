@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
-import FooterLogo from "@/ui/home_page/Footer/FooterLogo";
-import FooterSocialWebs from "@/ui/home_page/Footer/FooterSocialWebs";
+import FooterLogo from "@/components/home_page/Footer/FooterLogo";
+import FooterSocialWebs from "@/components/home_page/Footer/FooterSocialWebs";
 import hedgehogFooter from '@/assets/hedgehogFooter.svg';
 
 const Footer = () => {

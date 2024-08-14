@@ -3,7 +3,7 @@ import { FC, useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
 import { NavbarProps } from '@/data_models/NavbarItems';
-import NavbarItemsDescription from '@/ui/home_page/Navbar/navbarItem/NavbarItemsDescription';
+import NavbarItemsDescription from '@/components/home_page/Navbar/navbarItem/NavbarItemsDescription';
 
 const NavBarGamburgerItem: FC<NavbarProps> = ({ path, children }) => {
     const [isShown, setIsShown] = useState(false);

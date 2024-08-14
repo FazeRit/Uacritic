@@ -21,7 +21,7 @@ const GenresPicker:FC<{genres:string[]}> = ({genres}) =>{
     };
 
     return <div className="sm:mt-3 md:mt-3 sm:mx-[6vw] md:mx-[2vw] lg:mx-[1vw] border-t-4 md:pt-3">
-            <button type="button" onClick={toggleDropdown} className="sm:mt-3 md:mt-0 md:text-md w-full rounded-3xl bg-gray-300 items-center">
+            <button type="button" onClick={toggleDropdown} className="sm:mt-3 md:mt-0 md:text-base w-full rounded-3xl bg-gray-300 items-center">
                 <p>Жанр</p>
             </button>
             {isOpen && (

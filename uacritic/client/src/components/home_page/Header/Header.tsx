@@ -3,8 +3,8 @@
 import { useState, memo } from "react";
 import Image from 'next/image';
 import Link from 'next/link';
-import NavbarGamburger from "@/ui/home_page/Navbar/navbarGamburger/NavbarGamburger";
-import NavBar from "@/ui/home_page/Navbar/NavBar";
+import NavbarGamburger from "@/components/home_page/Navbar/navbarGamburger/NavbarGamburger";
+import NavBar from "@/components/home_page/Navbar/NavBar";
 import mainLogo from '@/assets/logo/mainLogo.svg';
 
 const MenuIcon = memo(() => (
@@ -55,10 +55,6 @@ const Header = () => {
                                 className="outline-none w-[16vw] placeholder-primaryText p-1 roboto-regular text-sm"
                                 type="text"
                                 placeholder="Введіть ключові слова"/>
-                            <button
-                                className="w-[8vw] h-6 ml-[1.75vw] my-1 bg-buttonPrimary text-primaryText bg-opacity-30 transition duration-300 hover:bg-blue-500 hover:text-white"
-                                type="button">Пошук
-                            </button>
                         </div>
                     </div>
                     <div className="sm:block lg:hidden" onClick={handleMenu}>

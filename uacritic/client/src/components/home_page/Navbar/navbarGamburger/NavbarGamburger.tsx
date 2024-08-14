@@ -1,6 +1,6 @@
 import {navItems} from '@/data_models/NavbarItems'
 import Link from 'next/link';
-import NavBarGamburgerItem from "@/ui/home_page/Navbar/navbarGamburger/NavBarGamburgerItem";
+import NavBarGamburgerItem from "@/components/home_page/Navbar/navbarGamburger/NavBarGamburgerItem";
 
 
 const NavbarGamburger = () =>{

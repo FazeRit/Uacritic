@@ -1,5 +1,5 @@
 import { FC } from "react";
-import GenresItem from "@/ui/home_page/ComingSoon/GenresContainer/GenresItem";
+import GenresItem from "@/components/home_page/ComingSoon/GenresContainer/GenresItem";
 
 const GenresContainer: FC<{ genres: string[] }> = ({ genres }) => {
     return (
