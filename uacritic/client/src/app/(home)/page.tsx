@@ -1,5 +1,5 @@
-import CardContainer from "../../components/home_page/CardContainer/CardContainer";
-import ComingSoonContainer from "../../components/home_page/ComingSoon/ComingSoonContainer";
+import CardContainer from "@/components/home_page/CardContainer/CardContainer";
+import ComingSoonContainer from "@/components/home_page/ComingSoon/ComingSoonContainer";
 import hedgehogHeader from '@/assets/hedgehogHeader.svg';
 import Image from 'next/image';
 
@@ -10,13 +10,13 @@ const HomePage= () => {
                 <Image className="w-full h-full" width={50} height={50} src={hedgehogHeader} alt="We are working on this part of page"></Image>
             </div>
             <div className="mx-[7vw] mt-[5vw]">
-                <CardContainer title={"ФІЛЬМИ"}/>
+                <CardContainer title={"ФІЛЬМИ"} linkToPopular={'/movies/popular'}/>
                 <ComingSoonContainer reverse={false}/>
-                <CardContainer title={"СЕРІАЛИ"}/>
+                <CardContainer title={"СЕРІАЛИ"} linkToPopular={'/serials/popular'}/>
                 <ComingSoonContainer reverse={true}/>
-                <CardContainer title={"МУЗИКА"}/>
+                <CardContainer title={"МУЗИКА"} linkToPopular={'/music/popular'}/>
                 <ComingSoonContainer reverse={false}/>
-                <CardContainer title={"ІГРИ"}/>
+                <CardContainer title={"ІГРИ"} linkToPopular={'/games/popular'}/>
             </div>
         </>
     );

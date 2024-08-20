@@ -8,7 +8,7 @@ export const navItems = [
     { path: "/about", label: "👥 Про нас" },
 ];
 
-export type NavbarProps = {
+export interface NavbarProps{
     path:string;
     children:ReactNode;
 }

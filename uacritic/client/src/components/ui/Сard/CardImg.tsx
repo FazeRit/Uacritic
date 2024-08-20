@@ -1,6 +1,7 @@
-import React, {  } from "react";
+import React, { FC } from "react";
 import { CardImgProps } from "@/data_models/CardProps";
 import { chooseCategory } from "@/data_models/CardProps";
+
 
 const CardImg: FC<CardImgProps> = ({ category, title, value, imageUrl }) => {
     return (

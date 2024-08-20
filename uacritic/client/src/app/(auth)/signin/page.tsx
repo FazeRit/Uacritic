@@ -21,7 +21,7 @@ const signUpPage= () => {
                 </div>
             </div>
             <div className="flex items-center justify-center sm:mt-[2vw] lg:mt-[1vw]">
-                <p className="text-[#71717A] sm:text-sm md:text-md">або ввійдіть через пошту</p>
+                <p className="text-[#71717A] sm:text-sm md:text-base">або ввійдіть через пошту</p>
             </div>
             <div>
                 <AuthEmailInput/>

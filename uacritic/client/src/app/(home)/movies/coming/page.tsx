@@ -1,7 +1,7 @@
 const MovieList = () => {
-    return<>
-        <p>MovieList</p>
-    </>
+    return<div className="flex flex-row">
+
+    </div>
 }
 
 export default MovieList;
