@@ -1,9 +1,10 @@
 import Link from 'next/link';
-import { FC, useState, useEffect, useRef } from "react";
+import {FC, useEffect, useRef, useState} from "react";
 import gsap from 'gsap';
 
-import { NavbarProps } from '@/data_models/NavbarItems';
-import NavbarItemsDescription from '@/components/home_page/Navbar/navbarItem/NavbarItemsDescription';
+
+import NavbarItemsDescription from '@/components/ui/Navbar/navbarItem/NavbarItemsDescription';
+import {NavbarProps} from "@/utils/NavBarItems";
 
 const NavBarItem: FC<NavbarProps> = ({ path, children }) => {
     const [isShown, setIsShown] = useState(false);
@@ -19,7 +20,7 @@ const NavBarItem: FC<NavbarProps> = ({ path, children }) => {
     }, [isShown]);
 
     return (
-        <div className="relative flex flex-col"
+        <div className="relative flex flex-col z-10"
              onMouseEnter={() => setIsShown(true)}
              onMouseLeave={() => setIsShown(false)}>
             {path !== '/about' ? (

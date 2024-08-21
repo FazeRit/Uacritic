@@ -1,27 +1,45 @@
-import axios from 'axios';
-import {Card} from "@/data_models/CardProps";
+import {useCallback, useState} from "react";
+import axios from "axios";
 
-interface useRequestProps {
+interface UseRequestProps {
     url: string;
-    method: string;
+    method: "GET" | "POST" | "PUT" | "DELETE";
+    params?: Record<string, any>;
     token: string;
 }
 
-const useRequest = async ({ url, method, token }: useRequestProps ): Promise<Card | Error> => {
-    try{
-        const response = await axios({
-            url,
-            method,
-            headers:{
-                accept: 'application/json',
-                authorization: token
-            }
-        });
+const useRequest = <T>({ method, url, token, params }: UseRequestProps) => {
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const [data, setData] = useState<T | null>(null);
 
-        return response.data;
-    }catch(error){
-        return Error('An unknown error occurred.');
-    }
-}
+    const fetchData = useCallback(async () => {
+        setIsLoading(true);
+        setError(null);
+
+        try {
+            const response = await axios({
+                url,
+                method,
+                params,
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": token
+                },
+            });
+
+            if (response.status === 200) {
+                setData(response.data);
+            }
+        } catch (error) {
+            setError('Помилка завантаження даних');
+        } finally {
+            setIsLoading(false);
+        }
+
+    }, [method, url, token, params]);
+
+    return { data, isLoading, error, fetchData };
+};
 
 export default useRequest;

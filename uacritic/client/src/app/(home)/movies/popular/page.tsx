@@ -1,23 +1,21 @@
 'use client';
 
-import {CardProps} from "@/data_models/CardProps";
-import {FC, useState } from "react";
-import Card from "@/components/ui/Сard/Card";
+import ListData from "@/components/ui/ListData/ListData";
+import {CardFactory} from "@/utils/CardFactory";
 
-const MovieList:FC<CardProps> = () => {
-    const [movieList, setMovieList] = useState<CardProps[]>([]);
-
-
-
-    return <div className="">
-            <ul className="grid lg:grid-cols-4 ">
-                {movieList.map((movie) => {
-                    return <li key={movie.id}>
-                        <Card item={movie}/>
-                    </li>
-                })}
-            </ul>
-        </div>
-}
+const MovieList = () => {
+    return (
+        <ListData
+            url={process.env.NEXT_PUBLIC_MOVIE_POPULAR_API_URL!}
+            genresUrl={process.env.NEXT_PUBLIC_MOVIE_GENRES_API_URL!}
+            token={process.env.NEXT_PUBLIC_MOVIE_API_TOKEN!}
+            genresParams={{ language: "uk-UA" }}
+            params={{ sort_by: "vote_average.desc", language: "uk-UA" }}
+            title="фільмів"
+            purpose="популярних"
+            createMethod={CardFactory.movieCardCreate}
+        />
+    );
+};
 
 export default MovieList;

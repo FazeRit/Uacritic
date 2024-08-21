@@ -1,11 +1,8 @@
 import Image from 'next/image';
-
-import FooterLogo from "@/components/home_page/Footer/FooterLogo";
-import FooterSocialWebs from "@/components/home_page/Footer/FooterSocialWebs";
 import hedgehogFooter from '@/assets/hedgehogFooter.svg';
 
 const Footer = () => {
-    return <div className="w-full mt-[4vw]">
+    return <footer className="w-full mt-[4vw]">
         <div className="mx-[7vw]">
             {/*<FooterLogo/>
             <FooterSocialWebs/>*/}
@@ -17,7 +14,7 @@ const Footer = () => {
                 © 2024 DUMMY TEXT. All rights reserved.
             </div>
         </div>
-    </div>
+    </footer>
 };
 
 export default Footer;

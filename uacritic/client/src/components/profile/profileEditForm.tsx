@@ -1,5 +1,5 @@
-import { useGSAP } from '@gsap/react';
-import { useRef, FormEvent } from 'react';
+import {useGSAP} from '@gsap/react';
+import {FormEvent, useRef} from 'react';
 import gsap from 'gsap';
 
 const ProfileEditForm = () => {

@@ -1,18 +1,17 @@
-'use client';
-
-import { ChangeEvent, FC, useCallback, useEffect, useRef, useState } from 'react';
-import './MultiRangeSlider.css'; // Include this to handle the slider thumb styling
+import {ChangeEvent, FC, useCallback, useEffect, useRef} from 'react';
+import './MultiRangeSlider.css';
 
 interface MultiRangeSliderProps {
     min: number;
     max: number;
+    minVal: number;
+    maxVal: number;
+    onRangeChange: (minVal: number, maxVal: number) => void;
 }
 
-const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ min, max }) => {
-    const [minVal, setMinVal] = useState<number>(min);
-    const [maxVal, setMaxVal] = useState<number>(max);
-    const minValRef = useRef<number>(min);
-    const maxValRef = useRef<number>(max);
+const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ min, max, minVal, maxVal, onRangeChange }) => {
+    const minValRef = useRef<number>(minVal);
+    const maxValRef = useRef<number>(maxVal);
     const range = useRef<HTMLDivElement>(null);
 
     const getPercent = useCallback(
@@ -22,22 +21,25 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ min, max }) => {
 
     useEffect(() => {
         const minPercent = getPercent(minVal);
-        const maxPercent = getPercent(maxValRef.current);
+        const maxPercent = getPercent(maxVal);
 
         if (range.current) {
             range.current.style.left = `${minPercent}%`;
             range.current.style.width = `${maxPercent - minPercent}%`;
         }
-    }, [minVal, getPercent]);
+    }, [minVal, maxVal, getPercent]);
 
-    useEffect(() => {
-        const minPercent = getPercent(minValRef.current);
-        const maxPercent = getPercent(maxVal);
+    const handleMinChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const value = Math.min(Number(event.target.value), maxVal - 1);
+        minValRef.current = value;
+        onRangeChange(value, maxValRef.current);
+    };
 
-        if (range.current) {
-            range.current.style.width = `${maxPercent - minPercent}%`;
-        }
-    }, [maxVal, getPercent]);
+    const handleMaxChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const value = Math.max(Number(event.target.value), minVal + 1);
+        maxValRef.current = value;
+        onRangeChange(minValRef.current, value);
+    };
 
     return (
         <div>
@@ -47,11 +49,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ min, max }) => {
                     min={min}
                     max={max}
                     value={minVal}
-                    onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                        const value = Math.min(Number(event.target.value), maxVal - 1);
-                        setMinVal(value);
-                        minValRef.current = value;
-                    }}
+                    onChange={handleMinChange}
                     className="thumb thumb--left absolute sm:w-[70vw] md:w-[200px] lg:w-[240px] h-0 z-50 outline-none pointer-events-none"
                     style={{ zIndex: minVal > max - 100 ? 5 : undefined }}
                 />
@@ -60,11 +58,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ min, max }) => {
                     min={min}
                     max={max}
                     value={maxVal}
-                    onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                        const value = Math.max(Number(event.target.value), minVal + 1);
-                        setMaxVal(value);
-                        maxValRef.current = value;
-                    }}
+                    onChange={handleMaxChange}
                     className="thumb thumb--right absolute sm:w-[70vw] md:w-[200px] lg:w-[240px] h-0 z-50 outline-none pointer-events-none"
                 />
 

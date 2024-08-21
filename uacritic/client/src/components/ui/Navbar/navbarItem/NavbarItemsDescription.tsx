@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FC } from 'react';
+import {FC} from 'react';
 
 interface NavbarItemsDescriptionProps {
     path: string;
@@ -13,6 +13,9 @@ const NavbarItemsDescription: FC<NavbarItemsDescriptionProps> = ({ path }) => {
             </Link>
             <Link href={path + '/coming'} className="transition duration-300 hover:text-blue-700">
                 Скоро вийде
+            </Link>
+            <Link href={path + '/top'} className="transition duration-300 hover:text-blue-700">
+                Найбільш популярні
             </Link>
         </div>
     );

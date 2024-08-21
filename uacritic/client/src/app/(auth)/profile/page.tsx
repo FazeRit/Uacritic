@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 
-import { useGSAP } from '@gsap/react';
+import {useGSAP} from '@gsap/react';
 import React, {useRef, useState} from 'react';
 import gsap from 'gsap';
 

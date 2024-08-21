@@ -126,29 +126,6 @@ body{
     @apply mr-11
 }
 
-.shadow-card{
-    position: absolute;
-    width: 16vw;
-    height: 13vw;
-    bottom: 0;
-    background: linear-gradient(180deg, rgba(29, 29, 29, 0) 0%, #0F1E29 100%);
-    border-radius: 12px;
-}
-
-@media (max-width: 1024px) {
-    .shadow-card{
-        width: 20vw;
-        height: 10vw;
-    }
-}
-
-@media (max-width: 766px) {
-    .shadow-card{
-        width: 40vw;
-        height: 10vw;
-    }
-}
-
 .profile-nav-item {
     @apply transition duration-300 sm:hover:text-pink-300 md:hover:text-white rounded-xl md:hover:bg-primaryText
 }

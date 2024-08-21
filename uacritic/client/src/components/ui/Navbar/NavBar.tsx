@@ -1,7 +1,7 @@
 import NavBarItem from "./navbarItem/NavBarItem";
-import {navItems} from '@/data_models/NavbarItems'
+import {navItems} from "@/utils/NavBarItems";
 
-const NavBar= () => {
+const NavBar = () => {
     return (
         <nav className="mt-[1vw] mx-[7vw]">
             <ul className="sm:hidden lg:flex w-full custom-ul flex-row">

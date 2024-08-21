@@ -1,45 +1,60 @@
-'use client'
+'use client';
 
 import {FC, useState} from "react";
+import {Genre} from "@/utils/CardProps";
 
+interface GenresPickerProps {
+    genres: Genre[];
+    genresError?: string;
+    onGenresChange: (selectedGenres: number[]) => void;
+}
 
-const GenresPicker:FC<{genres:string[]}> = ({genres}) =>{
+const GenresPicker: FC<GenresPickerProps> = ({ genres, genresError, onGenresChange }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+    const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
 
-    const handleCheckboxChange = (genre: string) => {
-        setSelectedGenres(prevSelected =>
-            prevSelected.includes(genre)
-                ? prevSelected.filter(g => g !== genre)
-                : [...prevSelected, genre]
-        );
+    const handleCheckboxChange = (genreId: number) => {
+        const updatedGenres = selectedGenres.includes(genreId)
+            ? selectedGenres.filter(g => g !== genreId)
+            : [...selectedGenres, genreId];
+
+        setSelectedGenres(updatedGenres);
+        onGenresChange(updatedGenres);
     };
-
 
     const toggleDropdown = () => {
-        setIsOpen(!isOpen);
+        setIsOpen(prevState => !prevState);
     };
 
-    return <div className="sm:mt-3 md:mt-3 sm:mx-[6vw] md:mx-[2vw] lg:mx-[1vw] border-t-4 md:pt-3">
-            <button type="button" onClick={toggleDropdown} className="sm:mt-3 md:mt-0 md:text-base w-full rounded-3xl bg-gray-300 items-center">
+    return (
+        <div className="sm:mt-3 md:mt-3 sm:mx-[6vw] md:mx-[2vw] lg:mx-[1vw] border-t-4 md:pt-3">
+            <button
+                type="button"
+                onClick={toggleDropdown}
+                className="sm:mt-3 md:mt-0 md:text-base w-full rounded-3xl bg-gray-300 flex items-center justify-center"
+            >
                 <p>Жанр</p>
             </button>
-            {isOpen && (
-                <div className="">
+            {genresError ? (
+                <div className="sm:mt-2 text-red-500">{genresError}</div>
+            ) : isOpen && (
+                <div className="mt-3 flex flex-col max-h-[200px] overflow-auto">
                     {genres.map((genre) => (
-                        <div className="" key={genre}>
+                        <div key={genre.id} className="flex items-center mb-2">
                             <input
                                 type="checkbox"
-                                id={genre}
-                                checked={selectedGenres.includes(genre)}
-                                onChange={() => handleCheckboxChange(genre)}
+                                id={genre.name}
+                                checked={selectedGenres.includes(genre.id)}
+                                onChange={() => handleCheckboxChange(genre.id)}
+                                className="mr-2"
                             />
-                            <label className="sm:ml-2" htmlFor={genre}>{genre}</label>
+                            <label htmlFor={genre.name}>{genre.name}</label>
                         </div>
                     ))}
                 </div>
             )}
         </div>
-}
+    );
+};
 
 export default GenresPicker;

@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import {FC} from 'react';
 import notFoundHedgehog from '@/assets/logo/notFoundHedgehog.svg';
 
 const NotFound = () => {

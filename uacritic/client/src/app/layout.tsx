@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import type {Metadata} from "next";
+import {Inter} from "next/font/google";
 import "./globals.css";
 import React from "react";
 
@@ -18,9 +18,7 @@ export default function RootLayout({
     return (
         <html lang="en" className="h-full">
             <body className={`flex flex-col min-h-screen ${inter.className}`}>
-                <div className="flex-grow">
-                    {children}
-                </div>
+                {children}
             </body>
         </html>
     );

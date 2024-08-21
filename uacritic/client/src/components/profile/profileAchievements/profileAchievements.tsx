@@ -1,8 +1,7 @@
-import { ProfileAchievementsCardProps } from "@/data_models/ProfileAchevementsCardProps";
 import ProfileAchievementsCard from './profileAchievementsCard';
 
 const ProfileAchievements = () => {
-    const DUMMY_LIST:ProfileAchievementsCardProps[] = [
+    const DUMMY_LIST = [
         {
             title: 'маладець',
             description: 'Прокоментовано 10 хоррор фільмів',

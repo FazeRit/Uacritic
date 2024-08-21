@@ -1,5 +1,11 @@
-import {ProfileAchievementsCardProps} from "@/data_models/ProfileAchevementsCardProps";
 import {FC} from "react";
+
+interface ProfileAchievementsCardProps{
+    readonly title:string,
+    readonly description:string,
+    readonly imageUrl?:string;
+    done: boolean;
+}
 
 const ProfileAchievementsCard:FC<ProfileAchievementsCardProps> = ({title, description, imageUrl, done}) =>{
     return <div className=" text-white sm:h-[42vw] md:h-[20vw] lg:h-[14vw] sm:w-[40vw] md:w-[18vw] lg:w-[12vw] bg-primaryText rounded-3xl flex flex-col hover:scale-90">

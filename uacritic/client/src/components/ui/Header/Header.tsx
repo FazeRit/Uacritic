@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, memo } from "react";
+import {memo, useState} from "react";
 import Image from 'next/image';
 import Link from 'next/link';
-import NavbarGamburger from "@/components/home_page/Navbar/navbarGamburger/NavbarGamburger";
-import NavBar from "@/components/home_page/Navbar/NavBar";
+import NavbarGamburger from "@/components/ui/Navbar/navbarGamburger/NavbarGamburger";
+import NavBar from "@/components/ui/Navbar/NavBar";
 import mainLogo from '@/assets/logo/mainLogo.svg';
 
 const MenuIcon = memo(() => (
@@ -49,12 +49,6 @@ const Header = () => {
                         <Image className="my-[0.4vw]" alt="Logo of UaCritic" src={mainLogo}/>
                         <div className="sm:mt-[3vw] md:mt-5 ml-5 roboto-black text-2xl mr-[10vw]">
                             <Link href="/" className="transition duration-300 hover:text-blue-700">UaCritic</Link>
-                        </div>
-                        <div className="mt-5 h-8 w-[26vw] lg:flex bg-inputHeader sm:hidden">
-                            <input
-                                className="outline-none w-[16vw] placeholder-primaryText p-1 roboto-regular text-sm"
-                                type="text"
-                                placeholder="Введіть ключові слова"/>
                         </div>
                     </div>
                     <div className="sm:block lg:hidden" onClick={handleMenu}>
