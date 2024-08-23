@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import type {Metadata} from "next";
+import {Inter} from "next/font/google";
 import "./globals.css";
 import React from "react";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({subsets: ["latin"]});
 
 export const metadata: Metadata = {
     title: "UaCritic",
@@ -17,11 +17,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" className="h-full">
-            <body className={`flex flex-col min-h-screen ${inter.className}`}>
-                <div className="flex-grow">
-                    {children}
-                </div>
-            </body>
+        <body className={`flex flex-col min-h-screen ${inter.className}`}>
+        {children}
+        </body>
         </html>
     );
 }

@@ -1,14 +1,20 @@
 import {FC} from "react";
-import {ComingSoonProps} from "@/data_models/ComingSoonProps";
-import GenresContainer from "../GenresContainer/GenresContainer";
+
 import ComingSoonTitle from "./ComingSoonTitle";
 import ComingSoonDescription from "@/components/home_page/ComingSoon/ComingSoonText/ComingSoonDescription";
 
-const ComingSoonText:FC<ComingSoonProps> = ({title, genres, description}) => {
+
+interface ComingSoonProps {
+    readonly title: string,
+    readonly description: string,
+    readonly category: string,
+    readonly id: number
+}
+
+const ComingSoonText: FC<ComingSoonProps> = ({title, description, category, id}) => {
     return <div>
         <div>
-            <ComingSoonTitle title={title}/>
-            <GenresContainer genres={genres}/>
+            <ComingSoonTitle title={title} category={category} id={id}/>
         </div>
         <div>
             <ComingSoonDescription description={description}/>

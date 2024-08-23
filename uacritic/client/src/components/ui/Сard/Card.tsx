@@ -1,21 +1,24 @@
-import {FC} from "react";
+import {FC, Suspense} from "react";
 import Link from 'next/link';
 import CardImg from "./CardImg";
 import CardRate from "./CardRate";
-import {CardProps} from "@/data_models/CardProps";
+import {CardItem} from "@/utils/CardProps";
 
-const Card: FC<{ item: CardProps }> = ({ item }) => {
+const Card: FC<{ item: CardItem }> = ({item}) => {
     return (
-        <div className="flex flex-col sm:w-[40vw] lg:w-[16vw] md:w-[20vw] bg-primaryText text-white md:h-[23vw] lg:h-[18vw] sm:min-h-[14rem] rounded-2xl transform transition-transform duration-300 hover:scale-105">
-            <CardImg title={item.title} category={item.category} value={item.value} imageUrl={item.imageUrl}/>
-            <div className="flex flex-row mx-[1vw] lg:mt-[0.5vw] md:mt-[0.8vw] sm:mt-[1vw] min-h-[1.5vw]">
-                {/*TODO: Make Link path */}
-                <Link href="/" className="sm:text-[3vw] md:text-[1.5vw] md:ml-0 sm:ml-[1vw] lg:text-[1.1vw] roboto-medium lg:h-[7vw] lg:w-[9vw] sm:w-[20vw] break-words">{item.title.length <= 10 ? item.title: item.title.slice(0, 10) + '...'}</Link>
-                <CardRate rate={item.rate}/>
-                <div className="lg:ml-[1vw] sm:ml-[2vw] md:ml-[0.5vw] sm:h-[4vw] md:w-[3vw] lg:w-[2vw] md:h-[3vw]">
-                    <div>
+        <Suspense fallback={<p>Завантажування даних</p>}>
+            <div
+                className="flex flex-col sm:w-[40vw] lg:w-[16vw] md:w-[20vw] bg-primaryText text-white md:h-[23vw] lg:h-[18vw] sm:min-h-[14rem] rounded-2xl transform transition-transform duration-300 hover:scale-105">
+                <CardImg title={item.title} imageUrl={item.imageUrl}/>
+                <div className="flex flex-row mx-[1vw] lg:mt-[0.5vw] md:mt-[0.8vw] sm:mt-[1vw] min-h-[1.5vw]">
+                    {/*TODO: Make Link path */}
+                    <Link href={`/movies/${item.id}`}
+                          className="sm:text-[3vw] md:text-[1.5vw] md:ml-0 sm:ml-[1vw] lg:text-[1vw] roboto-medium lg:h-[7vw] lg:w-[9vw] sm:w-[20vw] break-words">{item.title.length <= 15 ? item.title : item.title.slice(0, 10) + '...'}</Link>
+                    <CardRate rate={item.rate}/>
+                    <div
+                        className="lg:ml-[1vw] sm:ml-[2vw] md:ml-[0.5vw] sm:h-[4vw] md:w-[3vw] lg:mt-[] md:h-[3vw] lg:h-[2vw] lg:w-[2vw]">
                         <svg
-                            className="cursor-pointer sm:w-[5vw] sm:h-[5vw] md:w-[3vw] lg:h-[1.5vw] lg:mt-[0.2vw] lg:w-[2vw] md:h-[3vw]"
+                            className="cursor-pointer sm:w-[5vw] sm:h-[5vw] md:w-[3vw] lg:h-[1.5vw] lg:mt-[0.1vw] lg:w-[2vw] md:h-[3vw]"
                             width="2vw" height="2vw" viewBox="0 0 35 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clipPath="url(#clip0_21_17)">
                                 <path
@@ -31,7 +34,7 @@ const Card: FC<{ item: CardProps }> = ({ item }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </Suspense>
     );
 };
 

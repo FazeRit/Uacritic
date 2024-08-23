@@ -1,5 +1,5 @@
 const MovieList = () => {
-    return<div className="flex flex-row">
+    return <div className="flex flex-row">
     </div>
 }
 
