@@ -1,34 +1,11 @@
-import {CardItem} from "@/utils/CardProps";
+import {CardItem, MovieDescription} from "@/utils/CardProps";
+import {MovieAndSerialsListApiResponse} from "@/utils/MovieProps";
+import {MovieDescriptionProps} from "@/utils/MovieDescriptionProps";
 
-interface Movie {
-    adult: boolean;
-    backdrop_path: string;
-    genre_ids: number[];
-    id: number;
-    original_language: string;
-    original_title: string;
-    overview: string;
-    popularity: number;
-    poster_path: string;
-    release_date?: string;
-    first_air_date?: string;
-    title?: string;
-    name?: string;
-    video: boolean;
-    vote_average: number;
-    vote_count: number;
-    liked?: boolean;
-}
 
-export interface MovieApiResponse {
-    page: number;
-    results: Movie[];
-    total_pages: number;
-    total_results: number;
-}
 
 export class CardFactory {
-    static movieCardCreate(items: MovieApiResponse): CardItem[] {
+    static MovieCardCreate(items: MovieAndSerialsListApiResponse): CardItem[] {
         return items.results
             .sort((a, b) => b.vote_average - a.vote_average)
             .map((item) => {
@@ -42,9 +19,23 @@ export class CardFactory {
                     year: parseInt(date?.match(/^\d{4}/)?.[0] ?? '0', 10),
                     rate: item.vote_average,
                     title: title ?? "Unknown Title",
-                    liked: item.liked ?? false,
+                    // liked: item.liked ?? false,
                     imageUrl: `https://image.tmdb.org/t/p/original/${item.poster_path}`
                 });
             });
+    }
+
+    static MovieDescriptionCreate(item: MovieDescriptionProps): MovieDescription {
+        return new MovieDescription({
+            genres: item.genres,
+            budget: item.budget,
+            title: item.title,
+            overview: item.overview,
+            release_date: item.release_date,
+            vote_average: item.vote_average,
+            poster_path: 'https://image.tmdb.org/t/p/original/' + item.poster_path,
+            backdrop_path: 'https://image.tmdb.org/t/p/original/' + item.backdrop_path,
+            status: item.status
+        });
     }
 }

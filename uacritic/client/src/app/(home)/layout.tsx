@@ -4,7 +4,7 @@ import React from "react";
 import Header from "@/components/ui/Header/Header";
 import Footer from "@/components/ui/Footer/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({subsets: ["latin"]});
 
 export default function RootLayout({
                                        children,
@@ -13,11 +13,11 @@ export default function RootLayout({
 }>) {
     return (
         <div className={`flex flex-col min-h-screen ${inter.className}`}>
-            <Header />
-                <main>
-                    {children}
-                </main>
-            <Footer />
+            <Header/>
+            <main>
+                {children}
+            </main>
+            <Footer/>
         </div>
     );
 }

@@ -9,7 +9,7 @@ interface MultiRangeSliderProps {
     onRangeChange: (minVal: number, maxVal: number) => void;
 }
 
-const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ min, max, minVal, maxVal, onRangeChange }) => {
+const MultiRangeSlider: FC<MultiRangeSliderProps> = ({min, max, minVal, maxVal, onRangeChange}) => {
     const minValRef = useRef<number>(minVal);
     const maxValRef = useRef<number>(maxVal);
     const range = useRef<HTMLDivElement>(null);
@@ -51,7 +51,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ min, max, minVal, maxVal,
                     value={minVal}
                     onChange={handleMinChange}
                     className="thumb thumb--left absolute sm:w-[70vw] md:w-[200px] lg:w-[240px] h-0 z-50 outline-none pointer-events-none"
-                    style={{ zIndex: minVal > max - 100 ? 5 : undefined }}
+                    style={{zIndex: minVal > max - 100 ? 5 : undefined}}
                 />
                 <input
                     type="range"

@@ -27,7 +27,7 @@ interface FilterSearchProps {
     }>>;
 }
 
-const FilterSearch: FC<FilterSearchProps> = ({ title, genres, genresError, filter, setFilter }) => {
+const FilterSearch: FC<FilterSearchProps> = ({title, genres, genresError, filter, setFilter}) => {
     const handleSearchQueryChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFilter(prevFilter => ({
             ...prevFilter,
@@ -38,7 +38,7 @@ const FilterSearch: FC<FilterSearchProps> = ({ title, genres, genresError, filte
     const handleRangeChange = (type: 'year' | 'rating', minValue: number, maxValue: number) => {
         setFilter(prevFilter => ({
             ...prevFilter,
-            ...(type === 'year' ? { minYear: minValue, maxYear: maxValue } : { minRating: minValue, maxRating: maxValue })
+            ...(type === 'year' ? {minYear: minValue, maxYear: maxValue} : {minRating: minValue, maxRating: maxValue})
         }));
     };
 
@@ -50,7 +50,8 @@ const FilterSearch: FC<FilterSearchProps> = ({ title, genres, genresError, filte
     };
 
     return (
-        <form className="flex flex-col text-primaryText shadow-xl sm:mt-8 md:mt-6 lg:mt-10 sm:mx-auto md:mx-auto h-fit lg:mx-[2vw] sm:w-[90%] md:w-[30vw] lg:w-72 rounded-xl roboto-medium relative">
+        <form
+            className="flex flex-col text-primaryText shadow-xl sm:mt-8 md:mt-6 lg:mt-10 sm:mx-auto md:mx-auto h-fit lg:mx-[2vw] sm:w-[90%] md:w-[30vw] lg:w-72 rounded-xl roboto-medium relative">
             <div className="rounded-t-xl bg-primaryText sm:h-4 md:h-6"></div>
             <div className="flex flex-col flex-grow">
                 <label htmlFor="searchBar" className="sm:text-2xl md:text-xl mx-auto md:mt-3">
@@ -65,8 +66,9 @@ const FilterSearch: FC<FilterSearchProps> = ({ title, genres, genresError, filte
                     className="sm:mx-[10vw] md:mx-[2vw] lg:mx-[1vw] sm:mt-5 md:mt-3 lg:mt-3 bg-white focus:outline focus:outline-primaryText rounded-3xl sm:text-base sm:h-6 md:h-7 sm:px-[4vw] md:px-[1vw]"
                     placeholder={`Пошук ${title}`}
                 />
-                <GenresPicker genres={genres} onGenresChange={handleGenresChange} genresError={genresError} />
-                <label className="mx-auto border-t-4 sm:mx-[6vw] md:mx-[2vw] lg:mx-[1vw] sm:mt-3 sm:pt-3 md:text-base text-primaryText">
+                <GenresPicker genres={genres} onGenresChange={handleGenresChange} genresError={genresError}/>
+                <label
+                    className="mx-auto border-t-4 sm:mx-[6vw] md:mx-[2vw] lg:mx-[1vw] sm:mt-3 sm:pt-3 md:text-base text-primaryText">
                     Рік
                 </label>
                 <MultiRangeSlider
@@ -90,7 +92,8 @@ const FilterSearch: FC<FilterSearchProps> = ({ title, genres, genresError, filte
                 />
             </div>
             <div className="border-b-4 sm:pt-6 w-[86%] mx-auto"></div>
-            <div className="bg-primaryText sm:h-4 md:h-6 rounded-b-xl w-full sm:mt-4 flex justify-center items-center"></div>
+            <div
+                className="bg-primaryText sm:h-4 md:h-6 rounded-b-xl w-full sm:mt-4 flex justify-center items-center"></div>
         </form>
     );
 };

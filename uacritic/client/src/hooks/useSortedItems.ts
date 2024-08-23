@@ -1,8 +1,8 @@
 import {CardItem} from "@/utils/CardProps";
 
 interface useSortedItemsProps {
-    items:CardItem[];
-    filter:{
+    items: CardItem[];
+    filter: {
         searchQuery: string;
         minYear: number;
         maxYear: number;
@@ -12,7 +12,7 @@ interface useSortedItemsProps {
     }
 }
 
-export const useSortedItems = ({ items, filter }: { items: CardItem[], filter: useSortedItemsProps["filter"] }) => {
+export const useSortedItems = ({items, filter}: { items: CardItem[], filter: useSortedItemsProps["filter"] }) => {
     return items.filter(item => {
         const matchesQuery = item.title.toLowerCase().includes(filter.searchQuery.toLowerCase());
         const matchesYear = item.year >= filter.minYear && item.year <= filter.maxYear;

@@ -4,7 +4,7 @@ interface NextDataButtonProps {
     onClick: () => void;
 }
 
-const NextDataButton: FC<NextDataButtonProps> = ({ onClick }) => {
+const NextDataButton: FC<NextDataButtonProps> = ({onClick}) => {
     return (
         <div className="mt-20 flex justify-center items-center">
             <button

@@ -9,7 +9,7 @@ interface GenresPickerProps {
     onGenresChange: (selectedGenres: number[]) => void;
 }
 
-const GenresPicker: FC<GenresPickerProps> = ({ genres, genresError, onGenresChange }) => {
+const GenresPicker: FC<GenresPickerProps> = ({genres, genresError, onGenresChange}) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
 

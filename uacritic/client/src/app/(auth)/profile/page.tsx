@@ -16,18 +16,18 @@ const ProfilePage = () => {
 
     const [showBurgerMenu, setShowBurgerMenu] = useState(true);
     const container = useRef(null);
-    const [showArticle, setShowArticle] = useState<React.ReactElement>(<ProfileEditForm />);
+    const [showArticle, setShowArticle] = useState<React.ReactElement>(<ProfileEditForm/>);
 
     const lookupTable = {
-        "editForm": ()=> setShowArticle(<ProfileEditForm />),
-        "achievements": ()=> setShowArticle(<ProfileAchievements />)
+        "editForm": () => setShowArticle(<ProfileEditForm/>),
+        "achievements": () => setShowArticle(<ProfileAchievements/>)
     }
 
-    const { contextSafe} = useGSAP({scope:container});
+    const {contextSafe} = useGSAP({scope: container});
 
     const onBurgerMenu = contextSafe(() => {
         setShowBurgerMenu(prevState => !prevState);
-        gsap.to('#burgerMenu', { rotation: `${!showBurgerMenu ? '-=90' : '+=90'}` });
+        gsap.to('#burgerMenu', {rotation: `${!showBurgerMenu ? '-=90' : '+=90'}`});
     });
 
     return (

@@ -7,7 +7,7 @@ const NavBar = () => {
             <ul className="sm:hidden lg:flex w-full custom-ul flex-row">
                 {navItems.map((item) => (
                     <li key={item.path}>
-                        <NavBarItem  path={item.path}>
+                        <NavBarItem path={item.path}>
                             {item.label}
                         </NavBarItem>
                     </li>

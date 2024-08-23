@@ -8,7 +8,7 @@ interface SortByProps {
     isAscending: boolean;
 }
 
-const SortBy = ({ handleSortSelection, selectedSort, isAscending }: SortByProps) => {
+const SortBy = ({handleSortSelection, selectedSort, isAscending}: SortByProps) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const toggleDropdown = () => {
@@ -16,7 +16,8 @@ const SortBy = ({ handleSortSelection, selectedSort, isAscending }: SortByProps)
     };
 
     return (
-        <div className="relative sm:mt-[2vw] md:mt-[3vw] lg:mt-[2vw] bg-gray-300 sm:w-[36vw] md:w-[24vw] lg:w-[14vw] z-40">
+        <div
+            className="relative sm:mt-[2vw] md:mt-[3vw] lg:mt-[2vw] bg-gray-300 sm:w-[36vw] md:w-[24vw] lg:w-[14vw] z-40">
             <button
                 type="button"
                 onClick={toggleDropdown}

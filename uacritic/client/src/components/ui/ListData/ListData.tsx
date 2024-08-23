@@ -1,14 +1,13 @@
-'use client';
-
-import {useCallback, useEffect, useState} from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import FilterSearch from '@/components/ui/FilterSearch/FilterSearch';
 import SortBy from '@/components/ui/SortBy/SortBy';
 import NextDataButton from '@/components/ui/NextDataButton/NextDataButton';
 import DataView from '@/components/ui/DataView/DataView';
-
-import {useSortedItems} from "@/hooks/useSortedItems";
+import { useSortedItems } from "@/hooks/useSortedItems";
 import useRequest from "@/hooks/useRequest";
-import {CardItem, Genre, sortCards} from '@/utils/CardProps';
+import { CardItem, Genre, sortCards } from '@/utils/CardProps';
+import Loading from "@/components/ui/Loading/Loading";
+import ErrorLoading from "@/components/ui/ErrorLoading/ErrorLoading";
 
 interface ListDataProps<T> {
     url: string;
@@ -44,14 +43,24 @@ const ListData = <T,>({
     });
     const [currentPage, setCurrentPage] = useState(1);
 
-    const { data: fetchedGenres, isLoading: genresLoading, error: genresError, fetchData: fetchGenres } = useRequest<Genre[]>({
+    const {
+        data: fetchedGenres,
+        isLoading: genresLoading,
+        error: genresError,
+        fetchData: fetchGenres
+    } = useRequest<Genre[]>({
         method: 'GET',
         url: genresUrl,
         token,
         params: genresParams
     });
 
-    const { data: fetchedItems, isLoading: itemsLoading, error: itemsError, fetchData: fetchItems } = useRequest<T>({
+    const {
+        data: fetchedItems,
+        isLoading: itemsLoading,
+        error: itemsError,
+        fetchData: fetchItems
+    } = useRequest<T>({
         method: 'GET',
         url,
         token,
@@ -88,23 +97,18 @@ const ListData = <T,>({
 
     const sortedAndFilteredItems = useSortedItems({ items, filter });
 
-    const handlePageChange = () => {
+    const handlePageChange = useCallback(() => {
         setCurrentPage(prevPage => prevPage + 1);
-    };
+    }, []);
 
     return (
         <div className="flex flex-col min-h-screen">
             <div className="flex flex-grow flex-col md:flex-row">
                 <div className="flex-grow">
                     {genresLoading ? (
-                        <div className="sm:mt-8 md:mt-6 lg:mt-10 sm:mx-auto md:mx-auto sm:w-[90%] md:w-[30vw] lg:w-72 flex justify-center items-center">
-                            <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
-                                <span className="sr-only">Loading...</span>
-                            </div>
-                            <p className="ml-4 text-lg">Завантаження жанрів...</p>
-                        </div>
+                        <Loading />
                     ) : genresError ? (
-                        <div className="text-red-600">Помилка завантаження жанрів</div>
+                       <ErrorLoading />
                     ) : (
                         <FilterSearch
                             filter={filter}
@@ -118,14 +122,9 @@ const ListData = <T,>({
 
                 <div className="flex flex-col flex-grow">
                     {itemsLoading ? (
-                        <div className="sm:mt-8 md:mt-6 lg:mt-10 w-full h-full flex justify-center items-center">
-                            <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
-                                <span className="sr-only">Loading...</span>
-                            </div>
-                            <p className="ml-4 text-lg">Завантаження {title}...</p>
-                        </div>
+                        <Loading />
                     ) : itemsError ? (
-                        <div className="text-red-600">Помилка завантаження {title}</div>
+                        <ErrorLoading />
                     ) : (
                         <>
                             <div className="flex justify-end p-4">
@@ -142,7 +141,7 @@ const ListData = <T,>({
                     )}
                 </div>
             </div>
-            {(fetchedItems as any)?.total_pages  > currentPage &&
+            {(fetchedItems as any)?.total_pages > currentPage &&
                 <NextDataButton onClick={handlePageChange} />}
         </div>
     );

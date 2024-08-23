@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 
-const CardRate: FC<{ rate: number }> = ({ rate }) => {
+const CardRate: FC<{ rate: number }> = ({rate}) => {
     return (
         <div className="flex flex-row sm:ml-[1vw] md:ml-[0.1vw] lg:ml-[0.5vw] lg:mt-0">
             <p className="mr-[0.2vw] sm:text-[3vw] md:text-[1.5vw] lg:text-[1vw] roboto-medium">{rate.toFixed(1)}</p>

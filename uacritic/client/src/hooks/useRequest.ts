@@ -8,7 +8,7 @@ interface UseRequestProps {
     token: string;
 }
 
-const useRequest = <T>({ method, url, token, params }: UseRequestProps) => {
+const useRequest = <T>({method, url, token, params}: UseRequestProps) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [data, setData] = useState<T | null>(null);
@@ -39,7 +39,7 @@ const useRequest = <T>({ method, url, token, params }: UseRequestProps) => {
 
     }, [method, url, token, params]);
 
-    return { data, isLoading, error, fetchData };
+    return {data, isLoading, error, fetchData};
 };
 
 export default useRequest;

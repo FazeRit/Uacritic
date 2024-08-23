@@ -26,7 +26,7 @@ body {
     width: 100%;
 }
 
-body{
+body {
     @apply bg-bgMain
 }
 
@@ -106,11 +106,11 @@ body{
     @apply mx-5
 }
 
-.custom-ul > *:last-child{
+.custom-ul > *:last-child {
     @apply ml-5
 }
 
-.custom-ul > *:first-child{
+.custom-ul > *:first-child {
     @apply mr-5
 }
 
@@ -118,11 +118,11 @@ body{
     @apply mx-11
 }
 
-.card-ul > *:last-child{
+.card-ul > *:last-child {
     @apply ml-11
 }
 
-.card-ul > *:first-child{
+.card-ul > *:first-child {
     @apply mr-11
 }
 
