@@ -1,7 +1,7 @@
 'use client';
 
 import ListData from "@/components/ui/ListData/ListData";
-import {CardFactory} from "@/utils/CardFactory";
+import {CardFactory} from "@/lib/utils/CardFactory";
 
 const SerialList = () => {
     return (
@@ -14,6 +14,7 @@ const SerialList = () => {
             title="серіали"
             purpose="популярні"
             createMethod={CardFactory.MovieCardCreate}
+            category={'serials'}
         />
     );
 };

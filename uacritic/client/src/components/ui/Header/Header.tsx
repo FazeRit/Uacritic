@@ -64,16 +64,14 @@ const Header = () => {
                 </div>
             </header>
             <div className="mt-[1.5vw] border-b-4"></div>
-            <div>
-                {showMenu && (
-                    <div className="bg-gray-200 w-full pb-[2vw] lg:hidden">
-                        <NavbarGamburger/>
-                    </div>
-                )}
-                <NavBar/>
-            </div>
+            {showMenu && (
+                <div className="absolute bg-gray-200 w-full pb-[2vw] lg:hidden">
+                    <NavbarGamburger/>
+                </div>
+            )}
+            <NavBar/>
         </div>
     );
 };
 
-export default memo(Header);
+export default Header;

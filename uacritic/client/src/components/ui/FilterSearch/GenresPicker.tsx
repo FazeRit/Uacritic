@@ -1,7 +1,7 @@
 'use client';
 
 import {FC, useState} from "react";
-import {Genre} from "@/utils/CardProps";
+import {Genre} from "@/lib/utils/CardProps";
 
 interface GenresPickerProps {
     genres: Genre[];

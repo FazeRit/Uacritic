@@ -1,5 +1,5 @@
 import Card from "@/components/ui/Сard/Card";
-import {CardItem} from "@/utils/CardProps";
+import {CardItem} from "@/lib/utils/CardProps";
 import {FC} from "react";
 
 const DataView: FC<{ list: CardItem[] | null, title: string }> = ({list, title}) => {

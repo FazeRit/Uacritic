@@ -11,7 +11,6 @@ export interface Genre {
 export class CardItem implements CardImgProps {
     readonly id: number
     rate: number;
-    // liked: boolean;
     readonly year: number;
     readonly description: string;
     readonly genres: number[]
@@ -19,7 +18,7 @@ export class CardItem implements CardImgProps {
     readonly title: string;
     readonly imageUrl: string;
 
-    constructor({genres, id, category, year, rate, title, /*liked, */ imageUrl, description}: CardItem) {
+    constructor({genres, id, category, year, rate, title, imageUrl, description}: CardItem) {
         this.genres = genres;
         this.id = id;
         this.description = description;
@@ -27,7 +26,6 @@ export class CardItem implements CardImgProps {
         this.year = year;
         this.rate = rate;
         this.title = title;
-        // this.liked = liked;
         this.imageUrl = imageUrl;
     }
 }
@@ -46,36 +44,3 @@ export const sortCards = (items: CardItem[], sort: string, selectedSort: string,
     return sort === selectedSort ? !isAscending : true;
 };
 
-export class MovieDescription {
-    genres: Genre[];
-    budget: number;
-    title: string;
-    overview: string;
-    release_date: string;
-    vote_average: number;
-    backdrop_path: string;
-    poster_path: string;
-    status: string;
-
-    constructor({
-                    genres,
-                    budget,
-                    title,
-                    overview,
-                    release_date,
-                    vote_average,
-                    poster_path,
-                    backdrop_path,
-                    status
-                }:MovieDescription) {
-        this.genres = genres;
-        this.budget = budget;
-        this.title = title;
-        this.overview = overview;
-        this.release_date = release_date;
-        this.vote_average = vote_average;
-        this.backdrop_path = backdrop_path;
-        this.poster_path = poster_path;
-        this.status = status;
-    }
-}

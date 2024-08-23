@@ -3,18 +3,19 @@ import Image from 'next/image';
 
 import useRequest from '@/hooks/useRequest';
 
-import ErrorLoading from "@/components/ui/ErrorLoading/ErrorLoading";
+import ErrorFetching from "@/components/ui/ErrorFetching/ErrorFetching";
 import ComingSoonText from './ComingSoonText/ComingSoonText';
 
-import {CardItem} from "@/utils/CardProps";
+import {CardItem} from "@/lib/utils/CardProps";
 
 
 interface ComingSoonContainerProps<T> {
     url: string;
     token: string;
     params?: Record<string, any>;
-    createMethod: (data: T) => CardItem[];
+    createMethod: (data: T, category: 'movies' | 'serials' | 'music' | 'games') => CardItem[];
     reverse?: boolean;
+    category: 'movies' | 'serials' | 'music' | 'games';
 }
 
 const ComingSoonContainer = <T, >({
@@ -23,6 +24,7 @@ const ComingSoonContainer = <T, >({
                                       params,
                                       createMethod,
                                       reverse = false,
+                                      category
                                   }: ComingSoonContainerProps<T>) => {
     const [item, setItem] = useState<CardItem | null>(null);
     const {data: fetchedItems, isLoading, error, fetchData} = useRequest<T>({
@@ -38,7 +40,7 @@ const ComingSoonContainer = <T, >({
 
     useEffect(() => {
         if (fetchedItems) {
-            const cardItems = createMethod(fetchedItems);
+            const cardItems = createMethod(fetchedItems, category);
             if (cardItems.length > 0) {
                 setItem(cardItems[Math.floor(Math.random() * cardItems.length)]);
             }
@@ -76,13 +78,12 @@ const ComingSoonContainer = <T, >({
 
     if (error) {
         return (
-            <ErrorLoading />
+            <ErrorFetching />
         );
     }
 
     return (
-        <div
-            className="border-t-lineMain border-t-[3px] md:border-l-[3px] md:border-r-[3px] border-l-lineMain border-r-lineMain mt-[4vw]">
+        <div className="border-t-lineMain border-t-[3px] md:border-l-[3px] md:border-r-[3px] border-l-lineMain border-r-lineMain mt-[4vw]">
             <div className="flex flex-col">
                 <div className="flex flex-row mt-[0.5vw] sm:p-[2vw] w-full">
                     {reverse ? (

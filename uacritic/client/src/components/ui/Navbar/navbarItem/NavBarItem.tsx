@@ -2,9 +2,8 @@ import Link from 'next/link';
 import {FC, useEffect, useRef, useState} from "react";
 import gsap from 'gsap';
 
-
-import NavbarItemsDescription from '@/components/ui/Navbar/navbarItem/NavbarItemsDescription';
-import {NavbarProps} from "@/utils/NavBarItems";
+import NavbarItemDescription from '@/components/ui/Navbar/navbarItem/NavbarItemDescription';
+import {NavbarProps} from "@/lib/utils/NavBarItems";
 
 const NavBarItem: FC<NavbarProps> = ({path, children}) => {
     const [isShown, setIsShown] = useState(false);
@@ -40,7 +39,7 @@ const NavBarItem: FC<NavbarProps> = ({path, children}) => {
             )}
             {isShown && children !== '👥 Про нас' && (
                 <div ref={descriptionRef} className="absolute top-full left-0 pt-3">
-                    <NavbarItemsDescription path={path}/>
+                    <NavbarItemDescription path={path}/>
                 </div>
             )}
         </div>

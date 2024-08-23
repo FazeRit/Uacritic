@@ -4,7 +4,7 @@ import Image from 'next/image';
 import CardContainer from '@/components/home_page/CardContainer/CardContainer';
 import ComingSoonContainer from '@/components/home_page/ComingSoon/ComingSoonContainer';
 import hedgehogHeader from '@/assets/hedgehogHeader.svg';
-import {CardFactory} from '@/utils/CardFactory';
+import {CardFactory} from '@/lib/utils/CardFactory';
 
 const HomePage = () => {
     return (
@@ -21,13 +21,16 @@ const HomePage = () => {
                     url={process.env.NEXT_PUBLIC_MOVIE_POPULAR_API_URL!}
                     token={process.env.NEXT_PUBLIC_MOVIE_API_TOKEN!}
                     createMethod={CardFactory.MovieCardCreate}
+                    category={"movies"}
                 />
                 <ComingSoonContainer
                     url={process.env.NEXT_PUBLIC_MOVIE_COMING_SOON_API_URL!}
                     token={process.env.NEXT_PUBLIC_MOVIE_API_TOKEN!}
                     params={{sort_by: "vote_average.desc", language: "uk-UA"}}
                     createMethod={CardFactory.MovieCardCreate}
-                    reverse={false}/>
+                    reverse={false}
+                    category={"movies"}
+                />
                 <CardContainer
                     title={"серіали"}
                     linkToPopular={'/serials/popular'}
@@ -35,13 +38,16 @@ const HomePage = () => {
                     url={process.env.NEXT_PUBLIC_SERIALS_POPULAR_API_URL!}
                     token={process.env.NEXT_PUBLIC_MOVIE_API_TOKEN!}
                     createMethod={CardFactory.MovieCardCreate}
+                    category={"serials"}
                 />
                 <ComingSoonContainer
                     url={process.env.NEXT_PUBLIC_SERIALS_COMING_SOON_API_URL!}
                     token={process.env.NEXT_PUBLIC_MOVIE_API_TOKEN!}
                     params={{sort_by: "vote_average.desc", language: "uk-UA"}}
                     createMethod={CardFactory.MovieCardCreate}
-                    reverse={true}/>
+                    reverse={true}
+                    category={"serials"}
+                    />
                 {/*<CardContainer title={"ігри"} linkToPopular={'/games/popular'}/>*/}
             </div>
         </>

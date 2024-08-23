@@ -5,19 +5,20 @@ import NextDataButton from '@/components/ui/NextDataButton/NextDataButton';
 import DataView from '@/components/ui/DataView/DataView';
 import { useSortedItems } from "@/hooks/useSortedItems";
 import useRequest from "@/hooks/useRequest";
-import { CardItem, Genre, sortCards } from '@/utils/CardProps';
+import { CardItem, Genre, sortCards } from '@/lib/utils/CardProps';
 import Loading from "@/components/ui/Loading/Loading";
-import ErrorLoading from "@/components/ui/ErrorLoading/ErrorLoading";
+import ErrorFetching from "@/components/ui/ErrorFetching/ErrorFetching";
 
 interface ListDataProps<T> {
     url: string;
     genresUrl: string;
     token: string;
+    category:  'movies' | 'serials' | 'music' | 'games';
     params?: Record<string, any>;
     genresParams?: Record<string, any>;
     title: string;
     purpose: string;
-    createMethod: (data: T) => CardItem[];
+    createMethod: (data: T, category: 'movies' | 'serials' | 'music' | 'games') => CardItem[];
 }
 
 const ListData = <T,>({
@@ -28,6 +29,7 @@ const ListData = <T,>({
                           genresParams,
                           title,
                           purpose,
+                          category,
                           createMethod,
                       }: ListDataProps<T>) => {
     const [items, setItems] = useState<CardItem[]>([]);
@@ -80,7 +82,7 @@ const ListData = <T,>({
 
     useEffect(() => {
         if (fetchedItems) {
-            setItems(prevItems => [...prevItems, ...createMethod(fetchedItems)]);
+            setItems(prevItems => [...prevItems, ...createMethod(fetchedItems, category)]);
         }
     }, [fetchedItems, createMethod]);
 
@@ -108,7 +110,7 @@ const ListData = <T,>({
                     {genresLoading ? (
                         <Loading />
                     ) : genresError ? (
-                       <ErrorLoading />
+                       <ErrorFetching />
                     ) : (
                         <FilterSearch
                             filter={filter}
@@ -124,7 +126,7 @@ const ListData = <T,>({
                     {itemsLoading ? (
                         <Loading />
                     ) : itemsError ? (
-                        <ErrorLoading />
+                        <ErrorFetching />
                     ) : (
                         <>
                             <div className="flex justify-end p-4">

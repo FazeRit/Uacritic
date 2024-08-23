@@ -2,11 +2,11 @@
 
 import {useEffect, useState} from 'react';
 import useRequest from '@/hooks/useRequest';
-import {CardItem} from '@/utils/CardProps';
+import {CardItem} from '@/lib/utils/CardProps';
 import Link from 'next/link';
 import Card from '@/components/ui/Сard/Card';
 import Loading from "@/components/ui/Loading/Loading";
-import ErrorLoading from "@/components/ui/ErrorLoading/ErrorLoading";
+import ErrorFetching from "@/components/ui/ErrorFetching/ErrorFetching";
 
 interface CardContainerProps<T> {
     url: string;
@@ -14,7 +14,8 @@ interface CardContainerProps<T> {
     params?: Record<string, any>;
     title: string;
     linkToPopular: string;
-    createMethod: (data: T) => CardItem[];
+    category: 'movies' | 'serials' | 'music' | 'games';
+    createMethod: (data: T, category: 'movies' | 'serials' | 'music' | 'games') => CardItem[];
 }
 
 const CardContainer = <T, >({
@@ -24,6 +25,7 @@ const CardContainer = <T, >({
                                 title,
                                 linkToPopular,
                                 createMethod,
+                                category
                             }: CardContainerProps<T>) => {
     const [items, setItems] = useState<CardItem[]>([]);
     const {data: fetchedItems, isLoading, error, fetchData} = useRequest<T>({
@@ -39,7 +41,7 @@ const CardContainer = <T, >({
 
     useEffect(() => {
         if (fetchedItems) {
-            setItems(createMethod(fetchedItems).slice(0, 4));
+            setItems(createMethod(fetchedItems, category).slice(0, 4));
         }
     }, [fetchedItems, createMethod]);
 
@@ -49,9 +51,9 @@ const CardContainer = <T, >({
         );
     }
 
-    if (error) {
+    if (error || !items) {
         return (
-            <ErrorLoading />
+            <ErrorFetching />
         );
     }
 

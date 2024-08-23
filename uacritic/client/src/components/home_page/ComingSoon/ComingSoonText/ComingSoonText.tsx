@@ -13,12 +13,8 @@ interface ComingSoonProps {
 
 const ComingSoonText: FC<ComingSoonProps> = ({title, description, category, id}) => {
     return <div>
-        <div>
             <ComingSoonTitle title={title} category={category} id={id}/>
-        </div>
-        <div>
             <ComingSoonDescription description={description}/>
-        </div>
     </div>
 }
 

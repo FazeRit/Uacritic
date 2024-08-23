@@ -1,20 +1,21 @@
 'use client';
 
 import { FC, useEffect, useState } from 'react';
+
 import useRequest from "@/hooks/useRequest";
-import {MovieDescription, MovieDescriptionProps} from "@/lib/utils/MovieDescription";
 import { CardFactory } from "@/lib/utils/CardFactory";
 import ErrorFetching from "@/components/ui/ErrorFetching/ErrorFetching";
 import Loading from "@/components/ui/Loading/Loading";
+
+import {SerialDescription, SerialDescriptionProps} from "@/lib/utils/SerialDescription";
 import ItemDetails from "@/components/ui/ItemDetails/ItemDetails";
 
 const ItemPage: FC<{ params: { id: number } }> = ({ params }) => {
-    const [item, setItem] = useState<MovieDescription | null>(null);
-    const [formData, setFormData] = useState<{name: string, surname: string, rate: number, comment: string}>();
+    const [item, setItem] = useState<SerialDescription>();
 
-    const { data: fetchedItem, isLoading, error, fetchData } = useRequest<MovieDescriptionProps>({
+    const { data: fetchedItem, isLoading, error, fetchData } = useRequest<SerialDescriptionProps>({
         method: 'GET',
-        url: `https://api.themoviedb.org/3/movie/${params.id}`,
+        url: `https://api.themoviedb.org/3/tv/${params.id}`,
         token: process.env.NEXT_PUBLIC_MOVIE_API_TOKEN!,
         params: {
             language: "uk-UA"
@@ -27,20 +28,17 @@ const ItemPage: FC<{ params: { id: number } }> = ({ params }) => {
 
     useEffect(() => {
         if (fetchedItem) {
-            setItem(CardFactory.MovieDescriptionCreate(fetchedItem));
+            console.log(fetchedItem);
+            setItem(CardFactory.SerialDescriptionCreate(fetchedItem));
         }
     }, [fetchedItem]);
 
     if (isLoading) {
-        return (
-            <Loading />
-        );
+        return <Loading />;
     }
 
     if (error || !item) {
-        return (
-            <ErrorFetching />
-        );
+        return <ErrorFetching />;
     }
 
     return (
@@ -52,8 +50,8 @@ const ItemPage: FC<{ params: { id: number } }> = ({ params }) => {
             genres={item.genres}
             vote_average={item.vote_average}
             overview={item.overview}
-            budget={item.budget}
-            isSerial={false}
+            number_of_episodes={item.number_of_episodes}
+            isSerial={true}
         />
     );
 };

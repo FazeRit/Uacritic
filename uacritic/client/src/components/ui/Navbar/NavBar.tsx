@@ -1,5 +1,5 @@
 import NavBarItem from "./navbarItem/NavBarItem";
-import {navItems} from "@/utils/NavBarItems";
+import {navItems} from "@/lib/utils/NavBarItems";
 
 const NavBar = () => {
     return (

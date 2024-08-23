@@ -3,7 +3,7 @@
 import {ChangeEvent, Dispatch, FC, SetStateAction} from "react";
 import GenresPicker from "@/components/ui/FilterSearch/GenresPicker";
 import MultiRangeSlider from "@/components/ui/MultiRangeSlider/MultiRangeSlider";
-import {Genre} from "@/utils/CardProps";
+import {Genre} from "@/lib/utils/CardProps";
 
 interface FilterSearchProps {
     title: string;
