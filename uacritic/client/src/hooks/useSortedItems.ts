@@ -1,4 +1,4 @@
-import {CardItem} from "@/lib/utils/CardProps";
+import {CardItem} from "@/lib/utils/cardProps";
 
 interface useSortedItemsProps {
     items: CardItem[];

@@ -1,7 +1,7 @@
 'use client';
 
-import ListData from "@/components/ui/ListData/ListData";
-import {CardFactory} from "@/lib/utils/CardFactory";
+import ListData from "@/ui/dataView/ListData/ListData";
+import {CardFactory} from "@/lib/utils/cardFactory";
 
 const SerialList = () => {
     return (
@@ -12,6 +12,7 @@ const SerialList = () => {
             genresParams={{language: "uk-UA"}}
             params={{sort_by: "vote_average.desc", language: "uk-UA"}}
             title="серіали"
+            withCredentials={false}
             purpose="популярні"
             createMethod={CardFactory.MovieCardCreate}
             category={'serials'}

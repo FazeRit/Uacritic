@@ -1,10 +1,10 @@
 'use client';
 
 import Image from 'next/image';
-import CardContainer from '@/components/home_page/CardContainer/CardContainer';
-import ComingSoonContainer from '@/components/home_page/ComingSoon/ComingSoonContainer';
+import CardContainer from '@/ui/layout/homePage/CardContainer/CardContainer';
+import ComingSoonContainer from '@/ui/layout/homePage/ComingSoon/ComingSoonContainer';
 import hedgehogHeader from '@/assets/hedgehogHeader.svg';
-import {CardFactory} from '@/lib/utils/CardFactory';
+import {CardFactory} from '@/lib/utils/cardFactory';
 
 const HomePage = () => {
     return (
@@ -48,7 +48,23 @@ const HomePage = () => {
                     reverse={true}
                     category={"serials"}
                     />
-                {/*<CardContainer title={"ігри"} linkToPopular={'/games/popular'}/>*/}
+                <CardContainer
+                    linkToPopular={'/games/top'}
+                    url={process.env.NEXT_PUBLIC_GAMES_URL!}
+                    token={""}
+                    params={{ordering: '-rating', page_size: 4,  language: `uk`, key: process.env.NEXT_PUBLIC_GAMES_API_TOKEN}}
+                    title="ігор"
+                    createMethod={CardFactory.GameCardCreate}
+                    category={'games'}
+                />
+                <ComingSoonContainer
+                    url={process.env.NEXT_PUBLIC_GAMES_URL!}
+                    token={""}
+                    params={{ordering: '-rating', page_size: 1,  language: `uk`, key: process.env.NEXT_PUBLIC_GAMES_API_TOKEN}}
+                    createMethod={CardFactory.GameCardCreate}
+                    reverse={false}
+                    category={"serials"}
+                />
             </div>
         </>
     );

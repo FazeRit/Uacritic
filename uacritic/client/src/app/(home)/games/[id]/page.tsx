@@ -1,26 +1,23 @@
 'use client';
 
 import { FC, useEffect, useState } from 'react';
-
 import useRequest from "@/hooks/useRequest";
 import { CardFactory } from "@/lib/utils/cardFactory";
 import ErrorFetching from "@/ui/dataView/ErrorFetching/ErrorFetching";
 import Loading from "@/ui/dataView/Loading/Loading";
-
-import {SerialDescription, SerialDescriptionProps} from "@/lib/utils/serialDescription";
 import ItemDetails from "@/ui/dataView/ItemDetails/ItemDetails";
+import { GameDescription, GameResult} from "@/lib/utils/gameDescipription";
 
 const ItemPage: FC<{ params: { id: number } }> = ({ params }) => {
-    const [item, setItem] = useState<SerialDescription>();
+    const [item, setItem] = useState<GameDescription | null>(null);
+    const [formData, setFormData] = useState<{name: string, surname: string, rate: number, comment: string}>();
 
-    const { data: fetchedItem, isLoading, error, fetchData } = useRequest<SerialDescriptionProps>({
+    const { data: fetchedItem, isLoading, error, fetchData } = useRequest<GameResult>({
         method: 'GET',
-        url: `https://api.themoviedb.org/3/tv/${params.id}`,
-        token: process.env.NEXT_PUBLIC_MOVIE_API_TOKEN!,
         withCredentials: false,
-        params: {
-            language: "uk-UA"
-        }
+        url: `${process.env.NEXT_PUBLIC_GAMES_URL}/${params.id}`,
+        token: "",
+        params: {key:process.env.NEXT_PUBLIC_GAMES_API_TOKEN!}
     });
 
     useEffect(() => {
@@ -29,16 +26,20 @@ const ItemPage: FC<{ params: { id: number } }> = ({ params }) => {
 
     useEffect(() => {
         if (fetchedItem) {
-            setItem(CardFactory.SerialDescriptionCreate(fetchedItem));
+            setItem(CardFactory.CardDescriptionCreate(fetchedItem));
         }
     }, [fetchedItem]);
 
     if (isLoading) {
-        return <Loading />;
+        return (
+            <Loading />
+        );
     }
 
     if (error || !item) {
-        return <ErrorFetching />;
+        return (
+            <ErrorFetching />
+        );
     }
 
     return (
@@ -50,9 +51,8 @@ const ItemPage: FC<{ params: { id: number } }> = ({ params }) => {
             genres={item.genres}
             vote_average={item.vote_average}
             overview={item.overview}
-            number_of_episodes={item.number_of_episodes}
-            isSerial={true}
-            isGame={false}
+            isSerial={false}
+            isGame={true}
         />
     );
 };

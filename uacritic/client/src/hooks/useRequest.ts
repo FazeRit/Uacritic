@@ -6,9 +6,10 @@ interface UseRequestProps {
     method: "GET" | "POST" | "PUT" | "DELETE";
     params?: Record<string, any>;
     token: string;
+    withCredentials: boolean,
 }
 
-const useRequest = <T>({method, url, token, params}: UseRequestProps) => {
+const useRequest = <T>({method, url, token, params, withCredentials}: UseRequestProps) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [data, setData] = useState<T | null>(null);
@@ -22,6 +23,7 @@ const useRequest = <T>({method, url, token, params}: UseRequestProps) => {
                 url,
                 method,
                 params,
+                withCredentials,
                 headers: {
                     "Accept": "application/json",
                     "Authorization": token

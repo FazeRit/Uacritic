@@ -2,11 +2,11 @@
 
 import { FC, useEffect, useState } from 'react';
 import useRequest from "@/hooks/useRequest";
-import {MovieDescription, MovieDescriptionProps} from "@/lib/utils/MovieDescription";
-import { CardFactory } from "@/lib/utils/CardFactory";
-import ErrorFetching from "@/components/ui/ErrorFetching/ErrorFetching";
-import Loading from "@/components/ui/Loading/Loading";
-import ItemDetails from "@/components/ui/ItemDetails/ItemDetails";
+import {MovieDescription, MovieDescriptionProps} from "@/lib/utils/movieDescription";
+import { CardFactory } from "@/lib/utils/cardFactory";
+import ErrorFetching from "@/ui/dataView/ErrorFetching/ErrorFetching";
+import Loading from "@/ui/dataView/Loading/Loading";
+import ItemDetails from "@/ui/dataView/ItemDetails/ItemDetails";
 
 const ItemPage: FC<{ params: { id: number } }> = ({ params }) => {
     const [item, setItem] = useState<MovieDescription | null>(null);
@@ -14,6 +14,7 @@ const ItemPage: FC<{ params: { id: number } }> = ({ params }) => {
 
     const { data: fetchedItem, isLoading, error, fetchData } = useRequest<MovieDescriptionProps>({
         method: 'GET',
+        withCredentials: false,
         url: `https://api.themoviedb.org/3/movie/${params.id}`,
         token: process.env.NEXT_PUBLIC_MOVIE_API_TOKEN!,
         params: {
@@ -54,6 +55,7 @@ const ItemPage: FC<{ params: { id: number } }> = ({ params }) => {
             overview={item.overview}
             budget={item.budget}
             isSerial={false}
+            isGame={false}
         />
     );
 };
