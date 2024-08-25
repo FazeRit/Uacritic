@@ -1,7 +1,7 @@
 'use client';
 
-import ListData from "@/components/ui/ListData/ListData";
-import {CardFactory} from "@/utils/CardFactory";
+import ListData from "@/ui/dataView/ListData/ListData";
+import {CardFactory} from "@/lib/utils/cardFactory";
 
 const MovieList = () => {
     return (
@@ -13,7 +13,9 @@ const MovieList = () => {
             params={{sort_by: "vote_average.desc", language: "uk-UA"}}
             title="фільмів"
             purpose="найбільш популярних"
+            withCredentials={false}
             createMethod={CardFactory.MovieCardCreate}
+            category={'movies'}
         />
     );
 };

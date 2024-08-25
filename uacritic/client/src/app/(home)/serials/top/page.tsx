@@ -1,7 +1,7 @@
 'use client';
 
-import ListData from "@/components/ui/ListData/ListData";
-import {CardFactory} from "@/utils/CardFactory";
+import ListData from "@/ui/dataView/ListData/ListData";
+import {CardFactory} from "@/lib/utils/cardFactory";
 
 const MovieList = () => {
     return (
@@ -14,6 +14,8 @@ const MovieList = () => {
             title="фільмів"
             purpose="найбільш популярних"
             createMethod={CardFactory.MovieCardCreate}
+            category={'serials'}
+            withCredentials={false}
         />
     );
 };

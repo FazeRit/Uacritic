@@ -1,10 +1,10 @@
 'use client';
 
 import Image from 'next/image';
-import CardContainer from '@/components/home_page/CardContainer/CardContainer';
-import ComingSoonContainer from '@/components/home_page/ComingSoon/ComingSoonContainer';
+import CardContainer from '@/ui/layout/homePage/CardContainer/CardContainer';
+import ComingSoonContainer from '@/ui/layout/homePage/ComingSoon/ComingSoonContainer';
 import hedgehogHeader from '@/assets/hedgehogHeader.svg';
-import {CardFactory} from '@/utils/CardFactory';
+import {CardFactory} from '@/lib/utils/cardFactory';
 
 const HomePage = () => {
     return (
@@ -21,13 +21,16 @@ const HomePage = () => {
                     url={process.env.NEXT_PUBLIC_MOVIE_POPULAR_API_URL!}
                     token={process.env.NEXT_PUBLIC_MOVIE_API_TOKEN!}
                     createMethod={CardFactory.MovieCardCreate}
+                    category={"movies"}
                 />
                 <ComingSoonContainer
                     url={process.env.NEXT_PUBLIC_MOVIE_COMING_SOON_API_URL!}
                     token={process.env.NEXT_PUBLIC_MOVIE_API_TOKEN!}
                     params={{sort_by: "vote_average.desc", language: "uk-UA"}}
                     createMethod={CardFactory.MovieCardCreate}
-                    reverse={false}/>
+                    reverse={false}
+                    category={"movies"}
+                />
                 <CardContainer
                     title={"серіали"}
                     linkToPopular={'/serials/popular'}
@@ -35,14 +38,33 @@ const HomePage = () => {
                     url={process.env.NEXT_PUBLIC_SERIALS_POPULAR_API_URL!}
                     token={process.env.NEXT_PUBLIC_MOVIE_API_TOKEN!}
                     createMethod={CardFactory.MovieCardCreate}
+                    category={"serials"}
                 />
                 <ComingSoonContainer
                     url={process.env.NEXT_PUBLIC_SERIALS_COMING_SOON_API_URL!}
                     token={process.env.NEXT_PUBLIC_MOVIE_API_TOKEN!}
                     params={{sort_by: "vote_average.desc", language: "uk-UA"}}
                     createMethod={CardFactory.MovieCardCreate}
-                    reverse={true}/>
-                {/*<CardContainer title={"ігри"} linkToPopular={'/games/popular'}/>*/}
+                    reverse={true}
+                    category={"serials"}
+                    />
+                <CardContainer
+                    linkToPopular={'/games/top'}
+                    url={process.env.NEXT_PUBLIC_GAMES_URL!}
+                    token={""}
+                    params={{ordering: '-rating', page_size: 4,  language: `uk`, key: process.env.NEXT_PUBLIC_GAMES_API_TOKEN}}
+                    title="ігор"
+                    createMethod={CardFactory.GameCardCreate}
+                    category={'games'}
+                />
+                <ComingSoonContainer
+                    url={process.env.NEXT_PUBLIC_GAMES_URL!}
+                    token={""}
+                    params={{ordering: '-rating', page_size: 1,  language: `uk`, key: process.env.NEXT_PUBLIC_GAMES_API_TOKEN}}
+                    createMethod={CardFactory.GameCardCreate}
+                    reverse={false}
+                    category={"serials"}
+                />
             </div>
         </>
     );

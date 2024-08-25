@@ -2,9 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import signUpHedgehog from '@/assets/logo/signUpHedgehog.svg';
-import SigninWebItem from '@/components/auth/signinWebItem'
-import AuthEmailInput from "@/components/auth/authEmailInput";
-import AuthPasswordInput from "@/components/auth/authPasswordInput";
+import SigninWebItem from '@/ui/layout/auth/signinWebItem'
+import AuthEmailInput from "@/ui/layout/auth/authEmailInput";
+import AuthPasswordInput from "@/ui/layout/auth/authPasswordInput";
 import googleLogoSvg from '@/assets/logo/googleLogo.svg';
 import githubBlackLogo from '@/assets/logo/githubBlackLogo.svg';
 
@@ -52,7 +52,7 @@ const signUpPage = () => {
             </div>
         </div>
         <div className="w-[50vw] bg-[#E3D9CF] lg:block sm:hidden lg:ml-[3vw]">
-            <Image src={signUpHedgehog} alt="cute hedgehog" className="w-[50vw] h-full" width={50} height={50}></Image>
+            <Image src={signUpHedgehog} alt="cute hedgehog" className="w-[50vw] h-full" width={600} height={600} />
         </div>
     </div>
 }
