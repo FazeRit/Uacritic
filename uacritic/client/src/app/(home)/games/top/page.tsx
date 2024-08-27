@@ -11,7 +11,7 @@ const MovieList = () => {
             token={""}
             withCredentials={false}
             genresParams={{language: `uk`, key: process.env.NEXT_PUBLIC_GAMES_API_TOKEN}}
-            params={{ordering: '-rating', page_size: 20,  language: `uk`, key: process.env.NEXT_PUBLIC_GAMES_API_TOKEN}}
+            params={{ordering: '-rating', page_size: 20, language: `uk`, key: process.env.NEXT_PUBLIC_GAMES_API_TOKEN}}
             title="ігор"
             purpose="найбільш популярних"
             createMethod={CardFactory.GameCardCreate}

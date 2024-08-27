@@ -48,13 +48,13 @@ const CardContainer = <T, >({
 
     if (isLoading) {
         return (
-            <Loading />
+            <Loading/>
         );
     }
 
     if (error || !items) {
         return (
-            <ErrorFetching />
+            <ErrorFetching/>
         );
     }
 

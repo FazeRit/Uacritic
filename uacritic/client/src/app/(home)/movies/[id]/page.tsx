@@ -1,18 +1,18 @@
 'use client';
 
-import { FC, useEffect, useState } from 'react';
+import {FC, useEffect, useState} from 'react';
 import useRequest from "@/hooks/useRequest";
 import {MovieDescription, MovieDescriptionProps} from "@/lib/utils/movieDescription";
-import { CardFactory } from "@/lib/utils/cardFactory";
+import {CardFactory} from "@/lib/utils/cardFactory";
 import ErrorFetching from "@/ui/dataView/ErrorFetching/ErrorFetching";
 import Loading from "@/ui/dataView/Loading/Loading";
 import ItemDetails from "@/ui/dataView/ItemDetails/ItemDetails";
 
-const ItemPage: FC<{ params: { id: number } }> = ({ params }) => {
+const ItemPage: FC<{ params: { id: number } }> = ({params}) => {
     const [item, setItem] = useState<MovieDescription | null>(null);
-    const [formData, setFormData] = useState<{name: string, surname: string, rate: number, comment: string}>();
+    const [formData, setFormData] = useState<{ name: string, surname: string, rate: number, comment: string }>();
 
-    const { data: fetchedItem, isLoading, error, fetchData } = useRequest<MovieDescriptionProps>({
+    const {data: fetchedItem, isLoading, error, fetchData} = useRequest<MovieDescriptionProps>({
         method: 'GET',
         withCredentials: false,
         url: `https://api.themoviedb.org/3/movie/${params.id}`,
@@ -34,13 +34,13 @@ const ItemPage: FC<{ params: { id: number } }> = ({ params }) => {
 
     if (isLoading) {
         return (
-            <Loading />
+            <Loading/>
         );
     }
 
     if (error || !item) {
         return (
-            <ErrorFetching />
+            <ErrorFetching/>
         );
     }
 

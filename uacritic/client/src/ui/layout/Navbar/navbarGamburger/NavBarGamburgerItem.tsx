@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import {FC, useEffect, useRef, useState} from 'react';
 import gsap from 'gsap';
+import Link from 'next/link';
 
 import {NavbarProps} from '@/lib/utils/navBarItems';
 import NavbarItemDescription from '@/ui/layout/Navbar/navbarItem/NavbarItemDescription';
@@ -19,20 +19,24 @@ const NavBarGamburgerItem: FC<NavbarProps> = ({path, children}) => {
     }, [isShown]);
 
     return (
-        <div className="flex flex-col">
-            {children !== '👥 Про нас' ? <p
+        <div className={`flex flex-col ${isShown ? 'z-50 relative' : 'relative'}`}>
+            {children !== '👥 Про нас' ? (
+                <p
                     className="roboto-regular mx-auto cursor-pointer text-primaryText hover:text-black custom-hover-effect flex md:text-lg lg:text-2xl"
-                    onClick={() => setIsShown((prev) => !prev)}
+                    onClick={() => setIsShown(prev => !prev)}
                 >
                     <span className="hover-line"></span>
                     {children}
                 </p>
-                :
-                <Link href={path}
-                      className="roboto-regular mx-auto cursor-pointer text-primaryText hover:text-black custom-hover-effect flex md:text-lg lg:text-2xl">
+            ) : (
+                <Link
+                    href={path}
+                    className="roboto-regular mx-auto cursor-pointer text-primaryText hover:text-black custom-hover-effect flex md:text-lg lg:text-2xl"
+                >
                     <span className="hover-line"></span>
                     {children}
-                </Link>}
+                </Link>
+            )}
             {isShown && children !== '👥 Про нас' && (
                 <div ref={descriptionRef} className="sm:w-[24vw] mx-auto">
                     <NavbarItemDescription path={path}/>

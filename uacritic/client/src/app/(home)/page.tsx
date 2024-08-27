@@ -47,12 +47,17 @@ const HomePage = () => {
                     createMethod={CardFactory.MovieCardCreate}
                     reverse={true}
                     category={"serials"}
-                    />
+                />
                 <CardContainer
                     linkToPopular={'/games/top'}
                     url={process.env.NEXT_PUBLIC_GAMES_URL!}
                     token={""}
-                    params={{ordering: '-rating', page_size: 4,  language: `uk`, key: process.env.NEXT_PUBLIC_GAMES_API_TOKEN}}
+                    params={{
+                        ordering: '-rating',
+                        page_size: 4,
+                        language: `uk`,
+                        key: process.env.NEXT_PUBLIC_GAMES_API_TOKEN
+                    }}
                     title="ігор"
                     createMethod={CardFactory.GameCardCreate}
                     category={'games'}
@@ -60,7 +65,12 @@ const HomePage = () => {
                 <ComingSoonContainer
                     url={process.env.NEXT_PUBLIC_GAMES_URL!}
                     token={""}
-                    params={{ordering: '-rating', page_size: 1,  language: `uk`, key: process.env.NEXT_PUBLIC_GAMES_API_TOKEN}}
+                    params={{
+                        ordering: '-rating',
+                        page_size: 1,
+                        language: `uk`,
+                        key: process.env.NEXT_PUBLIC_GAMES_API_TOKEN
+                    }}
                     createMethod={CardFactory.GameCardCreate}
                     reverse={false}
                     category={"serials"}

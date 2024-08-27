@@ -1,19 +1,19 @@
 'use client';
 
-import { FC, useEffect, useState } from 'react';
+import {FC, useEffect, useState} from 'react';
 
 import useRequest from "@/hooks/useRequest";
-import { CardFactory } from "@/lib/utils/cardFactory";
+import {CardFactory} from "@/lib/utils/cardFactory";
 import ErrorFetching from "@/ui/dataView/ErrorFetching/ErrorFetching";
 import Loading from "@/ui/dataView/Loading/Loading";
 
 import {SerialDescription, SerialDescriptionProps} from "@/lib/utils/serialDescription";
 import ItemDetails from "@/ui/dataView/ItemDetails/ItemDetails";
 
-const ItemPage: FC<{ params: { id: number } }> = ({ params }) => {
+const ItemPage: FC<{ params: { id: number } }> = ({params}) => {
     const [item, setItem] = useState<SerialDescription>();
 
-    const { data: fetchedItem, isLoading, error, fetchData } = useRequest<SerialDescriptionProps>({
+    const {data: fetchedItem, isLoading, error, fetchData} = useRequest<SerialDescriptionProps>({
         method: 'GET',
         url: `https://api.themoviedb.org/3/tv/${params.id}`,
         token: process.env.NEXT_PUBLIC_MOVIE_API_TOKEN!,
@@ -34,11 +34,11 @@ const ItemPage: FC<{ params: { id: number } }> = ({ params }) => {
     }, [fetchedItem]);
 
     if (isLoading) {
-        return <Loading />;
+        return <Loading/>;
     }
 
     if (error || !item) {
-        return <ErrorFetching />;
+        return <ErrorFetching/>;
     }
 
     return (

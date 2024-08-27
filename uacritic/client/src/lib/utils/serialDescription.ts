@@ -1,4 +1,4 @@
-import { MovieDescription } from "@/lib/utils/movieDescription";
+import {MovieDescription} from "@/lib/utils/movieDescription";
 import {Genre} from "@/lib/utils/cardProps";
 
 export interface SerialDescriptionProps {
