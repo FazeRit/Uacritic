@@ -15,6 +15,7 @@ const useRequest = <T>({method, url, token, params, withCredentials}: UseRequest
     const [data, setData] = useState<T | null>(null);
 
     const fetchData = useCallback(async () => {
+        const controller = new AbortController();
         setIsLoading(true);
         setError(null);
 
@@ -24,6 +25,7 @@ const useRequest = <T>({method, url, token, params, withCredentials}: UseRequest
                 method,
                 params,
                 withCredentials,
+                signal: controller.signal,
                 headers: {
                     "Accept": "application/json",
                     "Authorization": token
@@ -34,12 +36,19 @@ const useRequest = <T>({method, url, token, params, withCredentials}: UseRequest
                 setData(response.data);
             }
         } catch (error) {
-            setError('Помилка завантаження даних');
+            if (axios.isCancel(error)) {
+                console.log('Request canceled:', error.message);
+            } else {
+                setError('Помилка завантаження даних');
+            }
         } finally {
             setIsLoading(false);
         }
 
-    }, [method, url, token, params]);
+        return () => {
+            controller.abort();
+        };
+    }, [method, url, token, params, withCredentials]);
 
     return {data, isLoading, error, fetchData};
 };

@@ -1,5 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
-
+import {useCallback, useEffect, useState} from 'react';
 import FilterSearch from '@/ui/dataView/FilterSearch/FilterSearch';
 import SortBy from '@/ui/dataView/SortBy/SortBy';
 import NextPageButton from '@/ui/dataView/NextPageData/NextPageButton';
@@ -7,12 +6,11 @@ import DataView from '@/ui/dataView/DataView/DataView';
 import Loading from "@/ui/dataView/Loading/Loading";
 import ErrorFetching from "@/ui/dataView/ErrorFetching/ErrorFetching";
 
-import { useSortedItems } from "@/hooks/useSortedItems";
 import useRequest from "@/hooks/useRequest";
-
+import useDebounce from "@/hooks/useDebounce"; // Import the debounce hook
 import {CardItem, sortCards} from '@/lib/utils/cardProps';
-import { GenresMovieAndSerialsProps, GenresGamesProps } from "@/lib/utils/genresProps";
-import { normalizeGenres} from "@/lib/utils/genresProps"
+import {filterItems} from '@/lib/utils/filterItems';
+import {GenresGamesProps, GenresMovieAndSerialsProps, normalizeGenres} from "@/lib/utils/genresProps";
 
 interface ListDataProps<T> {
     url: string;
@@ -24,21 +22,21 @@ interface ListDataProps<T> {
     title: string;
     purpose: string;
     withCredentials: boolean;
-    createMethod: (data: T, category?: 'movies' | 'serials' | 'games') => CardItem[];
+    createMethod: (data: T, category: 'movies' | 'serials' | 'games') => CardItem[];
 }
 
-const ListData = <T,>({
-                          url,
-                          genresUrl,
-                          token,
-                          params,
-                          genresParams,
-                          title,
-                          purpose,
-                          category,
-                          withCredentials,
-                          createMethod,
-                      }: ListDataProps<T>) => {
+const ListData = <T, >({
+                           url,
+                           genresUrl,
+                           token,
+                           params,
+                           genresParams,
+                           title,
+                           purpose,
+                           category,
+                           withCredentials,
+                           createMethod,
+                       }: ListDataProps<T>) => {
     const [items, setItems] = useState<CardItem[]>([]);
     const [isAscending, setIsAscending] = useState(false);
     const [selectedSort, setSelectedSort] = useState('Рейтингом');
@@ -51,6 +49,8 @@ const ListData = <T,>({
         maxRating: 10
     });
     const [currentPage, setCurrentPage] = useState(1);
+
+    const debouncedFilter = useDebounce(filter, 300);
 
     const {
         data: fetchedGenres,
@@ -85,8 +85,6 @@ const ListData = <T,>({
         fetchGenres();
     }, []);
 
-    const genres = fetchedGenres ? normalizeGenres(fetchedGenres) : [];
-
     useEffect(() => {
         fetchItems();
     }, [currentPage]);
@@ -111,8 +109,6 @@ const ListData = <T,>({
         setItems(copyItems);
     }, [items, selectedSort, isAscending]);
 
-    const sortedAndFilteredItems = useSortedItems({ items, filter });
-
     const handlePageChange = useCallback(() => {
         setCurrentPage(prevPage => prevPage + 1);
     }, []);
@@ -121,22 +117,22 @@ const ListData = <T,>({
         <div className="flex flex-col min-h-[60vw]">
             <div className="flex flex-grow flex-col md:flex-row">
                 {genresLoading ? (
-                    <Loading />
+                    <Loading/>
                 ) : genresError ? (
-                    <ErrorFetching />
+                    <ErrorFetching/>
                 ) : (
                     <FilterSearch
                         filter={filter}
                         setFilter={setFilter}
                         title={title}
-                        genres={genres}
+                        genres={fetchedGenres ? normalizeGenres(fetchedGenres) : []}
                     />
                 )}
                 <div className="flex flex-col flex-grow sm:w-full md:w-[65vw] lg:w-[70vw]">
                     {itemsLoading ? (
-                        <Loading />
+                        <Loading/>
                     ) : itemsError ? (
-                        <ErrorFetching />
+                        <ErrorFetching/>
                     ) : (
                         <>
                             <div className="flex justify-end sm:p-6 md:p-0">
@@ -147,14 +143,15 @@ const ListData = <T,>({
                                 />
                             </div>
                             <div className="flex-grow">
-                                <DataView list={sortedAndFilteredItems} title={`Список ${purpose} ${title}`} />
+                                <DataView list={filterItems(items, debouncedFilter)}
+                                          title={`Список ${purpose} ${title}`}/>
                             </div>
                         </>
                     )}
                 </div>
             </div>
             {!itemsError && !genresError &&
-                <NextPageButton onClick={handlePageChange} />}
+                <NextPageButton onClick={handlePageChange}/>}
         </div>
     );
 };

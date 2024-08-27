@@ -1,8 +1,7 @@
 import {CardItem} from "@/lib/utils/cardProps";
-import {MovieDescription, MovieAndSerialsListApiResponse, MovieDescriptionProps} from "@/lib/utils/movieDescription";
-import { SerialDescription, SerialDescriptionProps } from "@/lib/utils/serialDescription";
+import {MovieAndSerialsListApiResponse, MovieDescription, MovieDescriptionProps} from "@/lib/utils/movieDescription";
+import {SerialDescription, SerialDescriptionProps} from "@/lib/utils/serialDescription";
 import {GameApiResponse, GameDescription, GameResult} from "@/lib/utils/gameDescipription";
-import {normalizeGenres} from "@/lib/utils/genresProps";
 
 export class CardFactory {
     static MovieCardCreate(items: MovieAndSerialsListApiResponse, category: 'movies' | 'serials' | 'games'): CardItem[] {

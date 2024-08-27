@@ -9,7 +9,7 @@ const NotFound = () => {
             <div className="flex flex-row lg:h-[10vw] md:h-[20vw] sm:h-[30vw]">
                 <Image src={notFoundHedgehog} alt='cute hedgehog'
                        className="lg:w-[20vw] md:w-[30vw] md:h-[20vw] lg:h-[10vw] sm:w-[40vw] sm:h-[30vw]" width={200}
-                       height={200} />
+                       height={200}/>
                 <h2 className="lg:text-[7vw] md:text-[13vw] sm:text-[16vw] md:pt-[1.4vw] lg:pt-[0.6vw] sm:pt-[5vw] md:w-[40vw] sm:w-[50vw] lg:w-[20vw] md:h-[20vw] lg:h-[10vw] sm:h-[30vw] roboto-medium">404</h2>
             </div>
             <div className="lg:h-[15vw] md:h-[20vw] sm:h-[40vw] flex flex-col">

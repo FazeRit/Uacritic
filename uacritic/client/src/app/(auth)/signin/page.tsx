@@ -52,7 +52,7 @@ const signUpPage = () => {
             </div>
         </div>
         <div className="w-[50vw] bg-[#E3D9CF] lg:block sm:hidden lg:ml-[3vw]">
-            <Image src={signUpHedgehog} alt="cute hedgehog" className="w-[50vw] h-full" width={600} height={600} />
+            <Image src={signUpHedgehog} alt="cute hedgehog" className="w-[50vw] h-full" width={600} height={600}/>
         </div>
     </div>
 }

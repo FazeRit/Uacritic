@@ -30,7 +30,7 @@ const ComingSoonContainer = <T, >({
     const {data: fetchedItems, isLoading, error, fetchData} = useRequest<T>({
         method: 'GET',
         url,
-        withCredentials:false,
+        withCredentials: false,
         token,
         params,
     });
@@ -68,9 +68,14 @@ const ComingSoonContainer = <T, >({
                         height: 50px;
                         animation: spin 1s linear infinite;
                     }
+
                     @keyframes spin {
-                        0% { transform: rotate(0deg); }
-                        100% { transform: rotate(360deg); }
+                        0% {
+                            transform: rotate(0deg);
+                        }
+                        100% {
+                            transform: rotate(360deg);
+                        }
                     }
                 `}</style>
             </div>
@@ -79,12 +84,13 @@ const ComingSoonContainer = <T, >({
 
     if (error) {
         return (
-            <ErrorFetching />
+            <ErrorFetching/>
         );
     }
 
     return (
-        <div className="border-t-lineMain border-t-[3px] md:border-l-[3px] md:border-r-[3px] border-l-lineMain border-r-lineMain mt-[4vw]">
+        <div
+            className="border-t-lineMain border-t-[3px] md:border-l-[3px] md:border-r-[3px] border-l-lineMain border-r-lineMain mt-[4vw]">
             <div className="flex flex-col">
                 <div className="flex flex-row mt-[0.5vw] sm:p-[2vw] w-full">
                     {reverse ? (
