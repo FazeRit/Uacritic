@@ -6,11 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "prod": "npm run build && npm run start"
   },
   "dependencies": {
     "@gsap/react": "^2.1.1",
     "@types/gsap": "^3.0.0",
+    "axios": "^1.7.3",
     "gsap": "^3.12.5",
     "next": "14.2.4",
     "react": "^18",

@@ -33,11 +33,7 @@ const signUpPage = () => {
             </div>
             <div>
                 <div className="flex flex-row md:mt-[1vw] sm:mt-[3vw]">
-                    <input id="remember-me" className="w-5 h-5 " type="checkbox"/>
-                    <label htmlFor="remember-me"
-                           className="text-sm text-[#71717A] roboto-thin sm:ml-[2vw] md:ml-[0.6vw] py-auto">Запам'ятати
-                        мене</label>
-                    <p className="ml-auto text-[#8098F9] text-sm roboto-medium py-auto cursor-pointer hover:text-blue-900">Забув
+                    <p className="ml-auto text-[#8098F9] flex justify-end text-sm roboto-medium py-auto cursor-pointer hover:text-blue-900">Забув
                         пароль?</p>
                 </div>
             </div>
@@ -46,7 +42,9 @@ const signUpPage = () => {
                     className="bg-[#8098F9] rounded-lg w-full sm:h-[8vw] md:h-[4vw] lg:h-[3vw] text-white roboto-medium sm:mt-[3vw] md:mt-[2vw] lg:mt-[1vw] hover:bg-blue-500">Ввійти
                 </button>
                 <div className="flex justify-center items-center sm:mt-[3vw]  md:mt-[2vw] lg:mt-[1vw] text-gray-400">
-                    <p>Не маєте аккаунт? <Link href="/signup" className="text-[#8098F9] text-sm">Створіть новий</Link>
+                    <p>Не маєте аккаунт? <Link href="/signup"
+                                               className="text-[#8098F9] text-sm cursor-pointer hover:text-blue-900 ">Створіть
+                        новий</Link>
                     </p>
                 </div>
             </div>
