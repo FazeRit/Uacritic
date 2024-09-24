@@ -4,43 +4,39 @@ import Token from '../models/tokenModel';
 
 interface SaveTokenProps {
     userId: number;
-    refreshToken: string;
+    accessToken: string;
+}
+
+interface UserData {
+    email: string;
+    iat: number;
+    exp: number;
 }
 
 export default class TokenService {
     static async generateToken(email: string) {
-        const accessToken = jwt.sign({email}, process.env.JWT_SECRET!, {expiresIn: "30h"});
-        const refreshToken = jwt.sign({email}, process.env.JWT_SECRET!, {expiresIn: "30d"});
-        return {
-            accessToken, refreshToken
-        };
+        return jwt.sign({email}, process.env.JWT_SECRET!, {expiresIn: "30h"});
     }
 
     static async validateToken(token: string) {
         try {
-            const userData = jwt.verify(token, process.env.JWT_SECRET!);
-            return userData;
+            return jwt.verify(token, process.env.JWT_SECRET!) as UserData;
         } catch (err) {
             return null;
         }
     }
 
-    static async findToken(refreshToken: string) {
-        const tokenData = await Token.findOne({where: {refreshToken}});
-        return tokenData;
-    }
-
-    static async saveToken({userId, refreshToken}: SaveTokenProps) {
+    static async saveToken({userId, accessToken}: SaveTokenProps) {
         const tokenData = await Token.findOne({where: {userId}});
         if (tokenData) {
-            tokenData.refreshToken = refreshToken;
+            tokenData.accessToken = accessToken;
             return tokenData.save();
         }
-        return await Token.create({userId, refreshToken});
+        return await Token.create({userId, accessToken});
     }
 
-    static async removeToken(refreshToken: string) {
-        const tokenData = await Token.destroy({where: {refreshToken}});
+    static async removeToken(accessToken: string) {
+        const tokenData = await Token.destroy({where: {accessToken}});
         return tokenData;
     }
 }

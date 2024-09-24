@@ -2,20 +2,20 @@ import {DataTypes, Model} from 'sequelize';
 import db from '../db/db';
 
 interface TokenAttributes {
-    id: number;
-    refreshToken: string;
+    id?: number;
+    accessToken: string;
     userId: number;
 }
 
 class Token extends Model<TokenAttributes> implements TokenAttributes {
     id!: number;
-    refreshToken!: string;
+    accessToken!: string;
     userId!: number;
 }
 
 Token.init({
     id: {type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true, allowNull: false},
-    refreshToken: {type: DataTypes.STRING, allowNull: false},
+    accessToken: {type: DataTypes.STRING, allowNull: false},
     userId: {
         type: DataTypes.INTEGER,
         allowNull: false,

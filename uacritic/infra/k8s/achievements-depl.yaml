@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: achievements-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: profile
+  template:
+    metadata:
+      labels:
+        app: profile
+    spec:
+      containers:
+        - name: achievements
+          image: denishutzan/achievements
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: achievements-srv
+spec:
+  selector:
+    app: achievements
+  ports:
+    - name: achievements
+      protocol: TCP
+      port: 5000
+      targetPort: 5000

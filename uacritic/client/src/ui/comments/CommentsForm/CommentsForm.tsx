@@ -50,6 +50,8 @@ const CommentsForm: FC<CommentsFormProps> = ({addComment}) => {
         e.preventDefault();
 
         const validationError = validateFields(debouncedName, debouncedSurname);
+
+
         if (validationError) {
             setError(validationError);
             return;
@@ -76,7 +78,7 @@ const CommentsForm: FC<CommentsFormProps> = ({addComment}) => {
         >
             <div className="mb-4">
                 <label className="block text-lg font-medium text-gray-700" htmlFor="firstName">
-                    Ім'я
+                    Name
                 </label>
                 <input
                     type="text"
@@ -90,7 +92,7 @@ const CommentsForm: FC<CommentsFormProps> = ({addComment}) => {
             </div>
             <div className="mb-4">
                 <label className="block text-lg font-medium text-gray-700" htmlFor="lastName">
-                    Прізвище
+                    Surname
                 </label>
                 <input
                     type="text"
@@ -119,7 +121,7 @@ const CommentsForm: FC<CommentsFormProps> = ({addComment}) => {
 
             <div className="mb-4">
                 <label className="block text-lg font-medium text-gray-700" htmlFor="comments">
-                    Коментарі
+                    Comments
                 </label>
                 <textarea
                     id="comments"
@@ -137,7 +139,7 @@ const CommentsForm: FC<CommentsFormProps> = ({addComment}) => {
                 type="submit"
                 className="w-full py-2 px-4 bg-teal-500 text-white font-semibold rounded-md shadow-md hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-400"
             >
-                Погодити
+                submit
             </button>
         </form>
     );

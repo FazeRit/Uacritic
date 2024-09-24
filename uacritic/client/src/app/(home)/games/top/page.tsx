@@ -1,7 +1,7 @@
 'use client';
 
 import ListData from "@/ui/dataView/ListData/ListData";
-import {CardFactory} from "@/lib/utils/cardFactory";
+import {CardFactory} from "@/lib/utils/Card/cardFactory";
 
 const MovieList = () => {
     return (
@@ -11,9 +11,9 @@ const MovieList = () => {
             token={""}
             withCredentials={false}
             genresParams={{language: `uk`, key: process.env.NEXT_PUBLIC_GAMES_API_TOKEN}}
-            params={{ordering: '-rating', page_size: 20, language: `uk`, key: process.env.NEXT_PUBLIC_GAMES_API_TOKEN}}
-            title="ігор"
-            purpose="найбільш популярних"
+            params={{ordering: '-rating', page_size: 20, key: process.env.NEXT_PUBLIC_GAMES_API_TOKEN}}
+            title="games"
+            purpose="Top rated"
             createMethod={CardFactory.GameCardCreate}
             category={'games'}
         />

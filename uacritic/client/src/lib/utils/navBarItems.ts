@@ -1,10 +1,10 @@
 import {ReactNode} from "react";
 
 export const navItems = [
-    {path: "/movies", label: "🎬 Фільми"},
-    {path: "/serials", label: "🎥 Серіали"},
-    {path: "/games", label: "🎮 Ігри"},
-    {path: "/about", label: "👥 Про нас"},
+    {path: "/movies", label: "🎬 Movies"},
+    {path: "/serials", label: "🎥 Serials"},
+    {path: "/games", label: "🎮 Games"},
+    {path: "/about", label: "👥 About"},
 ];
 
 export interface NavbarProps {

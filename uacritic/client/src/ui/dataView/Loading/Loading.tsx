@@ -22,7 +22,7 @@ const Loading = () => {
                         d="M4 12a8 8 0 0116 0h-2a6 6 0 00-12 0H4z"
                     />
                 </svg>
-                <p className="text-blue-500 font-semibold text-lg">Завантаження...</p>
+                <p className="text-blue-500 font-semibold text-lg">Loading...</p>
             </div>
         </div>
     );

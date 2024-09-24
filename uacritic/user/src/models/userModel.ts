@@ -1,12 +1,11 @@
 import {DataTypes, Model} from 'sequelize';
 import db from '../db/db';
 
-interface UserAttributes {
-    id: number;
+export interface UserAttributes {
+    id?: number;
     email: string;
     password: string;
     isActivated: boolean;
-    imageUrl?: string;
     activationLink?: string;
     dateOfBirth?: Date;
     username: string;
@@ -18,11 +17,10 @@ class User extends Model<UserAttributes> implements UserAttributes {
     email!: string;
     password!: string;
     isActivated!: boolean;
-    imageUrl?: string;
     activationLink?: string;
     dateOfBirth!: Date;
     username!: string;
-    role?: string;
+    role!: string;
 }
 
 User.init({
@@ -44,9 +42,6 @@ User.init({
     password: {
         type: DataTypes.STRING,
         allowNull: false
-    },
-    imageUrl: {
-        type: DataTypes.STRING
     },
     isActivated: {
         type: DataTypes.BOOLEAN,

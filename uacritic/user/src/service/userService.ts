@@ -17,15 +17,16 @@ interface UserCredentials {
 }
 
 export default class UserService {
-    static async logout(refreshToken: string) {
-        const tokenData = await TokenService.removeToken(refreshToken);
+    static async logout(accessToken: string) {
+        const tokenData = await TokenService.removeToken(accessToken);
         return tokenData;
     }
 
     static async signup({email, password, username}: UserCredentials) {
         const candidate = await User.findOne({where: {email}});
+
         if (candidate) {
-            throw ApiError.BadRequestError(`Користувач з такою поштою:${email} вже існує`);
+            throw ApiError.BadRequestError(`Email is used`);
         }
 
         const hashPassword = await bcrypt.hash(password, 10);
@@ -42,61 +43,54 @@ export default class UserService {
         const userDto = new UserDto(user);
         const token = await TokenService.generateToken(userDto.email);
 
-        await TokenService.saveToken({userId: userDto.id, refreshToken: token.refreshToken});
+        await TokenService.saveToken({userId: userDto.id, accessToken: token});
 
-        return {...token, user: userDto}
+        return {token, user: userDto}
     }
 
 
     static async login(email: string, password: string) {
         const user = await User.findOne({where: {email}});
+
         if (!user) {
-            throw ApiError.BadRequestError('Користувач з такою поштою не знайдений');
+            throw ApiError.BadRequestError('User not found');
         }
         const isPassEqual = await bcrypt.compare(password, user.password);
         if (!isPassEqual) {
-            throw ApiError.BadRequestError('Невірний пароль');
+            throw ApiError.BadRequestError('Password is incorrect');
         }
         const userDto = new UserDto(user);
         const token = await TokenService.generateToken(userDto.email);
 
-        await TokenService.saveToken({userId: userDto.id, refreshToken: token.refreshToken});
-        return {...token, user: userDto}
-    }
-
-    static async refresh(refreshToken: string) {
-        if (!refreshToken) {
-            throw ApiError.UnAuthorizedError();
-        }
-
-        const userData = await TokenService.validateToken(refreshToken);
-        if (typeof userData === 'string') {
-            throw ApiError.UnAuthorizedError();
-        }
-
-        const tokenDb = await TokenService.findToken(refreshToken);
-        if (!tokenDb) {
-            throw ApiError.UnAuthorizedError();
-        }
-
-        const user = await User.findOne({where: {id: userData!.id}});
-        if (!user) {
-            throw ApiError.UnAuthorizedError();
-        }
-
-        const userDto = new UserDto(user);
-        const token = await TokenService.generateToken(userDto.email);
-
-        await TokenService.saveToken({userId: userDto.id, refreshToken: token.refreshToken});
-        return {...token, user: userDto};
+        await TokenService.saveToken({userId: userDto.id, accessToken: token});
+        return {token, user: userDto}
     }
 
     static async activate(activationLink: string) {
         const user = await User.findOne({where: {activationLink}});
         if (!user) {
-            throw ApiError.BadRequestError(`Некоректне посилання активації`);
+            throw ApiError.BadRequestError(`Wrong activation link`);
         }
         user.isActivated = true;
         await user.save();
+    }
+
+    static async profile(email: string) {
+        if (!email) {
+            throw ApiError.UnAuthorizedError();
+        }
+
+        const user = await User.findOne({where: {email}});
+
+        if (!user) {
+            throw ApiError.UnAuthorizedError();
+        }
+
+        return {
+            email: user.email,
+            username: user.username,
+            isActivated: user.isActivated,
+            dateOfBirth: user.dateOfBirth,
+        };
     }
 }

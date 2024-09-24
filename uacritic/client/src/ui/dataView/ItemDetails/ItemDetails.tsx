@@ -1,6 +1,6 @@
 import {FC, useState} from 'react';
 import Image from 'next/image';
-import {Genre} from '@/lib/utils/movieDescription';
+import {Genre} from '@/lib/utils/Description/movieDescription';
 import CommentsForm from "@/ui/comments/CommentsForm/CommentsForm";
 import CommentsList from "@/ui/comments/CommentsForm/CommentsList";
 import {DonutChart, DonutChartProps} from "@/ui/comments/DonutChart";
@@ -90,8 +90,8 @@ const ItemDetail: FC<ItemDetailProps> = ({
                 </div>
                 <div className="p-4 md:ml-8">
                     <h1 className="text-3xl font-bold">{title}</h1>
-                    <p className="mt-2 text-lg"><strong>Дата релізу:</strong> {release_date}</p>
-                    <p className="mt-2 text-lg"><strong>Жанри:</strong></p>
+                    <p className="mt-2 text-lg"><strong>Release date:</strong> {release_date}</p>
+                    <p className="mt-2 text-lg"><strong>Genres:</strong></p>
                     <ul className="list-disc list-inside mt-2 text-lg text-gray-700">
                         {genres.map((genre) => (
                             <li key={genre.id}>{genre.name}</li>
@@ -103,23 +103,25 @@ const ItemDetail: FC<ItemDetailProps> = ({
                             {isSerial ? ` ${number_of_episodes}` : ` $${budget?.toLocaleString()}`}
                         </p>
                     )}
-                    <p className="mt-2 text-lg"><strong>Рейтинг з інших джерел:</strong> {vote_average.toFixed(1)}/10
+                    <p className="mt-2 text-lg"><strong>Rating from another source:</strong> {vote_average.toFixed(1)}/10
                     </p>
                 </div>
             </div>
 
             <div className="flex flex-col lg:flex-row lg:justify-between mt-8 gap-4">
                 <div className="p-4 bg-white shadow-lg rounded-lg flex-1 lg:w-[480px]">
-                    <h2 className="text-2xl font-semibold">Опис</h2>
+                    <h2 className="text-2xl font-semibold">Description</h2>
                     <p className="mt-2 text-lg">{overview.replace(/(<([^>]+)>)/gi, '').replace(`&#39;`, "'") || "Опис відсутній"}</p>
                 </div>
                 <CommentsForm addComment={addComment}/>
             </div>
 
             <div className="mt-8 flex sm:flex-col lg:flex-row md:justify-between relative">
-                <div>
-                    <DonutChart chartData={chartData}/>
-                </div>
+                {comments.length > 0 &&
+                    <div>
+                        <DonutChart chartData={chartData}/>
+                    </div>
+                }
                 <CommentsList comments={comments}/>
             </div>
         </div>

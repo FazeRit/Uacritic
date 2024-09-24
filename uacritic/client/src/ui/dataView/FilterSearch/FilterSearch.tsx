@@ -3,7 +3,7 @@
 import {ChangeEvent, Dispatch, FC, SetStateAction} from "react";
 import GenresPicker from "@/ui/dataView/FilterSearch/GenresPicker";
 import MultiRangeSlider from "@/ui/dataView/MultiRangeSlider/MultiRangeSlider";
-import {Genre} from "@/lib/utils/cardProps";
+import {Genre} from "@/lib/utils/Card/cardProps";
 
 interface FilterSearchProps {
     title: string;
@@ -55,7 +55,7 @@ const FilterSearch: FC<FilterSearchProps> = ({title, genres, genresError, filter
             <div className="rounded-t-xl bg-primaryText sm:h-4 md:h-6"></div>
             <div className="flex flex-col flex-grow">
                 <label htmlFor="searchBar" className="sm:text-2xl md:text-xl mx-auto md:mt-3">
-                    Пошук
+                    Search
                 </label>
                 <div className="border-b-4 md:mx-[2vw] lg:mx-[1vw]"></div>
                 <input
@@ -64,12 +64,12 @@ const FilterSearch: FC<FilterSearchProps> = ({title, genres, genresError, filter
                     value={filter.searchQuery}
                     onChange={handleSearchQueryChange}
                     className="sm:mx-[10vw] md:mx-[2vw] lg:mx-[1vw] sm:mt-5 md:mt-3 lg:mt-3 bg-white focus:outline focus:outline-primaryText rounded-3xl sm:text-base sm:h-6 md:h-7 sm:px-[4vw] md:px-[1vw]"
-                    placeholder={`Пошук ${title}`}
+                    placeholder={`Search ${title}`}
                 />
                 <GenresPicker genres={genres} onGenresChange={handleGenresChange} genresError={genresError}/>
                 <label
                     className="mx-auto border-t-4 sm:mx-[6vw] md:mx-[2vw] lg:mx-[1vw] sm:mt-3 sm:pt-3 md:text-base text-primaryText">
-                    Рік
+                    Year
                 </label>
                 <MultiRangeSlider
                     min={1960}
@@ -81,7 +81,7 @@ const FilterSearch: FC<FilterSearchProps> = ({title, genres, genresError, filter
                 <label
                     className="mx-auto border-t-4 w-[86%] lg:text-base sm:mt-6 sm:pt-3 md:mt-6 md:pt-3 text-primaryText"
                 >
-                    Рейтинг
+                    Rating
                 </label>
                 <MultiRangeSlider
                     min={1}
