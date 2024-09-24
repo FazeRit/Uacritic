@@ -3,11 +3,11 @@
 import {FC, useEffect, useState} from 'react';
 
 import useRequest from "@/hooks/useRequest";
-import {CardFactory} from "@/lib/utils/cardFactory";
+import {CardFactory} from "@/lib/utils/Card/cardFactory";
 import ErrorFetching from "@/ui/dataView/ErrorFetching/ErrorFetching";
 import Loading from "@/ui/dataView/Loading/Loading";
 
-import {SerialDescription, SerialDescriptionProps} from "@/lib/utils/serialDescription";
+import {SerialDescription, SerialDescriptionProps} from "@/lib/utils/Description/serialDescription";
 import ItemDetails from "@/ui/dataView/ItemDetails/ItemDetails";
 
 const ItemPage: FC<{ params: { id: number } }> = ({params}) => {

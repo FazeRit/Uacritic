@@ -1,7 +1,7 @@
 'use client';
 
 import {FC, useState} from "react";
-import {Genre} from "@/lib/utils/cardProps";
+import {Genre} from "@/lib/utils/Card/cardProps";
 
 interface GenresPickerProps {
     genres: Genre[];
@@ -33,7 +33,7 @@ const GenresPicker: FC<GenresPickerProps> = ({genres, genresError, onGenresChang
                 onClick={toggleDropdown}
                 className="sm:mt-3 md:mt-0 md:text-base w-full rounded-3xl bg-gray-300 flex items-center justify-center"
             >
-                <p>Жанр</p>
+                <p>Genre</p>
             </button>
             {genresError ? (
                 <div className="sm:mt-2 text-red-500">{genresError}</div>

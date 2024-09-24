@@ -13,13 +13,13 @@ const NavbarItemDescription: FC<NavbarItemDescriptionProps> = ({path}) => {
                 ''
                 :
                 <><Link href={path + '/popular'} className="transition duration-300 hover:text-blue-700 mb-2">
-                    Популярне
+                    Popular
                 </Link><Link href={path + '/coming'} className="transition duration-300 hover:text-blue-700">
-                    Скоро вийдуть
+                    Coming soon
                 </Link></>
             }
             <Link href={path + '/top'} className="transition duration-300 hover:text-blue-700">
-                Найбільш популярні
+                Top rated
             </Link>
         </div>
     );

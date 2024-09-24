@@ -11,7 +11,7 @@ const NextPageButton: FC<NextDataButtonProps> = ({onClick}) => {
                 onClick={onClick}
                 className="text-gray-500 cursor-pointer bg-white border border-gray-300 rounded px-4 py-2"
                 type="button">
-                Натисніть, щоб отримати більше даних
+                Click for further data
             </button>
         </div>
     );

@@ -2,8 +2,8 @@
 
 import {FC, useEffect, useState} from 'react';
 import useRequest from "@/hooks/useRequest";
-import {MovieDescription, MovieDescriptionProps} from "@/lib/utils/movieDescription";
-import {CardFactory} from "@/lib/utils/cardFactory";
+import {MovieDescription, MovieDescriptionProps} from "@/lib/utils/Description/movieDescription";
+import {CardFactory} from "@/lib/utils/Card/cardFactory";
 import ErrorFetching from "@/ui/dataView/ErrorFetching/ErrorFetching";
 import Loading from "@/ui/dataView/Loading/Loading";
 import ItemDetails from "@/ui/dataView/ItemDetails/ItemDetails";

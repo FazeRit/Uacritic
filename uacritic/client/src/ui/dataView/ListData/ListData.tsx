@@ -8,9 +8,9 @@ import ErrorFetching from "@/ui/dataView/ErrorFetching/ErrorFetching";
 
 import useRequest from "@/hooks/useRequest";
 import useDebounce from "@/hooks/useDebounce"; // Import the debounce hook
-import {CardItem, sortCards} from '@/lib/utils/cardProps';
+import {CardItem, sortCards} from '@/lib/utils/Card/cardProps';
 import {filterItems} from '@/lib/utils/filterItems';
-import {GenresGamesProps, GenresMovieAndSerialsProps, normalizeGenres} from "@/lib/utils/genresProps";
+import {GenresGamesProps, GenresMovieAndSerialsProps, normalizeGenres} from "@/lib/utils/Card/genresProps";
 
 interface ListDataProps<T> {
     url: string;
@@ -39,7 +39,7 @@ const ListData = <T, >({
                        }: ListDataProps<T>) => {
     const [items, setItems] = useState<CardItem[]>([]);
     const [isAscending, setIsAscending] = useState(false);
-    const [selectedSort, setSelectedSort] = useState('Рейтингом');
+    const [selectedSort, setSelectedSort] = useState('Rating');
     const [filter, setFilter] = useState({
         searchQuery: '',
         minYear: 1960,
@@ -144,7 +144,7 @@ const ListData = <T, >({
                             </div>
                             <div className="flex-grow">
                                 <DataView list={filterItems(items, debouncedFilter)}
-                                          title={`Список ${purpose} ${title}`}/>
+                                          title={`${purpose} ${title}`}/>
                             </div>
                         </>
                     )}

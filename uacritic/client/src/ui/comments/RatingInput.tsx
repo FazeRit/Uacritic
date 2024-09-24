@@ -26,7 +26,7 @@ const RatingInput: FC<RatingInputProps> = ({value, onChange}) => {
         <div>
             <div className="mb-4 relative">
                 <label className="block text-lg font-medium text-gray-700" htmlFor="rating">
-                    Поділіться зі своїми враженнями
+                    Share your feelings
                 </label>
                 <div className="relative">
                     <input
@@ -55,7 +55,7 @@ const RatingInput: FC<RatingInputProps> = ({value, onChange}) => {
                         </div>
                     )}
                 </div>
-                <div className="text-center mt-2">Рейтинг: {value}</div>
+                <div className="text-center mt-2">Rating: {value}</div>
             </div>
         </div>
     );

@@ -6,7 +6,7 @@ import useRequest from '@/hooks/useRequest';
 import ErrorFetching from "@/ui/dataView/ErrorFetching/ErrorFetching";
 import ComingSoonText from './ComingSoonText/ComingSoonText';
 
-import {CardItem} from "@/lib/utils/cardProps";
+import {CardItem} from "@/lib/utils/Card/cardProps";
 
 
 interface ComingSoonContainerProps<T> {
@@ -57,7 +57,7 @@ const ComingSoonContainer = <T, >({
             <div className="flex justify-center items-center h-screen">
                 <div className="flex flex-col items-center">
                     <div className="loader"></div>
-                    <p className="mt-4 text-lg text-gray-600">Завантаження даних...</p>
+                    <p className="mt-4 text-lg text-gray-600">Fetching data...</p>
                 </div>
                 <style jsx>{`
                     .loader {
@@ -106,7 +106,7 @@ const ComingSoonContainer = <T, >({
                             </div>
                             <div className="flex flex-col">
                                 <p className="sm:text-[3vw] md:text-[2.5vw] lg:text-[2vw] sm:ml-[17vw] lg:ml-[13vw] md:ml-[2vw] roboto-bold text-primaryText">
-                                    Скоро вийдуть
+                                    Coming soon
                                 </p>
                                 <Image
                                     className="sm:w-[40vw] sm:h-[40vw] md:w-[30vw] ml-auto md:h-[30vw] mt-[1vw] rounded-3xl"
@@ -121,7 +121,7 @@ const ComingSoonContainer = <T, >({
                         <>
                             <div className="flex flex-col">
                                 <p className="sm:text-[3vw] md:text-[2.5vw] lg:text-[2vw] roboto-bold text-primaryText">
-                                    Скоро вийдуть
+                                    Coming soon
                                 </p>
                                 <Image
                                     className="sm:w-[40vw] sm:h-[40vw] md:w-[30vw] ml-auto md:h-[30vw] mt-[1vw] rounded-3xl"
@@ -144,7 +144,7 @@ const ComingSoonContainer = <T, >({
                     )}
                 </div>
                 <div className="sm:mt-[1vw] lg:w-[20vw] sm:w-[80vw] md:hidden break-words sm:p-[2vw]">
-                    <p className="md:mt-[0.5vw] lg:mt-[1vw] roboto-black sm:text-[5vw] md:text-[2vw] lg:text-[1.5vw] text-primaryText">Опис</p>
+                    <p className="md:mt-[0.5vw] lg:mt-[1vw] roboto-black sm:text-[5vw] md:text-[2vw] lg:text-[1.5vw] text-primaryText">Description</p>
                     <p className="md:mt-[0.5vw] lg:mt-[1vw] md:text-[1.5vw] roboto-regular lg:text-[1.3vw]">
                         {description}
                     </p>

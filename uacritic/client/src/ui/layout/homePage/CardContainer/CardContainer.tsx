@@ -2,7 +2,7 @@
 
 import {useEffect, useState} from 'react';
 import useRequest from '@/hooks/useRequest';
-import {CardItem} from '@/lib/utils/cardProps';
+import {CardItem} from '@/lib/utils/Card/cardProps';
 import Link from 'next/link';
 import Card from '@/ui/dataView/Сard/Card';
 import Loading from "@/ui/dataView/Loading/Loading";
@@ -62,11 +62,11 @@ const CardContainer = <T, >({
         <div>
             <div className="flex flex-row text-primaryText roboto-bold sm:mt-[5vw] md:mt-[2vw] w-full justify-between">
                 <p className="sm:text-[4vw] md:text-[3vw] lg:text-[2vw] sm:w-[72vw] md:w-[60vw] sm:mt-[1vw] md:mt-0">
-                    Популярні {title}
+                    Popular {title}
                 </p>
                 <div className="flex flex-row w-full mt-[1vw]">
                     <Link href={linkToPopular} className="ml-auto roboto-thin flex flex-row">
-                        Переглянути всі
+                        Show all
                         <div>
                             <svg className="ml-2 mt-[2px]" width="23" height="20" viewBox="0 0 23 20" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import CardImg from "./CardImg";
 import CardRate from "./CardRate";
 
-import {CardItem} from "@/lib/utils/cardProps";
+import {CardItem} from "@/lib/utils/Card/cardProps";
 
 const Card: FC<{ item: CardItem }> = ({item}) => {
     return (

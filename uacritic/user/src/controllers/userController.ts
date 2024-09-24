@@ -7,10 +7,40 @@ import {ApiError} from "@uacritic/uacritic_common";
 export default class UserController {
     static async logout(req: Request, res: Response, next: NextFunction) {
         try {
-            const {refreshToken} = req.cookies;
-            const token = await UserService.logout(refreshToken);
-            res.clearCookie('refreshToken');
+            const {accessToken} = req.cookies;
+            const token = await UserService.logout(accessToken);
+            res.clearCookie('accessToken');
             return res.json(token);
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    static async check(req: Request, res: Response, next: NextFunction) {
+        try {
+            const user = req.user;
+
+            if (!user) {
+                return next(ApiError.UnAuthorizedError());
+            }
+
+            return res.status(200).json({loggedIn: true});
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    static async profile(req: Request, res: Response, next: NextFunction) {
+        try {
+            const user = req.user;
+
+            if (!user) {
+                return next(ApiError.UnAuthorizedError());
+            }
+
+            const userData = await UserService.profile(user);
+
+            return res.json(userData);
         } catch (err) {
             next(err);
         }
@@ -20,12 +50,17 @@ export default class UserController {
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
-                return next(ApiError.BadRequestError('Помилки валідації даних', errors.array()));
+                return next(ApiError.BadRequestError('Error validating data', errors.array()));
             }
             const {email, password, username} = req.body;
             const userData = await UserService.signup({email, password, username});
-            res.cookie('refreshToken', userData.refreshToken, {maxAge: 86400, httpOnly: true});
-            return res.json(userData);
+            res.cookie('accessToken', userData.token,
+                {
+                    maxAge: 86400 * 1000,
+                    httpOnly: true,
+                    sameSite: 'strict'
+                });
+            return res.status(201).json(userData.user);
         } catch (err) {
             next(err);
         }
@@ -33,21 +68,19 @@ export default class UserController {
 
     static async login(req: Request, res: Response, next: NextFunction) {
         try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.BadRequestError('Error validating data', errors.array()));
+            }
             const {email, password} = req.body;
             const userData = await UserService.login(email, password);
-            res.cookie('refreshToken', userData.refreshToken, {maxAge: 86400, httpOnly: true});
-            return res.json(userData);
-        } catch (err) {
-            next(err);
-        }
-    }
-
-    static async refresh(req: Request, res: Response, next: NextFunction) {
-        try {
-            const {refreshToken} = req.cookies;
-            const userData = await UserService.refresh(refreshToken);
-            res.cookie('refreshToken', userData.refreshToken, {maxAge: 86400, httpOnly: true});
-            return res.json(userData);
+            res.cookie('accessToken', userData.token,
+                {
+                    maxAge: 86400 * 1000,
+                    httpOnly: true,
+                    sameSite: 'strict'
+                });
+            return res.json(userData.user);
         } catch (err) {
             next(err);
         }

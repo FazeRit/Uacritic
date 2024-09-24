@@ -3,19 +3,31 @@ require('dotenv').config();
 import express from "express";
 import cors from 'cors';
 import cookieParser from "cookie-parser";
+import slowDown from 'express-slow-down';
 
 import router from "./routes";
-import db from './db/db'
+import db from './db/db';
 import {ErrorMiddleware} from '@uacritic/uacritic_common';
 
 const PORT = process.env.PORT || 7000;
 const app = express();
 
+const speedLimiter = slowDown({
+    windowMs: 15 * 60 * 1000,
+    delayAfter: 20,
+    delayMs: () => 500
+});
+
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    credentials: true,
+    origin: process.env.CLIENT_URL
+}));
 app.use(cookieParser());
+app.use(speedLimiter);
 
 app.use('/api', router);
+
 app.use(ErrorMiddleware);
 
 const start = async () => {
@@ -28,6 +40,6 @@ const start = async () => {
     } catch (error) {
         console.log(error);
     }
-}
+};
 
-start()
+start();

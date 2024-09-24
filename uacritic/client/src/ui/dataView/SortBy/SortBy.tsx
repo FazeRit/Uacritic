@@ -1,6 +1,6 @@
 import {useState} from 'react';
 
-const sortByList: string[] = ['Рейтингом', 'Роком', 'Назвою'];
+const sortByList: string[] = ['Rating', 'Year', 'Title'];
 
 interface SortByProps {
     handleSortSelection: (sort: string) => void;
@@ -23,7 +23,7 @@ const SortBy = ({handleSortSelection, selectedSort, isAscending}: SortByProps) =
                 onClick={toggleDropdown}
                 className="sm:text-base rounded-3xl bg-gray-300 w-full items-center"
             >
-                <p>Сортувати за</p>
+                <p>Sort by</p>
             </button>
             {isOpen && (
                 <ul className="flex flex-col items-center absolute">

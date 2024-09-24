@@ -2,15 +2,14 @@
 
 import {FC, useEffect, useState} from 'react';
 import useRequest from "@/hooks/useRequest";
-import {CardFactory} from "@/lib/utils/cardFactory";
+import {CardFactory} from "@/lib/utils/Card/cardFactory";
 import ErrorFetching from "@/ui/dataView/ErrorFetching/ErrorFetching";
 import Loading from "@/ui/dataView/Loading/Loading";
 import ItemDetails from "@/ui/dataView/ItemDetails/ItemDetails";
-import {GameDescription, GameResult} from "@/lib/utils/gameDescipription";
+import {GameDescription, GameResult} from "@/lib/utils/Description/gameDescipription";
 
 const ItemPage: FC<{ params: { id: number } }> = ({params}) => {
     const [item, setItem] = useState<GameDescription | null>(null);
-    const [formData, setFormData] = useState<{ name: string, surname: string, rate: number, comment: string }>();
 
     const {data: fetchedItem, isLoading, error, fetchData} = useRequest<GameResult>({
         method: 'GET',

@@ -37,7 +37,7 @@ const NavBarItem: FC<NavbarProps> = ({path, children}) => {
                     {children}
                 </Link>
             )}
-            {isShown && children !== '👥 Про нас' && (
+            {isShown && children !== '👥 About' && (
                 <div ref={descriptionRef} className="absolute top-full left-0 pt-3">
                     <NavbarItemDescription path={path}/>
                 </div>

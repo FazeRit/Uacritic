@@ -1,7 +1,7 @@
 import {FC} from "react";
 import Image from "next/image";
 
-import {CardImgProps} from "@/lib/utils/cardProps";
+import {CardImgProps} from "@/lib/utils/Card/cardProps";
 
 const CardImg: FC<CardImgProps> = ({title, imageUrl}) => {
     return (

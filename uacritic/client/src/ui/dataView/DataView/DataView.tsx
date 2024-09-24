@@ -1,12 +1,12 @@
 import Card from "@/ui/dataView/Сard/Card";
-import {CardItem} from "@/lib/utils/cardProps";
+import {CardItem} from "@/lib/utils/Card/cardProps";
 import {FC} from "react";
 
 const DataView: FC<{ list: CardItem[] | null, title: string }> = ({list, title}) => {
     return (
         <div className="sm:mt-16 w-full min-h-screen md:ml-[1vw]">
             {list && list.length === 0 ?
-                <span className="text-red-500 md:text-xl">Даних за вашими фільтрами немає</span>
+                <span className="text-red-500 md:text-xl">No data with your filters</span>
                 :
                 <div className="h-full w-full">
                     <h1 className="flex sm:text-xl lg:text-2xl justify-center text-primaryText">{title}</h1>
