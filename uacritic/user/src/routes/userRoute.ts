@@ -2,6 +2,7 @@ import express from 'express';
 import UserController from '../controllers/userController';
 import {body} from 'express-validator';
 import authMiddleware from "../middlewares/authMiddleware";
+import isAuthMiddleware from "../middlewares/isAuthMiddleware";
 
 const router = express.Router();
 
@@ -42,8 +43,37 @@ router.post('/logout', UserController.logout);
 
 router.get('/activate/:link', UserController.activate);
 
-router.get('/profile/', authMiddleware, UserController.profile);
+router.get('/profile/', authMiddleware, isAuthMiddleware, UserController.profile);
 
-router.get('/check', authMiddleware, UserController.check);
+router.get('/check', authMiddleware, isAuthMiddleware, UserController.check);
+
+router.put(
+    '/profile/edit',
+    authMiddleware,
+    isAuthMiddleware,
+    [
+        body('field')
+            .notEmpty()
+            .withMessage('Field is required')
+            .isIn(['username', 'birthDate'])
+            .withMessage('Invalid field'),
+        body('value')
+            .custom((value, {req}) => {
+                if (req.body.field === 'username') {
+                    if (typeof value !== 'string' || value.length < 6 || value.length > 20) {
+                        throw new Error('Username must be between 6 and 20 characters');
+                    }
+                } else if (req.body.field === 'birthDate') {
+                    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+                    if (!dateRegex.test(value)) {
+                        throw new Error('Invalid date format, expected YYYY-MM-DD');
+                    }
+                }
+                return true;
+            })
+    ],
+    UserController.editProfile
+);
+
 
 export default router;

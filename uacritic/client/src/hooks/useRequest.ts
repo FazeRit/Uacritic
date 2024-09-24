@@ -3,7 +3,7 @@ import axios, {AxiosError} from "axios";
 
 interface UseRequestProps {
     url: string;
-    method: "GET" | "POST" | "PUT" | "DELETE";
+    method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
     params?: Record<string, any>;
     token: string;
     body?: any,

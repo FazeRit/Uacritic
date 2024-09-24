@@ -4,7 +4,6 @@ interface ProfileAttributes {
     id: number;
     email: string;
     password: string;
-    imageUrl?: string;
     isActivated: boolean;
     dateOfBirth?: Date;
     achievements: [
@@ -21,7 +20,6 @@ const profileSchema = new mongoose.Schema<ProfileAttributes>({
     id: {type: Number, required: true, unique: true, autoIncrement: true},
     email: {type: String, required: true},
     password: {type: String, required: true},
-    imageUrl: String,
     isActivated: {type: Boolean, required: true, default: false},
     dateOfBirth: Date,
     achievements: [

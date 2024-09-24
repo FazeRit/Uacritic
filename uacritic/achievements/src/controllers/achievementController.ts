@@ -5,7 +5,7 @@ export default class AchievementController {
     static async achievements(req: Request, res: Response, next: NextFunction) {
         try {
             const achievements = await AchievementService.achievements();
-
+            
             res.status(200).json(achievements);
         } catch (err) {
             next(err);

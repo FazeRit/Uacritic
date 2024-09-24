@@ -34,11 +34,7 @@ export default class UserController {
         try {
             const user = req.user;
 
-            if (!user) {
-                return next(ApiError.UnAuthorizedError());
-            }
-
-            const userData = await UserService.profile(user);
+            const userData = await UserService.profile(user!);
 
             return res.json(userData);
         } catch (err) {
@@ -89,8 +85,27 @@ export default class UserController {
     static async activate(req: Request, res: Response, next: NextFunction) {
         try {
             const activationLink = req.params.link;
+
             await UserService.activate(activationLink);
+
             return res.redirect(process.env.CLIENT_URL!);
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    static async editProfile(req: Request, res: Response, next: NextFunction) {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.BadRequestError('Error validating data', errors.array()));
+            }
+
+            const {field, value} = req.body;
+
+            await UserService.editProfile(field, value, req.user!);
+
+            return res.status(200).json({message: 'Profile updated'});
         } catch (err) {
             next(err);
         }

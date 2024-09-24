@@ -5,7 +5,7 @@ import TokenService from "../service/tokenService";
 declare global {
     namespace Express {
         interface Request {
-            user?: string; // This will hold the user's email as a string
+            user?: string;
         }
     }
 }
@@ -24,7 +24,7 @@ export default async function authMiddleware(req: Request, res: Response, next: 
             return next(ApiError.UnAuthorizedError());
         }
 
-        req.user = userData.email;
+        req.user = userData.email!;
         next();
     } catch (err) {
         console.error('Authentication error:', err);

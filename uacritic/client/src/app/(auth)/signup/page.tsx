@@ -14,6 +14,7 @@ import AuthConfirmPasswordInput from "@/ui/layout/auth/authConfirmPasswordInput"
 
 import useRequest from '@/hooks/useRequest';
 
+
 const SignUpPage = () => {
     const router = useRouter();
 
@@ -135,13 +136,6 @@ const SignUpPage = () => {
                     <div className="flex justify-center items-center sm:mt-[3vw] md:mt-[2vw] lg:mt-[1vw] text-gray-400">
                         <p>You have an account? <Link href="/signin" className="text-[#8098F9] text-sm">Sign in</Link>
                         </p>
-                    </div>
-                    <div className="flex justify-center items-center mt-3">
-                        <Link href="/">
-                            <button className="bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded-lg">
-                                Back to Main Page
-                            </button>
-                        </Link>
                     </div>
                 </form>
             </div>

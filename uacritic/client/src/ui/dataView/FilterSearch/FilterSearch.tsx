@@ -51,7 +51,7 @@ const FilterSearch: FC<FilterSearchProps> = ({title, genres, genresError, filter
 
     return (
         <form
-            className="flex flex-col text-primaryText shadow-xl sm:mt-8 md:mt-6 lg:mt-10 sm:mx-auto md:mx-auto h-fit lg:mx-[2vw] sm:w-[90%] md:w-[30vw] lg:w-72 rounded-xl roboto-medium relative">
+            className="flex flex-col text-primaryText shadow-xl sm:mt-8 md:mt-6 lg:mt-10 sm:mx-auto h-fit lg:mx-[2vw] sm:w-[70%] md:w-[30vw] lg:w-72 rounded-xl roboto-medium relative">
             <div className="rounded-t-xl bg-primaryText sm:h-4 md:h-6"></div>
             <div className="flex flex-col flex-grow">
                 <label htmlFor="searchBar" className="sm:text-2xl md:text-xl mx-auto md:mt-3">
