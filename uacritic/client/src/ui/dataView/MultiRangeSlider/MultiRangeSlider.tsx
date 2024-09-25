@@ -50,7 +50,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({min, max, minVal, maxVal, 
                     max={max}
                     value={minVal}
                     onChange={handleMinChange}
-                    className="thumb thumb--left absolute sm:w-[70vw] md:w-[200px] lg:w-[240px] h-0 z-50 outline-none pointer-events-none"
+                    className="thumb thumb--left absolute sm:w-[60vw] md:w-[200px] lg:w-[240px] h-0 z-50 outline-none pointer-events-none"
                     style={{zIndex: minVal > max - 100 ? 5 : undefined}}
                 />
                 <input
@@ -59,10 +59,10 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({min, max, minVal, maxVal, 
                     max={max}
                     value={maxVal}
                     onChange={handleMaxChange}
-                    className="thumb thumb--right absolute sm:w-[70vw] md:w-[200px] lg:w-[240px] h-0 z-50 outline-none pointer-events-none"
+                    className="thumb thumb--right absolute sm:w-[60vw] md:w-[200px] lg:w-[240px] h-0 z-50 outline-none pointer-events-none"
                 />
 
-                <div className="relative sm:w-[70vw] md:w-[200px] lg:w-[240px]">
+                <div className="relative sm:w-[60vw] md:w-[200px] lg:w-[240px]">
                     <div className="absolute w-full h-[5px] bg-[#ced4da] rounded-sm z-0"></div>
                     <div ref={range} className="absolute h-[5px] bg-primaryText z-0 rounded-sm"></div>
                     <div className="absolute left-[4px] text-[#364F6B] text-xs sm:mt-[20px]">{minVal}</div>

@@ -87,10 +87,13 @@ export default class UserService {
         }
 
         return {
-            email: user.email,
             username: user.username,
             isActivated: user.isActivated,
             dateOfBirth: user.dateOfBirth,
         };
+    }
+
+    static async editProfile(field: string, value: string, user: string) {
+        return await User.update({[field]: value}, {where: {email: user}})
     }
 }

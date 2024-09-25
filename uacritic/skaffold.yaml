@@ -1,0 +1,21 @@
+apiVersion: skaffold/v4beta11
+kind: Config
+metadata:
+  name: uacritic
+build:
+  artifacts:
+    - image: denishutzan/user
+      context: user
+      docker:
+        dockerfile: Dockerfile
+    - image: denishutzan/achievements
+      context: achievements
+      docker:
+        dockerfile: Dockerfile
+    - image: denishutzan/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+manifests:
+  rawYaml:
+    - ./infra/k8s/*

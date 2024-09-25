@@ -9,7 +9,7 @@ class ApiError extends Error {
     }
 
     static UnAuthorizedError() {
-        return new ApiError(401, "Користувач не авторизований");
+        return new ApiError(401, "Not authorized");
     }
 
     static BadRequestError(message: string, errors: any[] = []) {
@@ -17,11 +17,11 @@ class ApiError extends Error {
     }
 
     static AccessDeniedError() {
-        return new ApiError(403, 'Доступ до данного ресурсу забороннений')
+        return new ApiError(403, 'Access Denied');
     }
 
     static DatabaseError() {
-        return new ApiError(500, 'Помилка бази данних');
+        return new ApiError(500, 'Database error');
     }
 }
 

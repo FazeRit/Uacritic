@@ -68,7 +68,6 @@ export default class AchievementService {
 
     static async achievements() {
         const achievements = await Achievement.find();
-
         if (!achievements) {
             throw ApiError.DatabaseError();
         }

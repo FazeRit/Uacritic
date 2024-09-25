@@ -20,7 +20,7 @@ const MenuIcon = memo(function MenuIcon() {
             <path d="M4 12L20 12" stroke="#000000" strokeWidth="2" strokeLinecap="round"/>
             <path d="M4 6L20 6" stroke="#000000" strokeWidth="2" strokeLinecap="round"/>
         </svg>
-    )
+    );
 });
 
 const Header = () => {
@@ -81,8 +81,8 @@ const Header = () => {
             </header>
             <div className="mt-[1.5vw] border-b-4"></div>
             {showMenu && (
-                <div className="absolute bg-gray-200 w-full pb-[2vw] lg:hidden">
-                    <NavbarGamburger/>
+                <div className="absolute bg-gray-200 w-full pb-[2vw] z-10 lg:hidden">
+                    <NavbarGamburger loggedIn={loggedIn}/>
                 </div>
             )}
             <NavBar/>
