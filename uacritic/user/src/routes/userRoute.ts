@@ -75,5 +75,4 @@ router.put(
     UserController.editProfile
 );
 
-
 export default router;

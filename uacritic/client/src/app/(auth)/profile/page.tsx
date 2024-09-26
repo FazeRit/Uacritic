@@ -7,6 +7,7 @@ import ProfileAchievements from '@/ui/layout/profile/profileAchievements/profile
 import EditableFieldForm from '@/ui/layout/auth/EditableFieldForm';
 
 import useRequest from '@/hooks/useRequest';
+import useDebounce from '@/hooks/useDebounce';
 
 const UserProfile = () => {
     const [activeTab, setActiveTab] = useState('view');
@@ -15,6 +16,9 @@ const UserProfile = () => {
         username: '',
         birthDate: '',
     });
+    const [apiErrors, setApiErrors] = useState<string[]>([]);
+
+    const debouncedProfileData = useDebounce(profileData, 300);
 
     const {data, isLoading, error, fetchData} = useRequest<{
         email: string;
@@ -35,13 +39,14 @@ const UserProfile = () => {
         method: 'PUT',
         url: `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/user/profile/edit`,
         withCredentials: true,
-        body: {field: editingField, value: profileData[editingField as keyof typeof profileData]},
+        body: {field: editingField, value: debouncedProfileData[editingField as keyof typeof profileData]},
     });
-
 
     useEffect(() => {
         fetchData();
     }, []);
+
+    // TODO: handle editing field for user when error comes from api
 
     useEffect(() => {
         if (data) {
@@ -75,8 +80,13 @@ const UserProfile = () => {
             try {
                 await updateProfile();
                 setEditingField(null);
-            } catch (err) {
-                console.error('Failed to update profile:', err);
+                setApiErrors([]);
+            } catch (err: any) {
+                if (err?.errors) {
+                    setApiErrors(err.errors.map((error: any) => error.msg));
+                } else {
+                    setApiErrors(['Failed to update profile. Please try again.']);
+                }
             }
         }
     };
@@ -150,8 +160,20 @@ const UserProfile = () => {
                             <span className="text-yellow-500 font-semibold">Updating...</span>
                         </div>
                     )}
-                    {updateError && <p className="text-red-500">{updateError.message}</p>}
-
+                    {updateError && (
+                        <div className="text-red-500 bg-red-100 p-4 rounded-md mt-2">
+                            {updateError?.errors?.map((error: any, index: number) => (
+                                <p key={index}>{error.msg}</p>
+                            ))}
+                        </div>
+                    )}
+                    {apiErrors.length > 0 && (
+                        <div className="text-red-500 bg-red-100 p-4 rounded-md mt-2">
+                            {apiErrors.map((msg, index) => (
+                                <p key={index}>{msg}</p>
+                            ))}
+                        </div>
+                    )}
 
                     {activeTab === 'view' && (
                         <div className="text-gray-700 p-6 bg-white rounded-lg shadow-md">
