@@ -4,9 +4,9 @@ import {useEffect, useState} from 'react';
 import useRequest from '@/hooks/useRequest';
 import {CardItem} from '@/lib/utils/Card/cardProps';
 import Link from 'next/link';
-import Card from '@/ui/dataView/Сard/Card';
-import Loading from "@/ui/dataView/Loading/Loading";
-import ErrorFetching from "@/ui/dataView/ErrorFetching/ErrorFetching";
+import Card from '@/ui/data/dataListing/Сard/Card';
+import Loading from "@/ui/data/status/Loading/Loading";
+import ErrorFetching from "@/ui/data/status/ErrorFetching/ErrorFetching";
 
 interface CardContainerProps<T> {
     url: string;

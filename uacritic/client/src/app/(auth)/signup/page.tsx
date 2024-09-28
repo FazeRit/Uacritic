@@ -7,10 +7,10 @@ import {useRouter} from 'next/navigation';
 
 import signUpHedgehog from '@/assets/logo/signUpHedgehog.svg';
 
-import AuthEmailInput from "@/ui/layout/auth/authEmailInput";
-import AuthPasswordInput from "@/ui/layout/auth/authPasswordInput";
-import AuthUsernameInput from "@/ui/layout/auth/authUsernameInput";
-import AuthConfirmPasswordInput from "@/ui/layout/auth/authConfirmPasswordInput";
+import AuthEmailInput from "@/ui/layout/Auth/authEmailInput";
+import AuthPasswordInput from "@/ui/layout/Auth/authPasswordInput";
+import AuthUsernameInput from "@/ui/layout/Auth/authUsernameInput";
+import AuthConfirmPasswordInput from "@/ui/layout/Auth/authConfirmPasswordInput";
 
 import useRequest from '@/hooks/useRequest';
 

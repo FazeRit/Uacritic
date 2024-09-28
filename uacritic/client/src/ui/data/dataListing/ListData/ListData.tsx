@@ -1,10 +1,10 @@
 import {useCallback, useEffect, useState} from 'react';
-import FilterSearch from '@/ui/dataView/FilterSearch/FilterSearch';
-import SortBy from '@/ui/dataView/SortBy/SortBy';
-import NextPageButton from '@/ui/dataView/NextPageData/NextPageButton';
-import DataView from '@/ui/dataView/DataView/DataView';
-import Loading from "@/ui/dataView/Loading/Loading";
-import ErrorFetching from "@/ui/dataView/ErrorFetching/ErrorFetching";
+import FilterSearch from '@/ui/data/dataListing/FilterSearch/FilterSearch';
+import SortBy from '@/ui/data/dataListing/SortBy/SortBy';
+import NextPageButton from '@/ui/data/dataListing/NextPageData/NextPageButton';
+import DataView from '@/ui/data/dataListing/DataView/DataView';
+import Loading from "@/ui/data/status/Loading/Loading";
+import ErrorFetching from "@/ui/data/status/ErrorFetching/ErrorFetching";
 
 import useRequest from "@/hooks/useRequest";
 import useDebounce from "@/hooks/useDebounce"; // Import the debounce hook

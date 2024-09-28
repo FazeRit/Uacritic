@@ -22,7 +22,7 @@ const NavBarItem: FC<NavbarProps> = ({path, children}) => {
         <div className="relative flex flex-col z-10"
              onMouseEnter={() => setIsShown(true)}
              onMouseLeave={() => setIsShown(false)}>
-            {path !== '/about' ? (
+            {path !== '/About' ? (
                 <p
                     className="roboto-regular mx-auto cursor-pointer text-primaryText hover:text-black custom-hover-effect flex md:text-lg lg:text-2xl"
                     onClick={() => setIsShown((prev) => !prev)}

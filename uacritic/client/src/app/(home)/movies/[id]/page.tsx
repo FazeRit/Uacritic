@@ -4,9 +4,9 @@ import {FC, useEffect, useState} from 'react';
 import useRequest from "@/hooks/useRequest";
 import {MovieDescription, MovieDescriptionProps} from "@/lib/utils/Description/movieDescription";
 import {CardFactory} from "@/lib/utils/Card/cardFactory";
-import ErrorFetching from "@/ui/dataView/ErrorFetching/ErrorFetching";
-import Loading from "@/ui/dataView/Loading/Loading";
-import ItemDetails from "@/ui/dataView/ItemDetails/ItemDetails";
+import ErrorFetching from "@/ui/data/status/ErrorFetching/ErrorFetching";
+import Loading from "@/ui/data/status/Loading/Loading";
+import ItemDetails from "@/ui/data/dataListing/ItemDetails/ItemDetails";
 
 const ItemPage: FC<{ params: { id: number } }> = ({params}) => {
     const [item, setItem] = useState<MovieDescription | null>(null);

@@ -3,9 +3,9 @@
 import {FC, useEffect, useState} from 'react';
 import useRequest from "@/hooks/useRequest";
 import {CardFactory} from "@/lib/utils/Card/cardFactory";
-import ErrorFetching from "@/ui/dataView/ErrorFetching/ErrorFetching";
-import Loading from "@/ui/dataView/Loading/Loading";
-import ItemDetails from "@/ui/dataView/ItemDetails/ItemDetails";
+import ErrorFetching from "@/ui/data/status/ErrorFetching/ErrorFetching";
+import Loading from "@/ui/data/status/Loading/Loading";
+import ItemDetails from "@/ui/data/dataListing/ItemDetails/ItemDetails";
 import {GameDescription, GameResult} from "@/lib/utils/Description/gameDescipription";
 
 const ItemPage: FC<{ params: { id: number } }> = ({params}) => {

@@ -4,11 +4,11 @@ import {FC, useEffect, useState} from 'react';
 
 import useRequest from "@/hooks/useRequest";
 import {CardFactory} from "@/lib/utils/Card/cardFactory";
-import ErrorFetching from "@/ui/dataView/ErrorFetching/ErrorFetching";
-import Loading from "@/ui/dataView/Loading/Loading";
+import ErrorFetching from "@/ui/data/status/ErrorFetching/ErrorFetching";
+import Loading from "@/ui/data/status/Loading/Loading";
 
 import {SerialDescription, SerialDescriptionProps} from "@/lib/utils/Description/serialDescription";
-import ItemDetails from "@/ui/dataView/ItemDetails/ItemDetails";
+import ItemDetails from "@/ui/data/dataListing/ItemDetails/ItemDetails";
 
 const ItemPage: FC<{ params: { id: number } }> = ({params}) => {
     const [item, setItem] = useState<SerialDescription>();

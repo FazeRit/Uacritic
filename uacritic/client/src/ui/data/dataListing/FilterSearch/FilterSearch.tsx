@@ -1,8 +1,8 @@
 'use client';
 
 import {ChangeEvent, Dispatch, FC, SetStateAction} from "react";
-import GenresPicker from "@/ui/dataView/FilterSearch/GenresPicker";
-import MultiRangeSlider from "@/ui/dataView/MultiRangeSlider/MultiRangeSlider";
+import GenresPicker from "@/ui/data/dataListing/FilterSearch/GenresPicker";
+import MultiRangeSlider from "@/ui/data/dataListing/MultiRangeSlider/MultiRangeSlider";
 import {Genre} from "@/lib/utils/Card/cardProps";
 
 interface FilterSearchProps {

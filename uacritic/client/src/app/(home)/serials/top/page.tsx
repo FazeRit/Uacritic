@@ -1,6 +1,6 @@
 'use client';
 
-import ListData from "@/ui/dataView/ListData/ListData";
+import ListData from "@/ui/data/dataListing/ListData/ListData";
 import {CardFactory} from "@/lib/utils/Card/cardFactory";
 
 const MovieList = () => {
