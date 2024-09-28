@@ -3,18 +3,24 @@
 import {ChangeEvent, FormEvent, SetStateAction, useEffect, useState} from 'react';
 import Link from 'next/link';
 
-import ProfileAchievements from '@/ui/layout/profile/profileAchievements/profileAchievements';
-import EditableFieldForm from '@/ui/layout/auth/EditableFieldForm';
-
 import useRequest from '@/hooks/useRequest';
 import useDebounce from '@/hooks/useDebounce';
+import {useRouter} from "next/navigation";
+
+import ProfileAchievements from '@/ui/layout/Profile/profileAchievements/profileAchievements';
+import EditableFieldForm from '@/ui/layout/Auth/EditableFieldForm';
+import Loading from '@/ui/data/status/Loading/Loading';
+import ErrorFetching from "@/ui/data/status/ErrorFetching/ErrorFetching";
+import Updating from "@/ui/data/status/Updating/Updating";
 
 const UserProfile = () => {
+    const router = useRouter();
+
     const [activeTab, setActiveTab] = useState('view');
     const [editingField, setEditingField] = useState<string | null>(null);
     const [profileData, setProfileData] = useState({
         username: '',
-        birthDate: '',
+        birthDate: new Date()
     });
     const [apiErrors, setApiErrors] = useState<string[]>([]);
 
@@ -39,23 +45,30 @@ const UserProfile = () => {
         method: 'PUT',
         url: `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/user/profile/edit`,
         withCredentials: true,
-        body: {field: editingField, value: debouncedProfileData[editingField as keyof typeof profileData]},
+        body: {
+            field: editingField,
+            value: editingField === 'birthDate' ? debouncedProfileData.birthDate.toISOString() : debouncedProfileData[editingField as keyof typeof profileData],
+        },
     });
 
     useEffect(() => {
         fetchData();
     }, []);
 
-    // TODO: handle editing field for user when error comes from api
-
     useEffect(() => {
         if (data) {
             setProfileData({
                 username: data.username,
-                birthDate: data.dateOfBirth,
+                birthDate: new Date(data.dateOfBirth),
             });
         }
     }, [data]);
+
+    useEffect(() => {
+        if (error) {
+            router.push('/');
+        }
+    }, [error]);
 
     const handleTabChange = (tab: SetStateAction<string>) => {
         setActiveTab(tab);
@@ -69,7 +82,7 @@ const UserProfile = () => {
         const {name, value} = e.target;
         setProfileData((prev) => ({
             ...prev,
-            [name]: value,
+            [name]: name === 'birthDate' ? new Date(value) : value,
         }));
     };
 
@@ -85,7 +98,7 @@ const UserProfile = () => {
                 if (err?.errors) {
                     setApiErrors(err.errors.map((error: any) => error.msg));
                 } else {
-                    setApiErrors(['Failed to update profile. Please try again.']);
+                    setApiErrors(['Failed to update Profile. Please try again.']);
                 }
             }
         }
@@ -103,17 +116,13 @@ const UserProfile = () => {
                     <nav className="flex flex-col items-center lg:items-start space-y-2 mb-4">
                         <button
                             onClick={() => handleTabChange('view')}
-                            className={`w-full p-2 rounded-lg transition text-center duration-300 ${
-                                activeTab === 'view' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                            }`}
+                            className={`w-full p-2 rounded-lg transition text-center duration-300 ${activeTab === 'view' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
                         >
                             👁️ View Profile
                         </button>
                         <button
                             onClick={() => handleTabChange('achievements')}
-                            className={`w-full p-2 rounded-lg transition duration-300 ${
-                                activeTab === 'achievements' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                            }`}
+                            className={`w-full p-2 rounded-lg transition duration-300 ${activeTab === 'achievements' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
                         >
                             🏆 Achievements
                         </button>
@@ -127,39 +136,9 @@ const UserProfile = () => {
                 </aside>
 
                 <main className="w-full lg:flex-grow p-6 bg-white shadow-md rounded-lg mt-4 lg:mt-0">
-                    {isLoading && (
-                        <div className="flex justify-center items-center space-x-2">
-                            <svg
-                                className="animate-spin h-8 w-8 text-blue-600"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                            >
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
-                                        strokeWidth="4"></circle>
-                                <path className="opacity-75" fill="currentColor"
-                                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
-                            </svg>
-                            <span className="text-blue-600 font-semibold">Loading...</span>
-                        </div>
-                    )}
-                    {error && <p className="text-red-500">{error.message}</p>}
-                    {isUpdating && (
-                        <div className="flex justify-center items-center space-x-2">
-                            <svg
-                                className="animate-spin h-8 w-8 text-yellow-500"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                            >
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
-                                        strokeWidth="4"></circle>
-                                <path className="opacity-75" fill="currentColor"
-                                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
-                            </svg>
-                            <span className="text-yellow-500 font-semibold">Updating...</span>
-                        </div>
-                    )}
+                    {isLoading && <Loading/>}
+                    {error && <ErrorFetching/>}
+                    {isUpdating && <Updating/>}
                     {updateError && (
                         <div className="text-red-500 bg-red-100 p-4 rounded-md mt-2">
                             {updateError?.errors?.map((error: any, index: number) => (
@@ -183,23 +162,30 @@ const UserProfile = () => {
                                 {['username', 'birthDate'].map((field) => (
                                     <div key={field}
                                          className="flex justify-between p-4 border-b border-gray-200 hover:bg-gray-50 transition-colors">
-                                        <span className="font-medium">
-                                            {field.charAt(0).toUpperCase() + field.slice(1)}:
-                                        </span>
+            <span className="font-medium">
+                {field.charAt(0).toUpperCase() + field.slice(1)}:
+            </span>
                                         {editingField === field ? (
                                             <EditableFieldForm
                                                 field={field}
-                                                value={profileData[field as keyof typeof profileData]}
+                                                value={field === 'birthDate'
+                                                    ? profileData.birthDate.toISOString().split('T')[0]
+                                                    : String(profileData[field as keyof typeof profileData])}
                                                 onChange={handleChange}
                                                 onSubmit={handleSubmit}
                                             />
                                         ) : (
                                             <div className="flex justify-between">
-                                                <span
-                                                    className="text-gray-600">{profileData[field as keyof typeof profileData]}</span>
-                                                <button onClick={() => handleEditClick(field)}
-                                                        className="text-blue-500 ml-2">
-                                                    ✏️ Edit
+                    <span className="text-gray-600">
+                        {field === 'birthDate'
+                            ? profileData.birthDate.toLocaleDateString()
+                            : String(profileData[field as keyof typeof profileData])}
+                    </span>
+                                                <button
+                                                    onClick={() => handleEditClick(field)}
+                                                    className="text-blue-600 hover:underline ml-4"
+                                                >
+                                                    Edit
                                                 </button>
                                             </div>
                                         )}
@@ -208,10 +194,7 @@ const UserProfile = () => {
                             </div>
                         </div>
                     )}
-
-                    {activeTab === 'achievements' && (
-                        <ProfileAchievements/>
-                    )}
+                    {activeTab === 'achievements' && <ProfileAchievements/>}
                 </main>
             </div>
         </div>

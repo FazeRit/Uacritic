@@ -6,11 +6,11 @@ import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 
 import signUpHedgehog from '@/assets/logo/signUpHedgehog.svg';
-import SigninWebItem from '@/ui/layout/auth/signinWebItem';
+import SigninWebItem from '@/ui/layout/Auth/signinWebItem';
 import googleLogoSvg from '@/assets/logo/googleLogo.svg';
 import githubBlackLogo from '@/assets/logo/githubBlackLogo.svg';
-import AuthEmailInput from "@/ui/layout/auth/authEmailInput";
-import AuthPasswordInput from "@/ui/layout/auth/authPasswordInput";
+import AuthEmailInput from "@/ui/layout/Auth/authEmailInput";
+import AuthPasswordInput from "@/ui/layout/Auth/authPasswordInput";
 
 import useRequest from '@/hooks/useRequest';
 

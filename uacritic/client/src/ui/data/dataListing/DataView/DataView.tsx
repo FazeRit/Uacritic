@@ -1,4 +1,4 @@
-import Card from "@/ui/dataView/Сard/Card";
+import Card from "@/ui/data/dataListing/Сard/Card";
 import {CardItem} from "@/lib/utils/Card/cardProps";
 import {FC} from "react";
 

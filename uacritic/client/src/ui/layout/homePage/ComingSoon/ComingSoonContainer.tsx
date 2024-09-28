@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import useRequest from '@/hooks/useRequest';
 
-import ErrorFetching from "@/ui/dataView/ErrorFetching/ErrorFetching";
+import ErrorFetching from "@/ui/data/status/ErrorFetching/ErrorFetching";
 import ComingSoonText from './ComingSoonText/ComingSoonText';
 
 import {CardItem} from "@/lib/utils/Card/cardProps";
