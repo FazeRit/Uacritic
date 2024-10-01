@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int       @id @unique @default(autoincrement())
+  username String
+  email    String    @unique
+  role     Role      @default(USER)
+  comments Comment[]
+}
+
+model Comment {
+  id        Int      @id @unique @default(autoincrement())
+  text      String
+  rating    Int
+  user      User     @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId    Int
+  category  Category
+  itemId    Int
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Category {
+  MOVIES
+  GAMES
+  SERIES
+}
