@@ -4,10 +4,19 @@ import {validationResult} from "express-validator";
 import UserService from "../service/userService";
 import {ApiError} from "@uacritic/uacritic_common";
 
+declare global {
+    namespace Express {
+        interface Request {
+            user?: string;
+        }
+    }
+}
+
 export default class UserController {
     static async logout(req: Request, res: Response, next: NextFunction) {
         try {
             const {accessToken} = req.cookies;
+            
             const token = await UserService.logout(accessToken);
             res.clearCookie('accessToken');
             return res.json(token);
@@ -18,13 +27,11 @@ export default class UserController {
 
     static async check(req: Request, res: Response, next: NextFunction) {
         try {
-            const user = req.user;
+            const email = req.user;
 
-            if (!user) {
-                return next(ApiError.UnAuthorizedError());
-            }
+            await UserService.check(email!);
 
-            return res.status(200).json({loggedIn: true});
+            return res.json({loggedIn: true});
         } catch (err) {
             next(err);
         }
@@ -49,6 +56,7 @@ export default class UserController {
                 return next(ApiError.BadRequestError('Error validating data', errors.array()));
             }
             const {email, password, username} = req.body;
+
             const userData = await UserService.signup({email, password, username});
             res.cookie('accessToken', userData.token,
                 {

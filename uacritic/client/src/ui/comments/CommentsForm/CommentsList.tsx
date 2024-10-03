@@ -1,8 +1,7 @@
 import {FC} from 'react';
 
 interface Comment {
-    name: string;
-    surname: string;
+    username: string
     rating: number;
     text: string;
 }
@@ -22,7 +21,7 @@ const CommentsList: FC<CommentsListProps> = ({comments}) => {
                     {comments.map((comment, index) => (
                         <li key={index} className="p-4 bg-white rounded-lg shadow-md">
                             <div className="flex justify-between">
-                                <p className="text-lg font-semibold">{comment.name} {comment.surname}</p>
+                                <p className="text-lg font-semibold">{comment.username}</p>
                                 <p className="text-lg font-semibold">{comment.rating}/10</p>
                             </div>
                             <p className="mt-2 text-gray-700">{comment.text}</p>

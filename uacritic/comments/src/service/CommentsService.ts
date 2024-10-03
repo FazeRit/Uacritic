@@ -19,9 +19,7 @@ export default class CommentsService {
             }
         });
 
-        if (!comments) {
-            throw ApiError.DatabaseError();
-        }
+        if (!comments) throw ApiError.BadRequestError("No comments found");
     }
 
     static async itemComments(category: string, itemId: number) {
@@ -32,7 +30,7 @@ export default class CommentsService {
             }
         });
 
-        if (!comments) throw ApiError.DatabaseError();
+        if (!comments) throw ApiError.BadRequestError("No comments found");
 
         return comments;
     }
@@ -55,10 +53,9 @@ export default class CommentsService {
                 user: {connect: {id: user.id}}
             },
         });
+
         if (!comment) {
-            throw ApiError.DatabaseError();
+            throw ApiError.BadRequestError("Failed to add comment");
         }
-
-
     }
 }

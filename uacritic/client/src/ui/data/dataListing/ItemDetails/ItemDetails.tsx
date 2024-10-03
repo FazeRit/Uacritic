@@ -1,13 +1,11 @@
 import {FC, useState} from 'react';
 import Image from 'next/image';
 import {Genre} from '@/lib/utils/Description/movieDescription';
-import CommentsForm from "@/ui/comments/CommentsForm/CommentsForm";
 import CommentsList from "@/ui/comments/CommentsForm/CommentsList";
 import {DonutChart, DonutChartProps} from "@/ui/comments/DonutChart";
 
 interface Comment {
-    name: string;
-    surname: string;
+    username: string
     rating: number;
     text: string;
 }
@@ -56,13 +54,7 @@ const ItemDetail: FC<ItemDetailProps> = ({
     const [chartData, setChartData] = useState<DonutChartProps['chartData']>(initialData);
 
     const addComment = (comment: Comment) => {
-        const updatedChartData = chartData.map((data) =>
-            data.rating === comment.rating
-                ? {...data, count: data.count + 1}
-                : data
-        );
 
-        setChartData(updatedChartData);
         setComments([...comments, comment]);
     };
 
@@ -99,7 +91,7 @@ const ItemDetail: FC<ItemDetailProps> = ({
                     </ul>
                     {isGame ? null : (
                         <p className="mt-2 text-lg">
-                            <strong>{isSerial ? 'Кількість епізодів' : 'Бюджет'}:</strong>
+                            <strong>{isSerial ? 'Number of episodes' : 'Budget'}:</strong>
                             {isSerial ? ` ${number_of_episodes}` : ` $${budget?.toLocaleString()}`}
                         </p>
                     )}
@@ -111,9 +103,9 @@ const ItemDetail: FC<ItemDetailProps> = ({
             <div className="flex flex-col lg:flex-row lg:justify-between mt-8 gap-4">
                 <div className="p-4 bg-white shadow-lg rounded-lg flex-1 lg:w-[480px]">
                     <h2 className="text-2xl font-semibold">Description</h2>
-                    <p className="mt-2 text-lg">{overview.replace(/(<([^>]+)>)/gi, '').replace(`&#39;`, "'") || "Опис відсутній"}</p>
+                    <p className="mt-2 text-lg">{overview.replace(/(<([^>]+)>)/gi, '').replace(`&#39;`, "'") || "No description"}</p>
                 </div>
-                <CommentsForm addComment={addComment}/>
+                {/*<CommentsForm addComment={addComment}/>*/}
             </div>
 
             <div className="mt-8 flex sm:flex-col lg:flex-row md:justify-between relative">

@@ -1,6 +1,6 @@
 {
   "name": "@uacritic/uacritic_common",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "common packages for uacritic",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -15,6 +15,8 @@
   "license": "ISC",
   "dependencies": {
     "@types/express": "^4.17.21",
-    "del-cli": "^5.1.0"
+    "@types/jsonwebtoken": "^9.0.7",
+    "del-cli": "^5.1.0",
+    "jsonwebtoken": "^9.0.2"
   }
 }

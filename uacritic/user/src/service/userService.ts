@@ -18,8 +18,7 @@ interface UserCredentials {
 
 export default class UserService {
     static async logout(accessToken: string) {
-        const tokenData = await TokenService.removeToken(accessToken);
-        return tokenData;
+        return await TokenService.removeToken(accessToken);
     }
 
     static async signup({email, password, username}: UserCredentials) {
@@ -89,11 +88,24 @@ export default class UserService {
         return {
             username: user.username,
             isActivated: user.isActivated,
-            dateOfBirth: user.dateOfBirth,
+            dateOfBirth: user.birthDate
         };
     }
 
-    static async editProfile(field: string, value: string, user: string) {
-        return await User.update({[field]: value}, {where: {email: user}})
+    static async editProfile(field: string, value: string | Date, user: string) {
+        if (field === 'birthDate') {
+            value = (value instanceof Date) ? value : new Date(value);
+        }
+
+        return await User.update({[field]: value}, {where: {email: user}});
+    }
+
+    static async check(email: string) {
+        const user = await User.findOne({where: {email}});
+        if (!user) {
+            throw ApiError.UnAuthorizedError();
+        }
+
+        return true;
     }
 }

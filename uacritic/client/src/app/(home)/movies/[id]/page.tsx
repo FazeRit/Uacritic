@@ -17,9 +17,7 @@ const ItemPage: FC<{ params: { id: number } }> = ({params}) => {
         withCredentials: false,
         url: `https://api.themoviedb.org/3/movie/${params.id}`,
         token: process.env.NEXT_PUBLIC_MOVIE_API_TOKEN!,
-        params: {
-            language: "uk-UA"
-        }
+        params: {}
     });
 
     useEffect(() => {

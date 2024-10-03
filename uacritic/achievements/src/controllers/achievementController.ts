@@ -5,7 +5,7 @@ export default class AchievementController {
     static async achievements(req: Request, res: Response, next: NextFunction) {
         try {
             const achievements = await AchievementService.achievements();
-            
+
             res.status(200).json(achievements);
         } catch (err) {
             next(err);
@@ -14,9 +14,9 @@ export default class AchievementController {
 
     static async userAchievements(req: Request, res: Response, next: NextFunction) {
         try {
-            const {accessToken} = req.params;
+            const email = req.user;
 
-            const userAchievements = await AchievementService.userAchievements(accessToken);
+            const userAchievements = await AchievementService.userAchievements(email!);
 
             return res.status(200).json(userAchievements);
         } catch (err) {
@@ -26,11 +26,11 @@ export default class AchievementController {
 
     static async addToGeneralList(req: Request, res: Response, next: NextFunction) {
         try {
-            const {accessToken} = req.cookies;
+            const email = req.user;
 
             const {name, description, triggerTags, points} = req.body;
 
-            const achievement = await AchievementService.addToGeneralList(accessToken, {
+            const achievement = await AchievementService.addToGeneralList(email!, {
                 name,
                 description,
                 triggerTags,
@@ -45,10 +45,10 @@ export default class AchievementController {
 
     static async addToUserList(req: Request, res: Response, next: NextFunction) {
         try {
-            const {accessToken} = req.cookies;
+            const email = req.user;
             const {achievementId} = req.params;
 
-            await AchievementService.addToUserList(accessToken, Number(achievementId));
+            await AchievementService.addToUserList(email!, Number(achievementId));
 
             return res.status(200).json({});
         } catch (err) {
