@@ -1,6 +1,6 @@
 {
   "name": "@uacritic/uacritic_common",
-  "version": "1.0.8",
+  "version": "1.0.22",
   "description": "common packages for uacritic",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

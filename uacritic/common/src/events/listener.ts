@@ -6,7 +6,6 @@ interface Event {
     data: any;
 }
 
-
 export abstract class Listener<T extends Event> {
     abstract subject: T['subject'];
     abstract queueGroupName: string;

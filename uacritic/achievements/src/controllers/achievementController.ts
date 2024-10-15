@@ -18,7 +18,7 @@ export default class AchievementController {
 
             const userAchievements = await AchievementService.userAchievements(email!);
 
-            return res.status(200).json(userAchievements);
+            res.status(200).json(userAchievements);
         } catch (err) {
             next(err);
         }
@@ -50,7 +50,7 @@ export default class AchievementController {
 
             await AchievementService.addToUserList(email!, Number(achievementId));
 
-            return res.status(200).json({});
+            res.status(200).json({message: "Successfully added achievement to user list"});
         } catch (err) {
             next(err);
         }

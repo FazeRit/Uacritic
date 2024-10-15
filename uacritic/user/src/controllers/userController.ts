@@ -19,7 +19,8 @@ export default class UserController {
             
             const token = await UserService.logout(accessToken);
             res.clearCookie('accessToken');
-            return res.json(token);
+
+            res.json(token);
         } catch (err) {
             next(err);
         }
@@ -31,7 +32,7 @@ export default class UserController {
 
             await UserService.check(email!);
 
-            return res.json({loggedIn: true});
+            res.json({loggedIn: true});
         } catch (err) {
             next(err);
         }
@@ -43,7 +44,7 @@ export default class UserController {
 
             const userData = await UserService.profile(user!);
 
-            return res.json(userData);
+            res.json(userData);
         } catch (err) {
             next(err);
         }
@@ -64,7 +65,8 @@ export default class UserController {
                     httpOnly: true,
                     sameSite: 'strict'
                 });
-            return res.status(201).json(userData.user);
+                
+            res.status(201).json(userData.user);
         } catch (err) {
             next(err);
         }
@@ -84,7 +86,7 @@ export default class UserController {
                     httpOnly: true,
                     sameSite: 'strict'
                 });
-            return res.json(userData.user);
+            res.json(userData.user);
         } catch (err) {
             next(err);
         }
@@ -96,7 +98,7 @@ export default class UserController {
 
             await UserService.activate(activationLink);
 
-            return res.redirect(process.env.CLIENT_URL!);
+            res.redirect(process.env.CLIENT_URL!);
         } catch (err) {
             next(err);
         }
@@ -113,7 +115,7 @@ export default class UserController {
 
             await UserService.editProfile(field, value, req.user!);
 
-            return res.status(200).json({message: 'Profile updated'});
+            res.status(200).json({message: 'Profile updated'});
         } catch (err) {
             next(err);
         }

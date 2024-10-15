@@ -16,6 +16,10 @@ build:
       context: client
       docker:
         dockerfile: Dockerfile
+    - image: denishutzan/comments
+      context: comments
+      docker:
+        dockerfile: Dockerfile
 manifests:
   rawYaml:
     - ./infra/k8s/*

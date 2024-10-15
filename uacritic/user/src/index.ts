@@ -1,5 +1,4 @@
-require('dotenv').config();
-
+import {natsWrapper} from "./natsWrapper";
 import express from "express";
 import cors from 'cors';
 import cookieParser from "cookie-parser";
@@ -8,6 +7,8 @@ import slowDown from 'express-slow-down';
 import router from "./routes";
 import db from './db/db';
 import {ErrorMiddleware} from '@uacritic/uacritic_common';
+
+require('dotenv').config();
 
 const PORT = process.env.PORT || 7000;
 const app = express();
@@ -32,8 +33,17 @@ app.use(ErrorMiddleware);
 
 const start = async () => {
     try {
+        await natsWrapper.connect('uacritic', 'user', 'http://nats-srv:4222');
+        natsWrapper.client.on('close', () => {
+            console.log('NATS connection closed');
+            process.exit();
+        })
+        process.on('SIGINT', () => natsWrapper.client.close());
+        process.on('SIGTERM', () => natsWrapper.client.close());
+
         await db.authenticate();
         await db.sync();
+
         app.listen(PORT, () => {
             console.log(`Server started on port ${PORT}`);
         });

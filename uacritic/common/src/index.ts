@@ -7,7 +7,6 @@ export {TokenService} from './service/tokenService';
 
 export {Listener} from './events/listener';
 export {Publisher} from './events/publisher';
-export {UserEvent} from './events/user-event';
+export {UserCreatedEvent} from './events/user-created-event';
+export {UserUpdatedEvent} from './events/user-updated-event';
 export {Subjects} from './events/subjects';
-export {UserCreatedPublisher} from './events/user-created-publisher';
-export {UserCreatedListener} from './events/user-created-listener';
