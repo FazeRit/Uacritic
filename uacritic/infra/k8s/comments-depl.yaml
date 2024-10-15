@@ -1,30 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: achievements-depl
+  name: comments-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: achievements
+      app: comments
   template:
     metadata:
       labels:
-        app: achievements
+        app: comments
     spec:
       containers:
-        - name: achievements
-          image: denishutzan/achievements
+        - name: comments
+          image: denishutzan/comments
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: achievements-srv
+  name: comments-srv
 spec:
   selector:
-    app: achievements
+    app: comments
   ports:
-    - name: achievements
+    - name: comments
       protocol: TCP
       port: 5000
       targetPort: 5000

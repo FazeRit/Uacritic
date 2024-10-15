@@ -8,6 +8,8 @@ import slowDown from 'express-slow-down';
 import {ErrorMiddleware} from '@uacritic/uacritic_common';
 import router from "./routes";
 
+import {natsWrapper} from "./natsWrapper";
+
 const PORT = process.env.PORT || 7000;
 const app = express();
 
@@ -27,14 +29,23 @@ app.use(speedLimiter);
 
 app.use('/api', router);
 
-app.use(ErrorMiddleware);
+app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    ErrorMiddleware(err, req, res, next);
+});
 
 const start = async () => {
     try {
-
         app.listen(PORT, () => {
             console.log(`Server started on port ${PORT}`);
         });
+
+        await natsWrapper.connect('uacritic', 'comment', 'http://nats-srv:4222');
+        natsWrapper.client.on('close', () => {
+            console.log('NATS connection closed');
+            process.exit();
+        })
+        process.on('SIGINT', () => natsWrapper.client.close());
+        process.on('SIGTERM', () => natsWrapper.client.close());
     } catch (error) {
         console.log(error);
     }

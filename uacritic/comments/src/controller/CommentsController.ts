@@ -18,7 +18,7 @@ export default class CommentsController {
 
             const comments = await CommentsService.userComments(email);
 
-            return res.status(200).json(comments);
+            res.status(200).json(comments);
         } catch (err) {
             next(err);
         }
@@ -31,7 +31,7 @@ export default class CommentsController {
 
             const comments = await CommentsService.itemComments(category, itemId);
 
-            return res.status(200).json(comments);
+            res.status(200).json(comments);
         } catch (err) {
             next(err);
         }
@@ -48,7 +48,7 @@ export default class CommentsController {
 
             await CommentsService.addComment(req.user!, text, rating, category, itemId);
 
-            return res.status(201).json({message: 'Comment added successfully'});
+            res.status(201).json({message: 'Comment added successfully'});
         } catch (err) {
             next(err);
         }
