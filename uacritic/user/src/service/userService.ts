@@ -10,6 +10,10 @@ import TokenService from "./tokenService";
 
 import {ApiError} from '@uacritic/uacritic_common';
 
+import {UserCreatedPublisher} from "../events/publishers/user-created-publisher";
+import {natsWrapper} from "../natsWrapper";
+import {UserUpdatedPublisher} from '../events/publishers/user-updated-publisher';
+
 interface UserCredentials {
     email: string;
     password: string;
@@ -18,8 +22,7 @@ interface UserCredentials {
 
 export default class UserService {
     static async logout(accessToken: string) {
-        const tokenData = await TokenService.removeToken(accessToken);
-        return tokenData;
+        return await TokenService.removeToken(accessToken);
     }
 
     static async signup({email, password, username}: UserCredentials) {
@@ -45,16 +48,21 @@ export default class UserService {
 
         await TokenService.saveToken({userId: userDto.id, accessToken: token});
 
+        await new UserCreatedPublisher(natsWrapper.client).publish({
+            id: userDto.id,
+            email,
+            username,
+            password
+        })
         return {token, user: userDto}
     }
 
-
     static async login(email: string, password: string) {
         const user = await User.findOne({where: {email}});
-
         if (!user) {
             throw ApiError.BadRequestError('User not found');
         }
+
         const isPassEqual = await bcrypt.compare(password, user.password);
         if (!isPassEqual) {
             throw ApiError.BadRequestError('Password is incorrect');
@@ -89,11 +97,33 @@ export default class UserService {
         return {
             username: user.username,
             isActivated: user.isActivated,
-            dateOfBirth: user.dateOfBirth,
+            dateOfBirth: user.birthDate
         };
     }
 
-    static async editProfile(field: string, value: string, user: string) {
-        return await User.update({[field]: value}, {where: {email: user}})
+    static async editProfile(field: string, value: string | Date, user: string) {
+        if (field === 'birthDate') {
+            value = (value instanceof Date) ? value : new Date(value);
+        }
+
+        await User.update({ [field]: value }, { where: { email: user } });
+        const updatedUser = await User.findOne({ where: { email: user } });
+        new UserUpdatedPublisher(natsWrapper.client).publish({
+            id: updatedUser!.id,
+            field: { 
+                [field]: value 
+            }
+        });        
+
+        return true;    
+    }
+
+    static async check(email: string) {
+        const user = await User.findOne({where: {email}});
+        if (!user) {
+            throw ApiError.UnAuthorizedError();
+        }
+
+        return true;
     }
 }

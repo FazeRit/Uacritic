@@ -1,8 +1,7 @@
 import express from 'express';
 import UserController from '../controllers/userController';
 import {body} from 'express-validator';
-import authMiddleware from "../middlewares/authMiddleware";
-import isAuthMiddleware from "../middlewares/isAuthMiddleware";
+import {AuthMiddleware} from '@uacritic/uacritic_common';
 
 const router = express.Router();
 
@@ -39,38 +38,39 @@ router.post('/login',
     UserController.login
 );
 
-router.post('/logout', UserController.logout);
+router.post('/logout', AuthMiddleware, UserController.logout);
 
 router.get('/activate/:link', UserController.activate);
 
-router.get('/profile/', authMiddleware, isAuthMiddleware, UserController.profile);
+router.get('/profile/', AuthMiddleware, UserController.profile);
 
-router.get('/check', authMiddleware, isAuthMiddleware, UserController.check);
+router.get('/check', AuthMiddleware, UserController.check);
 
 router.put(
     '/profile/edit',
-    authMiddleware,
-    isAuthMiddleware,
+    AuthMiddleware,
     [
         body('field')
             .notEmpty()
             .withMessage('Field is required')
             .isIn(['username', 'birthDate'])
             .withMessage('Invalid field'),
-        body('value')
-            .custom((value, {req}) => {
-                if (req.body.field === 'username') {
-                    if (typeof value !== 'string' || value.length < 6 || value.length > 20) {
-                        throw new Error('Username must be between 6 and 20 characters');
-                    }
-                } else if (req.body.field === 'birthDate') {
-                    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-                    if (!dateRegex.test(value)) {
-                        throw new Error('Invalid date format, expected YYYY-MM-DD');
-                    }
+        body('value').custom((value, {req}) => {
+            if (req.body.field === 'username') {
+                if (typeof value !== 'string' || value.length < 6 || value.length > 20) {
+                    throw new Error('Username must be between 6 and 20 characters');
                 }
-                return true;
-            })
+            } else if (req.body.field === 'birthDate') {
+                const isoDateString = value;
+                const date = new Date(isoDateString);
+
+                if (isNaN(date.getTime())) {
+                    throw new Error('Invalid date format');
+                }
+            }
+
+            return true;
+        })
     ],
     UserController.editProfile
 );

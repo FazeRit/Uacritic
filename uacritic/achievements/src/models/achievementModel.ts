@@ -13,7 +13,7 @@ const achievementModel = new mongoose.Schema<AchievementAttributes>({
     name: {type: String, required: true},
     description: {type: String, required: true},
     triggerTags: [String],
-    points: Number
+    points: {type: Number, required: true}
 }, {_id: false})
 
 const Achievement = mongoose.model('Achievement', achievementModel);

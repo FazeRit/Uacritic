@@ -1,18 +1,11 @@
-import TokenService from "./tokenService";
 import {ApiError} from "@uacritic/uacritic_common";
 import Profile from "../models/profileModel";
 
 import {Achievement, AchievementAttributes} from "../models/achievementModel";
 
 export default class AchievementService {
-    static async addToGeneralList(accessToken: string, achievementData: AchievementAttributes) {
-        const userData = await TokenService.validateToken(accessToken);
-
-        if (typeof userData === 'string') {
-            throw ApiError.UnAuthorizedError();
-        }
-
-        const user = await Profile.findOne({email: userData});
+    static async addToGeneralList(email: string, achievementData: AchievementAttributes) {
+        const user = await Profile.findOne({email});
 
         if (!user) {
             throw ApiError.UnAuthorizedError();
@@ -31,14 +24,8 @@ export default class AchievementService {
         return achievement;
     }
 
-    static async addToUserList(accessToken: string, achievementId: number) {
-        const userData = await TokenService.validateToken(accessToken);
-
-        if (typeof userData === 'string') {
-            throw ApiError.UnAuthorizedError();
-        }
-
-        const user = await Profile.findOne({email: userData});
+    static async addToUserList(email: string, achievementId: number) {
+        const user = await Profile.findOne({email});
 
         if (!user) {
             throw ApiError.UnAuthorizedError();
@@ -75,14 +62,8 @@ export default class AchievementService {
         return achievements;
     }
 
-    static async userAchievements(accessToken: string) {
-        const userData = await TokenService.validateToken(accessToken);
-
-        if (typeof userData === 'string') {
-            throw ApiError.UnAuthorizedError();
-        }
-
-        const user = await Profile.findOne({email: userData});
+    static async userAchievements(email: string) {
+        const user = await Profile.findOne({email});
 
         if (!user) {
             throw ApiError.UnAuthorizedError();

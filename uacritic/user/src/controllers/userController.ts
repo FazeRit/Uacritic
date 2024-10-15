@@ -4,13 +4,23 @@ import {validationResult} from "express-validator";
 import UserService from "../service/userService";
 import {ApiError} from "@uacritic/uacritic_common";
 
+declare global {
+    namespace Express {
+        interface Request {
+            user?: string;
+        }
+    }
+}
+
 export default class UserController {
     static async logout(req: Request, res: Response, next: NextFunction) {
         try {
             const {accessToken} = req.cookies;
+            
             const token = await UserService.logout(accessToken);
             res.clearCookie('accessToken');
-            return res.json(token);
+
+            res.json(token);
         } catch (err) {
             next(err);
         }
@@ -18,13 +28,11 @@ export default class UserController {
 
     static async check(req: Request, res: Response, next: NextFunction) {
         try {
-            const user = req.user;
+            const email = req.user;
 
-            if (!user) {
-                return next(ApiError.UnAuthorizedError());
-            }
+            await UserService.check(email!);
 
-            return res.status(200).json({loggedIn: true});
+            res.json({loggedIn: true});
         } catch (err) {
             next(err);
         }
@@ -36,7 +44,7 @@ export default class UserController {
 
             const userData = await UserService.profile(user!);
 
-            return res.json(userData);
+            res.json(userData);
         } catch (err) {
             next(err);
         }
@@ -49,6 +57,7 @@ export default class UserController {
                 return next(ApiError.BadRequestError('Error validating data', errors.array()));
             }
             const {email, password, username} = req.body;
+
             const userData = await UserService.signup({email, password, username});
             res.cookie('accessToken', userData.token,
                 {
@@ -56,7 +65,8 @@ export default class UserController {
                     httpOnly: true,
                     sameSite: 'strict'
                 });
-            return res.status(201).json(userData.user);
+                
+            res.status(201).json(userData.user);
         } catch (err) {
             next(err);
         }
@@ -76,7 +86,7 @@ export default class UserController {
                     httpOnly: true,
                     sameSite: 'strict'
                 });
-            return res.json(userData.user);
+            res.json(userData.user);
         } catch (err) {
             next(err);
         }
@@ -88,7 +98,7 @@ export default class UserController {
 
             await UserService.activate(activationLink);
 
-            return res.redirect(process.env.CLIENT_URL!);
+            res.redirect(process.env.CLIENT_URL!);
         } catch (err) {
             next(err);
         }
@@ -105,7 +115,7 @@ export default class UserController {
 
             await UserService.editProfile(field, value, req.user!);
 
-            return res.status(200).json({message: 'Profile updated'});
+            res.status(200).json({message: 'Profile updated'});
         } catch (err) {
             next(err);
         }

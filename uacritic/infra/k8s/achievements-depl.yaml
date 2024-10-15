@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: profile
+      app: achievements
   template:
     metadata:
       labels:
-        app: profile
+        app: achievements
     spec:
       containers:
         - name: achievements

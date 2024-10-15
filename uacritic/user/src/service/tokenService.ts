@@ -18,14 +18,6 @@ export default class TokenService {
         return jwt.sign({email}, process.env.JWT_SECRET!, {expiresIn: "30h"});
     }
 
-    static async validateToken(token: string) {
-        try {
-            return jwt.verify(token, process.env.JWT_SECRET!) as UserData;
-        } catch (err) {
-            return null;
-        }
-    }
-
     static async saveToken({userId, accessToken}: SaveTokenProps) {
         const tokenData = await Token.findOne({where: {userId}});
         if (tokenData) {

@@ -7,7 +7,7 @@ export interface UserAttributes {
     password: string;
     isActivated: boolean;
     activationLink?: string;
-    dateOfBirth?: Date;
+    birthDate?: Date;
     username: string;
     role?: string;
 }
@@ -18,7 +18,7 @@ class User extends Model<UserAttributes> implements UserAttributes {
     password!: string;
     isActivated!: boolean;
     activationLink?: string;
-    dateOfBirth!: Date;
+    birthDate!: Date;
     username!: string;
     role!: string;
 }
@@ -54,7 +54,7 @@ User.init({
         type: DataTypes.STRING,
         defaultValue: "USER"
     },
-    dateOfBirth: {
+    birthDate: {
         type: DataTypes.DATE,
     }
 }, {
