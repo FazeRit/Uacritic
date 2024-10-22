@@ -1,4 +1,4 @@
-import {FC, FormEvent, useState} from 'react';
+    import {FC, FormEvent, useState} from 'react';
 
 import Loading from '@/ui/data/status/Loading/Loading';
 import AuthRequireError from "@/ui/data/status/AuthRequireError/AuthRequireError";

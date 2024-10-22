@@ -33,7 +33,7 @@ app.use(ErrorMiddleware);
 
 const start = async () => {
     try {
-        await natsWrapper.connect('uacritic', 'user', 'http://nats-srv:4222');
+        await natsWrapper.connect('uacritic', 'user', 'http://localhost:4222');
         natsWrapper.client.on('close', () => {
             console.log('NATS connection closed');
             process.exit();
@@ -53,3 +53,4 @@ const start = async () => {
 };
 
 start();
+    
