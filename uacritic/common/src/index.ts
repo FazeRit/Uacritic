@@ -9,5 +9,4 @@ export {Listener} from './events/listener';
 export {Publisher} from './events/publisher';
 export {UserCreatedEvent} from './events/user-created-event';
 export {UserUpdatedEvent} from './events/user-updated-event';
-export {CommentCreatedEvent} from './events/comment-created-event';
 export {Subjects} from './events/subjects';

@@ -1,18 +1,15 @@
-import mongoose, { Schema, Document } from "mongoose";
-import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
+import mongoose from "mongoose";
 
-interface ProfileAttributes extends Document {
+interface ProfileAttributes {
     id: number;
     email: string;
     password: string;
-    birthDate?: Date;
+    isActivated: boolean;
+    dateOfBirth?: Date;
     achievements: [
         {
-            achievementId: mongoose.Schema.Types.ObjectId,
-            dateAchieved: Date | null,
-            progress: number,
-            points: number,
-            status: boolean
+            achievementId: number,
+            dateAchieved: Date
         }
     ],
     totalPoints: number;
@@ -20,27 +17,24 @@ interface ProfileAttributes extends Document {
     role: string;
 }
 
-const profileSchema = new Schema<ProfileAttributes>({
-    id: { type: Number, required: true, unique: true},
-    email: { type: String, required: true },
-    password: { type: String, required: true },
-    birthDate: Date,
+const profileSchema = new mongoose.Schema<ProfileAttributes>({
+    id: {type: Number, required: true, unique: true, autoIncrement: true},
+    email: {type: String, required: true},
+    password: {type: String, required: true},
+    isActivated: {type: Boolean, required: true, default: false},
+    dateOfBirth: Date,
     achievements: [
         {
-            achievementId: { type: mongoose.Schema.Types.ObjectId, ref: 'Achievement' },
-            dateAchieved: { type: Date, required: false },
-            progress: { type: Number, default: 0 },
-            points: { type: Number, default: 0 },
-            status: { type: Boolean, default: false }
+            id: {type: Number, required: true, unique: true},
+            dateAchieved: {type: Date, required: true},
+            points: {type: Number, required: true, default: 0}
         }
     ],
-    totalPoints: { type: Number, default: 0 },
-    username: { type: String, required: true },
-    role: { type: String, required: true, default: "USER" }
-});
+    totalPoints: {type: Number, default: 0},
+    username: {type: String, required: true},
+    role: {type: String, required: true, default: "USER"}
+}, {_id: false})
 
-profileSchema.plugin(updateIfCurrentPlugin);
-
-const Profile = mongoose.model<ProfileAttributes>('Profile', profileSchema);
+const Profile = mongoose.model('Profile', profileSchema);
 
 export default Profile;

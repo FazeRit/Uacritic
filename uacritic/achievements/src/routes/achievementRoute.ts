@@ -8,5 +8,6 @@ const router = express.Router();
 router.get('/', AchievementController.achievements);
 router.get('/userAchievements', AuthMiddleware, AchievementController.userAchievements);
 router.post('/addToGeneralList', AuthMiddleware, AchievementController.addToGeneralList);
+router.post('/addToUserList/', AuthMiddleware, AchievementController.addToUserList)
 
 export default router;

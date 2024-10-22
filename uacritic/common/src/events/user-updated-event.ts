@@ -4,7 +4,8 @@ export interface UserUpdatedEvent {
     subject: Subjects.UserUpdated;
     data: {
         id: number;
-        fieldName: string;
-        fieldValue: string | Date;
+        field: {
+            [key: string]: string | Date;
+        };
     };
 }

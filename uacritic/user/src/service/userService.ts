@@ -54,7 +54,6 @@ export default class UserService {
             username,
             password
         })
-        
         return {token, user: userDto}
     }
 
@@ -109,11 +108,11 @@ export default class UserService {
 
         await User.update({ [field]: value }, { where: { email: user } });
         const updatedUser = await User.findOne({ where: { email: user } });
-        
         new UserUpdatedPublisher(natsWrapper.client).publish({
             id: updatedUser!.id,
-            fieldName: field, 
-            fieldValue: value 
+            field: { 
+                [field]: value 
+            }
         });        
 
         return true;    

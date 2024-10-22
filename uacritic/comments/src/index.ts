@@ -9,8 +9,6 @@ import {ErrorMiddleware} from '@uacritic/uacritic_common';
 import router from "./routes";
 
 import {natsWrapper} from "./natsWrapper";
-import {UserCreatedListener} from "./events/listeners/user-created-listener";
-import { UserUpdatedListener } from "./events/listeners/user-updated-listener";
 
 const PORT = process.env.PORT || 7000;
 const app = express();
@@ -37,21 +35,17 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
 
 const start = async () => {
     try {
-        await natsWrapper.connect('uacritic', 'comment', 'http://localhost:4222');
+        app.listen(PORT, () => {
+            console.log(`Server started on port ${PORT}`);
+        });
+
+        await natsWrapper.connect('uacritic', 'comment', 'http://nats-srv:4222');
         natsWrapper.client.on('close', () => {
             console.log('NATS connection closed');
             process.exit();
         })
-
-        new UserCreatedListener(natsWrapper.client).listen();
-        new UserUpdatedListener(natsWrapper.client).listen();
-
         process.on('SIGINT', () => natsWrapper.client.close());
         process.on('SIGTERM', () => natsWrapper.client.close());
-
-        app.listen(PORT, () => {
-            console.log(`Server started on port ${PORT}`);
-        });
     } catch (error) {
         console.log(error);
     }
