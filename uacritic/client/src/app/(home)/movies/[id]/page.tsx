@@ -2,15 +2,14 @@
 
 import {FC, useEffect, useState} from 'react';
 import useRequest from "@/hooks/useRequest";
-import {MovieDescription, MovieDescriptionProps} from "@/lib/utils/Description/movieDescription";
-import {CardFactory} from "@/lib/utils/Card/cardFactory";
-import ErrorFetching from "@/ui/data/status/ErrorFetching/ErrorFetching";
-import Loading from "@/ui/data/status/Loading/Loading";
-import ItemDetails from "@/ui/data/dataListing/ItemDetails/ItemDetails";
+import {MovieDescription, MovieDescriptionProps} from "@/lib/models/Description/movieDescription";
+import {CardFactory} from "@/lib/models/Card/cardFactory";
+import ErrorFetching from "@/ui/status/FetchingError/FetchingError";
+import Loading from "@/ui/status/Loading/Loading";
+import ItemDetails from "@/ui/content/ItemDetails/ItemDetails";
 
 const ItemPage: FC<{ params: { id: number } }> = ({params}) => {
     const [item, setItem] = useState<MovieDescription | null>(null);
-    const [formData, setFormData] = useState<{ name: string, surname: string, rate: number, comment: string }>();
 
     const {data: fetchedItem, isLoading, error, fetchData} = useRequest<MovieDescriptionProps>({
         method: 'GET',
@@ -52,8 +51,8 @@ const ItemPage: FC<{ params: { id: number } }> = ({params}) => {
             vote_average={item.vote_average}
             overview={item.overview}
             budget={item.budget}
-            isSerial={false}
-            isGame={false}
+            itemId={params.id}
+            category={'MOVIES'}
         />
     );
 };

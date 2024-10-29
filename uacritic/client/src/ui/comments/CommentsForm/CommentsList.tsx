@@ -1,5 +1,5 @@
 import {FC} from 'react';
-
+    
 interface Comment {
     username: string
     rating: number;

@@ -12,13 +12,13 @@ declare global {
 
 export async function AuthMiddleware(req: Request, res: Response, next: NextFunction) {
     try {
-        const accessToken = req.cookies.accessToken;
+        const refreshToken = req.cookies.refreshToken;
 
-        if (!accessToken) {
+        if (!refreshToken) {
             return next(ApiError.UnAuthorizedError());
         }
 
-        const userData = await TokenService.validateToken(accessToken);
+        const userData = await TokenService.validateToken(refreshToken);
 
         if (!userData) {
             return next(ApiError.UnAuthorizedError());

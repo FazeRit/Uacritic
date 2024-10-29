@@ -2,11 +2,11 @@
 
 import {useEffect, useState} from 'react';
 import useRequest from '@/hooks/useRequest';
-import {CardItem} from '@/lib/utils/Card/cardProps';
+import {CardItem} from '@/lib/models/Card/cardProps';
 import Link from 'next/link';
-import Card from '@/ui/data/dataListing/Сard/Card';
-import Loading from "@/ui/data/status/Loading/Loading";
-import ErrorFetching from "@/ui/data/status/ErrorFetching/ErrorFetching";
+import Card from '@/ui/content/Сard/Card';
+import Loading from "@/ui/status/Loading/Loading";
+import ErrorFetching from "@/ui/status/FetchingError/FetchingError";
 
 interface CardContainerProps<T> {
     url: string;
@@ -14,8 +14,8 @@ interface CardContainerProps<T> {
     params?: Record<string, any>;
     title: string;
     linkToPopular: string;
-    category: 'movies' | 'serials' | 'games';
-    createMethod: (data: T, category: 'movies' | 'serials' | 'games') => CardItem[];
+    category: 'MOVIES' | 'SERIALS' | 'GAMES';
+    createMethod: (data: T, category: 'MOVIES' | 'SERIALS' | 'GAMES') => CardItem[];
 }
 
 const CardContainer = <T, >({

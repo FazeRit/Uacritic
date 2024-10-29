@@ -1,21 +1,33 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, Document } from "mongoose";
+import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 
-export interface AchievementAttributes {
-    id?: number;
+export interface AchievementAttributes extends Document {
+    id: number;
     name: string;
     description: string;
     triggerTags: string[];
     points: number;
+    maxProgress: number;
 }
 
-const achievementModel = new mongoose.Schema<AchievementAttributes>({
-    id: {type: Number, required: true, unique: true, autoIncrement: true},
-    name: {type: String, required: true},
-    description: {type: String, required: true},
+interface Achievement {
+    achievementId: mongoose.Types.ObjectId;
+    dateAchieved: Date;
+    progress: number;
+    points: number;
+    status: boolean;
+  }
+
+const achievementSchema = new Schema<AchievementAttributes>({
+    name: { type: String, required: true },
+    description: { type: String, required: true },
     triggerTags: [String],
-    points: {type: Number, required: true}
-}, {_id: false})
+    points: { type: Number, required: true },
+    maxProgress: { type: Number, required: true}
+});
 
-const Achievement = mongoose.model('Achievement', achievementModel);
+achievementSchema.plugin(updateIfCurrentPlugin);
 
-export {Achievement};
+const Achievement = mongoose.model<AchievementAttributes>('Achievement', achievementSchema);
+
+export { Achievement };

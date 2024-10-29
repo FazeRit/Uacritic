@@ -75,4 +75,6 @@ router.put(
     UserController.editProfile
 );
 
+router.post('/refresh', UserController.refresh);
+
 export default router;

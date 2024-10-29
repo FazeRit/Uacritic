@@ -17,7 +17,7 @@ export default class CommentsController {
             const email = req.user!;
 
             const comments = await CommentsService.userComments(email);
-
+            
             res.status(200).json(comments);
         } catch (err) {
             next(err);
@@ -26,13 +26,16 @@ export default class CommentsController {
 
     static async itemComments(req: Request, res: Response, next: NextFunction) {
         try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(ApiError.BadRequestError('Error validating data', errors.array()));
+            }
             const {category, itemId} = req.body;
-
 
             const comments = await CommentsService.itemComments(category, itemId);
 
             res.status(200).json(comments);
-        } catch (err) {
+        } catch (err) { 
             next(err);
         }
     }
@@ -44,13 +47,13 @@ export default class CommentsController {
                 return next(ApiError.BadRequestError('Error validating data', errors.array()));
             }
 
-            const {text, rating, category, itemId} = req.body;
+            const {text, rating, category, itemId, tags} = req.body;
 
-            await CommentsService.addComment(req.user!, text, rating, category, itemId);
+            const comment = await CommentsService.addComment(req.user!, text, rating, category, parseInt(itemId), tags);
 
-            res.status(201).json({message: 'Comment added successfully'});
+            res.status(201).json({message: 'Comment added successfully', comment});
         } catch (err) {
             next(err);
         }
-    }
+    }   
 }

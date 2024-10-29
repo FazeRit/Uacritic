@@ -8,8 +8,15 @@ spec:
   ingressClassName: nginx
   rules:
     - host: uacritic.com
-      http:
+      http: 
         paths:
+          - path: /api/comments/?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: comments-srv
+                port:
+                  number: 6000
           - path: /api/user/?(.*)
             pathType: ImplementationSpecific
             backend:
@@ -17,13 +24,6 @@ spec:
                 name: user-srv
                 port:
                   number: 7000
-          - path: /?(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: client-srv
-                port:
-                  number: 3000
           - path: /api/achievements/?(.*)
             pathType: ImplementationSpecific
             backend:
@@ -31,3 +31,10 @@ spec:
                 name: achievements-srv
                 port:
                   number: 5000
+          - path: /?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: client-srv
+                port:
+                  number: 3000

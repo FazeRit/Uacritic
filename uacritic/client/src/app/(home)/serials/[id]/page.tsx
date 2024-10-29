@@ -3,12 +3,12 @@
 import {FC, useEffect, useState} from 'react';
 
 import useRequest from "@/hooks/useRequest";
-import {CardFactory} from "@/lib/utils/Card/cardFactory";
-import ErrorFetching from "@/ui/data/status/ErrorFetching/ErrorFetching";
-import Loading from "@/ui/data/status/Loading/Loading";
+import {CardFactory} from "@/lib/models/Card/cardFactory";
+import ErrorFetching from "@/ui/status/FetchingError/FetchingError";
+import Loading from "@/ui/status/Loading/Loading";
 
-import {SerialDescription, SerialDescriptionProps} from "@/lib/utils/Description/serialDescription";
-import ItemDetails from "@/ui/data/dataListing/ItemDetails/ItemDetails";
+import {SerialDescription, SerialDescriptionProps} from "@/lib/models/Description/serialDescription";
+import ItemDetails from "@/ui/content/ItemDetails/ItemDetails";
 
 const ItemPage: FC<{ params: { id: number } }> = ({params}) => {
     const [item, setItem] = useState<SerialDescription>();
@@ -49,8 +49,8 @@ const ItemPage: FC<{ params: { id: number } }> = ({params}) => {
             vote_average={item.vote_average}
             overview={item.overview}
             number_of_episodes={item.number_of_episodes}
-            isSerial={true}
-            isGame={false}
+            category={"SERIALS"}
+            itemId={params.id}
         />
     );
 };
