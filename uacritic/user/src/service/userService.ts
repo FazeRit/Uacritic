@@ -21,8 +21,8 @@ interface UserCredentials {
 }
 
 export default class UserService {
-    static async logout(accessToken: string) {
-        return await TokenService.removeToken(accessToken);
+    static async logout(refreshToken: string) {
+        return await TokenService.removeToken(refreshToken);
     }
 
     static async signup({email, password, username}: UserCredentials) {
@@ -32,7 +32,7 @@ export default class UserService {
             throw ApiError.BadRequestError(`Email is used`);
         }
 
-        const hashPassword = await bcrypt.hash(password, 10);
+        const hashPassword = await bcrypt.hash(password, 4);
         const activationLink = uuidv4();
 
         const user = await User.create({email, password: hashPassword, activationLink, isActivated: false, username});
@@ -44,9 +44,9 @@ export default class UserService {
         });
 
         const userDto = new UserDto(user);
-        const token = await TokenService.generateToken(userDto.email);
+        const {accessToken, refreshToken} = await TokenService.generateTokens(userDto.email);
 
-        await TokenService.saveToken({userId: userDto.id, accessToken: token});
+        await TokenService.saveToken({userId: userDto.id, accessToken, refreshToken});;
 
         await new UserCreatedPublisher(natsWrapper.client).publish({
             id: userDto.id,
@@ -54,7 +54,8 @@ export default class UserService {
             username,
             password
         })
-        return {token, user: userDto}
+
+        return {accessToken, refreshToken, user: userDto};
     }
 
     static async login(email: string, password: string) {
@@ -68,10 +69,10 @@ export default class UserService {
             throw ApiError.BadRequestError('Password is incorrect');
         }
         const userDto = new UserDto(user);
-        const token = await TokenService.generateToken(userDto.email);
+        const {accessToken, refreshToken} = await TokenService.generateTokens(userDto.email);
 
-        await TokenService.saveToken({userId: userDto.id, accessToken: token});
-        return {token, user: userDto}
+        await TokenService.saveToken({userId: userDto.id, accessToken, refreshToken});
+        return {accessToken, refreshToken, user: userDto};
     }
 
     static async activate(activationLink: string) {
@@ -89,7 +90,6 @@ export default class UserService {
         }
 
         const user = await User.findOne({where: {email}});
-
         if (!user) {
             throw ApiError.UnAuthorizedError();
         }
@@ -110,9 +110,8 @@ export default class UserService {
         const updatedUser = await User.findOne({ where: { email: user } });
         new UserUpdatedPublisher(natsWrapper.client).publish({
             id: updatedUser!.id,
-            field: { 
-                [field]: value 
-            }
+            fieldName: field,
+            fieldValue: value
         });        
 
         return true;    

@@ -2,7 +2,9 @@ import {NextFunction, Request, Response} from "express";
 import {validationResult} from "express-validator";
 
 import UserService from "../service/userService";
+import TokenService from "../service/tokenService";
 import {ApiError} from "@uacritic/uacritic_common";
+
 
 declare global {
     namespace Express {
@@ -12,15 +14,16 @@ declare global {
     }
 }
 
-export default class UserController {
+export default class UserController {    
     static async logout(req: Request, res: Response, next: NextFunction) {
         try {
-            const {accessToken} = req.cookies;
-            
-            const token = await UserService.logout(accessToken);
+            const { refreshToken } = req.cookies;
+    
+            await UserService.logout( refreshToken);
             res.clearCookie('accessToken');
-
-            res.json(token);
+            res.clearCookie('refreshToken');
+    
+            res.json({ message: 'Logged out successfully' });
         } catch (err) {
             next(err);
         }
@@ -59,12 +62,19 @@ export default class UserController {
             const {email, password, username} = req.body;
 
             const userData = await UserService.signup({email, password, username});
-            res.cookie('accessToken', userData.token,
-                {
-                    maxAge: 86400 * 1000,
-                    httpOnly: true,
-                    sameSite: 'strict'
-                });
+            
+            res.cookie('accessToken', userData.accessToken, {
+                maxAge: 15 * 60 * 1000,
+                httpOnly: true,
+                sameSite: 'strict'
+            });
+    
+            res.cookie('refreshToken', userData.refreshToken, {
+                maxAge: 30 * 86400 * 1000,
+                httpOnly: true,
+                sameSite: 'strict'
+            });
+                
                 
             res.status(201).json(userData.user);
         } catch (err) {
@@ -80,14 +90,31 @@ export default class UserController {
             }
             const {email, password} = req.body;
             const userData = await UserService.login(email, password);
-            res.cookie('accessToken', userData.token,
-                {
-                    maxAge: 86400 * 1000,
-                    httpOnly: true,
-                    sameSite: 'strict'
-                });
+            res.cookie('accessToken', userData.accessToken, {
+                maxAge: 15 * 60 * 1000,
+                httpOnly: true,
+                sameSite: 'strict'
+            });
+    
+            res.cookie('refreshToken', userData.refreshToken, {
+                maxAge: 30 * 86400 * 1000,
+                httpOnly: true,
+                sameSite: 'strict'
+            }); 
             res.json(userData.user);
         } catch (err) {
+            next(err);
+        }
+    }
+
+    static async refresh(req: Request, res: Response, next: NextFunction) {
+        try{
+            const {refreshToken} = req.cookies;
+            if (!refreshToken) throw ApiError.UnAuthorizedError();
+        
+            const tokens = await TokenService.refreshTokens(refreshToken);
+            res.json(tokens);
+        }catch(err){
             next(err);
         }
     }

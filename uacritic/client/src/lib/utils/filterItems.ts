@@ -1,4 +1,4 @@
-import {CardItem} from "@/lib/utils/Card/cardProps";
+import {CardItem} from "@/lib/models/Card/cardProps";
 
 interface Filter {
     searchQuery: string;

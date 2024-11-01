@@ -60,7 +60,7 @@ const SignInPage = () => {
         if (data) {
             router.push('/');
         }
-    }, [data]);
+    }, [data, router]);
 
     useEffect(() => {
         if (error) {
@@ -80,16 +80,6 @@ const SignInPage = () => {
                 className="sm:w-[88vw] sm:mt-[6vh] sm:mx-auto md:w-[44vw] md:h-[60vw] md:border-4 md:bg-white lg:bg-bgMain lg:border-none sm:p-[5vw] md:p-[2vw] lg:p-0 sm:rounded-3xl border-primaryText lg:rounded-none lg:w-[30vw] lg:mx-[10vw] flex-row md:mt-[6vw] lg:mt-[8vw] lg:h-[20vh] lg:justify-center">
                 <div>
                     <p className="roboto-bold sm:text-[8vw] md:text-[4vw] lg:text-3xl">Sign in</p>
-                    <p className="sm:hidden md:block text-[#71717A] sm:mt-[0.1vh] md:mt-[0.2vh] sm:text-[2.6vw] md:text-[1.8vw] lg:text-lg">Choose
-                        auth method</p>
-                    <div
-                        className="grid sm:grid-cols-1 md:grid-cols-2 sm:gap-y-[1vh] sm:mt-[1vh] lg:mt-[2vh] border-lineMain sm:border-b-2 md:border-none sm:pb-4 rounded-xl md:pb-0">
-                        <SigninWebItem path={googleLogoSvg} text={'Google'}/>
-                        <SigninWebItem path={githubBlackLogo} text={'GitHub'}/>
-                    </div>
-                </div>
-                <div className="flex items-center justify-center sm:mt-[2vw] lg:mt-[1vw]">
-                    <p className="text-[#71717A] sm:text-sm md:text-base">or with email</p>
                 </div>
                 <form onSubmit={handleSubmit}>
                     <AuthEmailInput

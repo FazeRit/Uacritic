@@ -1,6 +1,6 @@
 'use client';
 
-import {memo, useState} from "react";
+import { memo, useState } from "react";
 import Image from 'next/image';
 import Link from 'next/link';
 import useAuth from "@/hooks/useAuth";
@@ -9,7 +9,7 @@ import axios from 'axios';
 import profileIcon from '@/assets/profileIcon.svg';
 import NavbarGamburger from "@/ui/layout/Navbar/navbarGamburger/NavbarGamburger";
 import NavBar from "@/ui/layout/Navbar/NavBar";
-import Loading from '@/ui/data/status/Loading/Loading';
+import Loading from '@/ui/status/Loading/Loading';
 import mainLogo from '@/assets/logo/mainLogo.svg';
 
 const MenuIcon = memo(function MenuIcon() {
@@ -27,7 +27,7 @@ const MenuIcon = memo(function MenuIcon() {
 
 const Header = () => {
     const [showMenu, setShowMenu] = useState(false);
-    const {authData, isLoading, error} = useAuth();
+    const { authData, isLoading } = useAuth();
 
     const handleMenu = () => {
         setShowMenu(prevState => !prevState);
@@ -35,15 +35,15 @@ const Header = () => {
 
     const handleLogout = async () => {
         try {
-            await axios.post('/api/user/logout', {}, {withCredentials: true});
+            await axios.post('/api/user/logout', {}, { withCredentials: true });
             window.location.reload();
         } catch (err) {
             console.error("Logout failed:", err);
         }
     };
 
-    if (isLoading) {
-        return <div><Loading/></div>;
+    if (isLoading) {    
+        return <Loading/>;
     }
 
     return (

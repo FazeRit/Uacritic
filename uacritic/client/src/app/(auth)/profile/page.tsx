@@ -9,9 +9,9 @@ import {useRouter} from "next/navigation";
 
 import ProfileAchievements from '@/ui/layout/Profile/profileAchievements/profileAchievements';
 import EditableFieldForm from '@/ui/layout/Auth/EditableFieldForm';
-import Loading from '@/ui/data/status/Loading/Loading';
-import ErrorFetching from "@/ui/data/status/ErrorFetching/ErrorFetching";
-import Updating from "@/ui/data/status/Updating/Updating";
+import Loading from '@/ui/status/Loading/Loading';
+import ErrorFetching from "@/ui/status/FetchingError/FetchingError";
+import Updating from "@/ui/status/Updating/Updating";
 
 const UserProfile = () => {
     const router = useRouter();

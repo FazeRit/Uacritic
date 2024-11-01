@@ -11,9 +11,7 @@ export interface DonutChartProps {
 }
 
 export const DonutChart = ({chartData}: DonutChartProps) => {
-    if (chartData.length === 0) {
-        return <p className="text-center text-lg mt-8">Немає даних для відображення</p>;
-    }
+    if (chartData.length === 0) return <p className="text-center text-lg mt-8">Немає даних для відображення</p>;
 
     const pieChartData = {
         labels: chartData.map(data => `${data.rating}`),
@@ -41,25 +39,29 @@ export const DonutChart = ({chartData}: DonutChartProps) => {
 
     return (
         <div className="sm:w-full lg:w-[480px] lg:h-[480px] mt-8 bg-white shadow-lg rounded-lg p-4">
-            <Pie
-                data={pieChartData}
-                options={{
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: "Рейтинги користувачів",
-                            font: {
-                                size: 20,
-                                weight: 'bold'
+            {pieChartData ?
+                <Pie
+                    data={pieChartData}
+                    options={{
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: "Рейтинги користувачів",
+                                font: {
+                                    size: 20,
+                                    weight: 'bold'
+                                }
+                            },
+                            legend: {
+                                display: false,
                             }
                         },
-                        legend: {
-                            display: false,
-                        }
-                    },
-                    maintainAspectRatio: false,
-                }}
-            />
+                        maintainAspectRatio: false,
+                    }}
+                />
+            :
+                <></>
+            }   
         </div>
     );
 };

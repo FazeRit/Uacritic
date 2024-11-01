@@ -75,7 +75,7 @@ const SignUpPage = () => {
         if (data) {
             router.push('/');
         }
-    }, [data]);
+    }, [data, router]);
 
     useEffect(() => {
         if (error) {
@@ -138,6 +138,13 @@ const SignUpPage = () => {
                         </p>
                     </div>
                 </form>
+                <div className="flex justify-center items-center sm:mt-[3vw] md:mt-[2vw] lg:mt-[1vw]">
+                    <Link href="/">
+                        <button className="bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded-lg">
+                            Back to Main Page
+                        </button>
+                    </Link>
+                </div>
             </div>
         </div>
     );

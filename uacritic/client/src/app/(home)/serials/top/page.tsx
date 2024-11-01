@@ -1,7 +1,7 @@
 'use client';
 
-import ListData from "@/ui/data/dataListing/ListData/ListData";
-import {CardFactory} from "@/lib/utils/Card/cardFactory";
+import ListData from "@/ui/content/ListData/ListData";
+import {CardFactory} from "@/lib/models/Card/cardFactory";
 
 const MovieList = () => {
     return (
@@ -14,7 +14,7 @@ const MovieList = () => {
             title="serials"
             purpose="Top rated"
             createMethod={CardFactory.MovieCardCreate}
-            category={'serials'}
+            category={'SERIALS'}
             withCredentials={false}
         />
     );

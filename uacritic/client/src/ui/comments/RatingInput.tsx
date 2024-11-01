@@ -17,7 +17,7 @@ const RatingInput: FC<RatingInputProps> = ({value, onChange}) => {
         return rating >= 1 && rating <= 10 ? colors[Math.ceil(rating / 2) - 1] : 'bg-gray-500';
     };
 
-    const calculateTooltipPosition = (rating: number) => {
+    const calculateTooltipPosition = (rating: number) => {  
         const offset = 30;
         return `calc(${(rating - 1) * 10}% + ${offset}px)`;
     };

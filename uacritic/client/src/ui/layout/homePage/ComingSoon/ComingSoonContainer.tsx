@@ -3,19 +3,19 @@ import Image from 'next/image';
 
 import useRequest from '@/hooks/useRequest';
 
-import ErrorFetching from "@/ui/data/status/ErrorFetching/ErrorFetching";
+import ErrorFetching from "@/ui/status/FetchingError/FetchingError";
 import ComingSoonText from './ComingSoonText/ComingSoonText';
 
-import {CardItem} from "@/lib/utils/Card/cardProps";
+import {CardItem} from "@/lib/models/Card/cardProps";
 
 
 interface ComingSoonContainerProps<T> {
     url: string;
     token: string;
     params?: Record<string, any>;
-    createMethod: (data: T, category: 'movies' | 'serials' | 'games') => CardItem[];
+    createMethod: (data: T, category: 'MOVIES' | 'SERIALS' | 'GAMES') => CardItem[];
     reverse?: boolean;
-    category: 'movies' | 'serials' | 'games';
+    category: 'MOVIES' | 'SERIALS' | 'GAMES';
 }
 
 const ComingSoonContainer = <T, >({
