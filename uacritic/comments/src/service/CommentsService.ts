@@ -1,4 +1,4 @@
-import {PrismaClient} from "@prisma/client";
+import { Category } from './../../node_modules/.prisma/client/index.d';
 import {ApiError} from "@uacritic/uacritic_common";
 import prisma from '../db/db';
 
@@ -10,7 +10,7 @@ interface Comment {
     email: string;
     text: string;
     rating: number;
-    category: "MOVIES" | "GAMES" | "SERIES";
+    category: Category;
     itemId: number;
 }
 
@@ -49,13 +49,11 @@ export default class CommentsService {
 
         if (!comments) throw ApiError.BadRequestError("No comments found");
 
-        return comments.map(comment => {
-            return {
-                username: comment.user.username,
-                text: comment.text,
-                rating: comment.rating,
-            }
-        });
+        return comments.map((comment: any) => ({
+            username: comment.user?.username || "Unknown User",
+            text: comment.text,
+            rating: comment.rating,
+        }));
     }
 
     static async addComment(

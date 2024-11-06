@@ -1,3 +1,5 @@
+'use client';
+
 import {useEffect, useState} from 'react';
 import Image from 'next/image';
 
@@ -7,7 +9,6 @@ import ErrorFetching from "@/ui/status/FetchingError/FetchingError";
 import ComingSoonText from './ComingSoonText/ComingSoonText';
 
 import {CardItem} from "@/lib/models/Card/cardProps";
-
 
 interface ComingSoonContainerProps<T> {
     url: string;

@@ -3,7 +3,7 @@
 import {FC, useEffect, useState} from 'react';
 import useRequest from "@/hooks/useRequest";
 import {MovieDescription, MovieDescriptionProps} from "@/lib/models/Description/movieDescription";
-import {CardFactory} from "@/lib/models/Card/cardFactory";
+import {CardFactory} from "@/service/card.service";
 import ErrorFetching from "@/ui/status/FetchingError/FetchingError";
 import Loading from "@/ui/status/Loading/Loading";
 import ItemDetails from "@/ui/content/ItemDetails/ItemDetails";

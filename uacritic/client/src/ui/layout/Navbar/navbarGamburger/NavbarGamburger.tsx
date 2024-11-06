@@ -1,15 +1,27 @@
-import {navItems} from '@/lib/utils/navBarItems'
-import NavBarGamburgerItem from "@/ui/layout/Navbar/navbarGamburger/NavBarGamburgerItem";
+import axios from 'axios';
+
 import Link from "next/link";
 import Image from "next/image";
-import profileIcon from "@/assets/profileIcon.svg";
 
+import {navItems} from '@/lib/utils/navBarItems'
+import NavBarGamburgerItem from "@/ui/layout/Navbar/navbarGamburger/NavBarGamburgerItem";
+
+import profileIcon from "@/assets/profileIcon.svg";
 
 interface NavbarGamburgerProps {
     loggedIn?: boolean
 }
 
 const NavbarGamburger = ({loggedIn}: NavbarGamburgerProps) => {
+    const handleLogout = async () => {
+        try {
+            await axios.post('/api/user/logout', {}, { withCredentials: true });
+            window.location.reload();
+        } catch (err) {
+            console.error("Logout failed:", err);
+        }
+    };
+
     return <div>
         <div className="border-black border-b-2 sm:mx-[10vw] md:mx-[20vw] flex justify-center">
             <div
@@ -19,16 +31,17 @@ const NavbarGamburger = ({loggedIn}: NavbarGamburgerProps) => {
                         className="flex hover:border-r-2 hover:border-l-2 pl-[1vw] pr-[1vw] border-black  items-end h-5">
                         <Image src={profileIcon} alt="Profile" className="inline-block w-5 h-5"/>
                         <Link href="/profile" className="md:text-lg ml-2 h-5 mb-1">Profile</Link>
+                        <button onClick={handleLogout} className="md:text-lg ml-2 h-5 mb-1">Logout</button>
                     </div>
                 ) : (
                     <>
                         <Link href='/signup'>
                             <span
-                                className="hover:border-r-2 hover:border-l-2 border-black pl-[1vw] pr-[1vw]">Зареєструватися</span>
+                                className="hover:border-r-2 hover:border-l-2 border-black pl-[1vw] pr-[1vw]">Sign up</span>
                         </Link>
                         <Link href='/signin'>
                             <span
-                                className="hover:border-r-2 hover:border-l-2 border-black pl-[1vw] pr-[1vw]">Авторизуватися</span>
+                                className="hover:border-r-2 hover:border-l-2 border-black pl-[1vw] pr-[1vw]">Sign in</span> 
                         </Link>
                     </>
                 )}

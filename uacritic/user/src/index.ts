@@ -1,8 +1,11 @@
 import {natsWrapper} from "./natsWrapper";
+
 import express from "express";
 import cors from 'cors';
 import cookieParser from "cookie-parser";
 import slowDown from 'express-slow-down';
+
+import swaggerSetup from './swaggerDocs';
 
 import router from "./routes";
 import db from './db/db';
@@ -10,7 +13,7 @@ import {ErrorMiddleware} from '@uacritic/uacritic_common';
 
 require('dotenv').config();
 
-const PORT = process.env.PORT || 7000;
+const PORT = 7000;
 const app = express();
 
 const speedLimiter = slowDown({
@@ -28,6 +31,7 @@ app.use(cookieParser());
 app.use(speedLimiter);
 
 app.use('/api', router);
+swaggerSetup(app);
 
 app.use(ErrorMiddleware);
 

@@ -11,6 +11,7 @@ export class TokenService {
         try {
             return jwt.verify(token, process.env.JWT_SECRET!) as UserData;
         } catch (err) {
+            console.log('Token validation error:', err);
             return null;
         }
     }

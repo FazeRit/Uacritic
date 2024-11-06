@@ -1,19 +1,24 @@
-import {useCallback, useState} from "react";
-import axios, {AxiosError} from "axios";
+import { useCallback, useState, useRef, useEffect } from "react";
+import axios, { AxiosError } from "axios";
 
 interface UseRequestProps {
     url: string;
     method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
     params?: Record<string, any>;
     token: string;
-    body?: any,
-    withCredentials: boolean,
+    body?: any;
+    withCredentials: boolean;
 }
 
-const useRequest = <T>({method, url, token, params, body, withCredentials}: UseRequestProps) => {
+const useRequest = <T>({ method, url, token, params, body, withCredentials }: UseRequestProps) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<any | null>(null);
     const [data, setData] = useState<T | null>(null);
+    const paramsRef = useRef(params);
+
+    useEffect(() => {
+        paramsRef.current = params; 
+    }, [params]);
 
     const fetchData = useCallback(async () => {
         const controller = new AbortController();
@@ -24,13 +29,13 @@ const useRequest = <T>({method, url, token, params, body, withCredentials}: UseR
             const response = await axios({
                 url,
                 method,
-                params,
+                params: paramsRef.current,
                 data: body,
                 withCredentials,
                 signal: controller.signal,
                 headers: {
-                    "Accept": "application/json",
-                    "Authorization": token
+                    Accept: "application/json",
+                    Authorization: token,
                 },
             });
 
@@ -41,7 +46,7 @@ const useRequest = <T>({method, url, token, params, body, withCredentials}: UseR
             if (axios.isCancel(error)) {
                 console.log("Request canceled:", error.message);
             } else if (error instanceof AxiosError) {
-                setError(error.response?.data || 'An error occurred');
+                setError(error.response?.data || "An error occurred");
             } else {
                 setError("An unknown error occurred");
             }
@@ -52,9 +57,9 @@ const useRequest = <T>({method, url, token, params, body, withCredentials}: UseR
         return () => {
             controller.abort();
         };
-    }, [method, url, token, params, body, withCredentials]);
+    }, [body]);
 
-    return {data, isLoading, error, fetchData};
+    return { data, isLoading, error, fetchData };
 };
 
 export default useRequest;

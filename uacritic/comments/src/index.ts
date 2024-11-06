@@ -11,8 +11,9 @@ import router from "./routes";
 import {natsWrapper} from "./natsWrapper";
 import {UserCreatedListener} from "./events/listeners/user-created-listener";
 import { UserUpdatedListener } from "./events/listeners/user-updated-listener";
+import swaggerSetup from './swaggerDocs';
 
-const PORT = process.env.PORT || 7000;
+const PORT = 6000;
 const app = express();
 
 const speedLimiter = slowDown({
@@ -30,6 +31,7 @@ app.use(cookieParser());
 app.use(speedLimiter);
 
 app.use('/api', router);
+swaggerSetup(app);
 
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
     ErrorMiddleware(err, req, res, next);

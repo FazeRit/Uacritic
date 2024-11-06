@@ -25,6 +25,8 @@
     "nodemailer": "^6.9.14",
     "pg": "^8.13.0",
     "sequelize": "^6.37.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "ts-node-dev": "^2.0.0",
     "uuid": "^10.0.0"
   },

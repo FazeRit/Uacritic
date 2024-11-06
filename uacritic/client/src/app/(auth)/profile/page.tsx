@@ -7,7 +7,7 @@ import useRequest from '@/hooks/useRequest';
 import useDebounce from '@/hooks/useDebounce';
 import {useRouter} from "next/navigation";
 
-import ProfileAchievements from '@/ui/layout/Profile/profileAchievements/profileAchievements';
+import ProfileAchievements from '@/ui/layout/Profile/Achievements/profileAchievements';
 import EditableFieldForm from '@/ui/layout/Auth/EditableFieldForm';
 import Loading from '@/ui/status/Loading/Loading';
 import ErrorFetching from "@/ui/status/FetchingError/FetchingError";

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import CardContainer from '@/ui/layout/homePage/CardContainer/CardContainer';
 import ComingSoonContainer from '@/ui/layout/homePage/ComingSoon/ComingSoonContainer';
 
-import {CardFactory} from '@/lib/models/Card/cardFactory';
+import {CardFactory} from '@/service/card.service';
 
 import hedgehogHeader from '@/assets/hedgehogHeader.svg';
 
