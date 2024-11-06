@@ -30,7 +30,7 @@ export default class MailService {
             html:
                 `
                 <div>
-                    <h1>Для активації перейдіть по посиланню</h1>
+                    <h1>For activation yout account user this link</h1>
                     <a href='${link}'>${link}</a>
                 </div>
             `

@@ -1,7 +1,7 @@
 'use client';
 
 import ListData from "@/ui/content/ListData/ListData";
-import {CardFactory} from "@/lib/models/Card/cardFactory";
+import {CardFactory} from "@/service/card.service";
 
 const SerialList = () => {
     return (

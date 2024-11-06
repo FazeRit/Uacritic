@@ -1,4 +1,5 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
 import mongoose from "mongoose";
 import express from "express";
@@ -9,14 +10,14 @@ import slowDown from 'express-slow-down';
 import router from "./routes";
 import {ErrorMiddleware} from '@uacritic/uacritic_common';
 
+import swaggerSetup from './swaggerDocs';
+
 import {natsWrapper} from "./natsWrapper";
 import {UserCreatedListener} from "./events/listeners/user-created-listener";
 import {UserUpdatedListener} from "./events/listeners/user-updated-listener";
 import {CommentCreatedListener} from "./events/listeners/comment-created-listener";
 
-require('dotenv').config();
-
-const PORT = process.env.PORT || 8000;
+const PORT = 8000;
 const app = express();
 
 const speedLimiter = slowDown({
@@ -34,6 +35,7 @@ app.use(cookieParser());
 app.use(speedLimiter);
 
 app.use('/api', router);
+swaggerSetup(app);
 
 app.use(ErrorMiddleware);
 

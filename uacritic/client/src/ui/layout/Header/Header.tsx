@@ -27,7 +27,7 @@ const MenuIcon = memo(function MenuIcon() {
 
 const Header = () => {
     const [showMenu, setShowMenu] = useState(false);
-    const { authData, isLoading } = useAuth();
+    const {authData, isLoading} = useAuth();
 
     const handleMenu = () => {
         setShowMenu(prevState => !prevState);
